@@ -34,7 +34,7 @@ namespace AdvancedVehicleOptions.GUI
         private const int WIDTHRIGHT = 315;
 
         public static readonly string[] categoryList = { "All", "Citizen", "Bicycle",
-            "Forestry", "Farming", "Ore", "Oil", "Industry",
+            "Forestry", "Farming", "Ore", "Oil", "Industry", "Player Industry",
             "Police", "Prison", "Fire Safety", "Disaster",
             "Healthcare", "Deathcare", "Garbage", "Maintenance", "Postal Service",
             "Taxi", "Bus", "Metro", "Tram", "Monorail", "Cable Car",
@@ -43,7 +43,7 @@ namespace AdvancedVehicleOptions.GUI
             "Launch Site", "Natural" };
 
         public static readonly string[] vehicleIconList = { "IconCitizenVehicle", "IconCitizenBicycleVehicle",
-              "IconPolicyForest", "IconPolicyFarming", "IconPolicyOre", "IconPolicyOil", "IconPolicyNone",
+              "IconPolicyForest", "IconPolicyFarming", "IconPolicyOre", "IconPolicyOil", "IconPolicyNone", "SubBarIndustryUniqueFactory",
               "ToolbarIconPolice", "IconPolicyDoubleSentences", "InfoIconFireSafety", "ToolbarIconFireDepartmentHovered",
               "ToolbarIconHealthcare", "ToolbarIconHealthcareHovered", "InfoIconGarbage", "InfoIconMaintenance", "SubBarPublicTransportPost",
               "SubBarPublicTransportTaxi", "SubBarPublicTransportBus", "SubBarPublicTransportMetro", "SubBarPublicTransportTram", "SubBarPublicTransportMonorail", "SubBarPublicTransportCableCar",

@@ -91,7 +91,7 @@ namespace SamsamTS
             dropDown.hoveredBgSprite = "ButtonMenuHovered";
             dropDown.focusedBgSprite = "ButtonMenu";
             dropDown.listWidth = 90;
-            dropDown.listHeight = 500;
+            dropDown.listHeight = 450;
             dropDown.foregroundSpriteMode = UIForegroundSpriteMode.Stretch;
             dropDown.popupColor = new Color32(45, 52, 61, 255);
             dropDown.popupTextColor = new Color32(170, 170, 170, 255);

@@ -24,6 +24,7 @@ namespace AdvancedVehicleOptions
             Ore,
             Oil,
             IndustryGeneric,
+			IndustryPlayer,
             Police,
             Prison,
             FireSafety,
@@ -444,6 +445,8 @@ namespace AdvancedVehicleOptions
                         return Category.Monument;
                     case ItemClass.Service.Natural:
                         return Category.Natural;
+					case ItemClass.Service.PlayerIndustry:
+                        return Category.IndustryPlayer;
                 }
 
                 switch (prefab.m_class.m_subService)

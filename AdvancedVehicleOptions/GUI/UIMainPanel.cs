@@ -36,16 +36,16 @@ namespace AdvancedVehicleOptions.GUI
         public static readonly string[] categoryList = { "All", "Citizen", "Bicycle",
             "Forestry", "Farming", "Ore", "Oil", "Industry",
             "Police", "Prison", "Fire Safety", "Disaster",
-            "Healthcare", "Deathcare", "Garbage", "Maintenance",
-            "Taxi", "Bus", "Metro", "Tram", "Monorail", "CableCar",
+            "Healthcare", "Deathcare", "Garbage", "Maintenance", "Postal Service",
+            "Taxi", "Bus", "Metro", "Tram", "Monorail", "Cable Car",
             "Cargo Train", "Passenger Train",
             "Cargo Ship", "Passenger Ship", "Plane", "Tours",
-            "Monument", "Natural" };
+            "Launch Site", "Natural" };
 
         public static readonly string[] vehicleIconList = { "IconCitizenVehicle", "IconCitizenBicycleVehicle",
               "IconPolicyForest", "IconPolicyFarming", "IconPolicyOre", "IconPolicyOil", "IconPolicyNone",
               "ToolbarIconPolice", "IconPolicyDoubleSentences", "InfoIconFireSafety", "ToolbarIconFireDepartmentHovered",
-              "ToolbarIconHealthcare", "ToolbarIconHealthcareHovered", "InfoIconGarbage", "InfoIconMaintenance",
+              "ToolbarIconHealthcare", "ToolbarIconHealthcareHovered", "InfoIconGarbage", "InfoIconMaintenance", "SubBarPublicTransportPost",
               "SubBarPublicTransportTaxi", "SubBarPublicTransportBus", "SubBarPublicTransportMetro", "SubBarPublicTransportTram", "SubBarPublicTransportMonorail", "SubBarPublicTransportCableCar",
               "IconServiceVehicle", "SubBarPublicTransportTrain",
               "IconCargoShip", "SubBarPublicTransportShip", "SubBarPublicTransportPlane", "SubBarPublicTransportTours",
@@ -205,7 +205,7 @@ namespace AdvancedVehicleOptions.GUI
 
             m_category.selectedIndex = 0;
             m_category.tooltip = "Select a category to display\nTip: Use the mouse wheel to switch between categories faster";
-            m_category.relativePosition = label.relativePosition + new Vector3(70f, 0f);
+            m_category.relativePosition = label.relativePosition + new Vector3(75f, 0f);
 
             m_category.eventSelectedIndexChanged += (c, t) =>
             {
@@ -216,7 +216,7 @@ namespace AdvancedVehicleOptions.GUI
 
             // Search
             m_search = UIUtils.CreateTextField(this);
-            m_search.width = 150f;
+            m_search.width = 145f;
             m_search.height = 30f;
             m_search.padding = new RectOffset(6, 6, 6, 6);
             m_search.tooltip = "Type the name of a vehicle type";

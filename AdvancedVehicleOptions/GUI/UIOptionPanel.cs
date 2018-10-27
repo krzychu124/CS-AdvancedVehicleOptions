@@ -81,7 +81,7 @@ namespace AdvancedVehicleOptions.GUI
             m_capacity.parent.isVisible = options.hasCapacity;
 
             string name = options.localizedName;
-            if (name.Length > 16) name = name.Substring(0, 16) + "...";
+            if (name.Length > 20) name = name.Substring(0, 20) + "...";
             m_removeLabel.text = "Remove vehicles (" + name + "):";
 
             (parent as UIMainPanel).ChangePreviewColor(m_color0.selectedColor);

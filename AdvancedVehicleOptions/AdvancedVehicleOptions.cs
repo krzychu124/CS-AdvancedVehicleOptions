@@ -36,7 +36,7 @@ namespace AdvancedVehicleOptions
 
         public string Description
         {
-            get { return "Customize your vehicles"; }
+            get { return "Customize your vehicles. Industries DLC Ready (Cities Skylines 1.11.0-f3)"; }
         }
 
         public void OnSettingsUI(UIHelperBase helper)
@@ -76,7 +76,7 @@ namespace AdvancedVehicleOptions
             }
         }
 
-        public const string version = "1.8.2";
+        public const string version = "1.8.3";
     }
 
     public class AdvancedVehicleOptionsLoader : LoadingExtensionBase
@@ -427,13 +427,14 @@ namespace AdvancedVehicleOptions
         {
             if (version.IsNullOrWhiteSpace()) return 0;
 
+			int a;
             int v = 0;
             string[] t = version.Split('.');
 
             for (int i = 0; i < t.Length; i++)
             {
                 v *= 100;
-                if (int.TryParse(t[i], out int a))
+                if (int.TryParse(t[i], out a))
                     v += a;
             }
 

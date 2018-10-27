@@ -32,6 +32,7 @@ namespace AdvancedVehicleOptions
             Deathcare,
             Garbage,
             Maintenance,
+			TransportPost,
             TransportTaxi,
             TransportBus,
             TransportMetro,
@@ -44,7 +45,7 @@ namespace AdvancedVehicleOptions
             TransportShip,
             TransportPlane,
             TransportTours,
-            Monument,
+			Monument,
             Natural
         }
 
@@ -277,6 +278,9 @@ namespace AdvancedVehicleOptions
 
                 ai = m_prefab.m_vehicleAI as PassengerBlimpAI;
                 if (ai != null) return ((PassengerBlimpAI)ai).m_passengerCapacity;
+				
+				ai = m_prefab.m_vehicleAI as PostVanAI;
+                if (ai != null) return ((PostVanAI)ai).m_mailCapacity;
 
                 return -1;
             }
@@ -342,6 +346,9 @@ namespace AdvancedVehicleOptions
 
                 ai = m_prefab.m_vehicleAI as PassengerBlimpAI;
                 if (ai != null) { ((PassengerBlimpAI)ai).m_passengerCapacity = value; return; }
+				
+				ai = m_prefab.m_vehicleAI as PostVanAI;
+                if (ai != null) { ((PostVanAI)ai).m_mailCapacity = value; return; }
             }
         }
         #endregion
@@ -422,7 +429,10 @@ namespace AdvancedVehicleOptions
                         if (prefab.m_class.m_level == ItemClass.Level.Level1)
                             return Category.Healthcare;
                         else
+						if (prefab.m_class.m_level == ItemClass.Level.Level2)
                             return Category.Deathcare;
+						else
+                            return Category.Healthcare;
                     case ItemClass.Service.Garbage:
                         return Category.Garbage;
                     case ItemClass.Service.Water:
@@ -479,6 +489,8 @@ namespace AdvancedVehicleOptions
                         return Category.Bicycle;
                     case ItemClass.SubService.BeautificationParks:
                         return Category.Maintenance;
+					case ItemClass.SubService.PublicTransportPost:
+                        return Category.TransportPost;
                 }
 
                 return Category.Citizen;

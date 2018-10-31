@@ -44,7 +44,10 @@ namespace AdvancedVehicleOptions
             TransportTrain,
             CargoShip,
             TransportShip,
+			TransportFerry,
+			CargoPlane,
             TransportPlane,
+			TransportBlimp,
             TransportTours,
 			Monument,
             Natural
@@ -231,6 +234,9 @@ namespace AdvancedVehicleOptions
 
                 ai = m_prefab.m_vehicleAI as CargoShipAI;
                 if (ai != null) return ((CargoShipAI)ai).m_cargoCapacity;
+				
+				ai = m_prefab.m_vehicleAI as CargoPlaneAI;
+                if (ai != null) return ((CargoPlaneAI)ai).m_cargoCapacity;
 
                 ai = m_prefab.m_vehicleAI as CargoTrainAI;
                 if (ai != null) return ((CargoTrainAI)ai).m_cargoCapacity;
@@ -299,6 +305,9 @@ namespace AdvancedVehicleOptions
 
                 ai = m_prefab.m_vehicleAI as CargoShipAI;
                 if (ai != null) { ((CargoShipAI)ai).m_cargoCapacity = value; return; }
+				
+                ai = m_prefab.m_vehicleAI as CargoPlaneAI;
+                if (ai != null) { ((CargoPlaneAI)ai).m_cargoCapacity = value; return; }
 
                 ai = m_prefab.m_vehicleAI as CargoTrainAI;
                 if (ai != null) { ((CargoTrainAI)ai).m_cargoCapacity = value; return; }
@@ -460,18 +469,30 @@ namespace AdvancedVehicleOptions
                             return Category.TransportTrain;
                         else
                             return Category.CargoTrain;
+						
                     case ItemClass.SubService.PublicTransportShip:
-                        if (prefab.m_class.m_level == ItemClass.Level.Level1 ||
-                            prefab.m_class.m_level == ItemClass.Level.Level2)
-                            return Category.TransportShip;
-                        else
+                        if (prefab.m_class.m_level == ItemClass.Level.Level4)
                             return Category.CargoShip;
+						else
+						if (prefab.m_class.m_level == ItemClass.Level.Level1)
+                            return Category.TransportShip;
+						else
+                            return Category.TransportFerry;
+						
                     case ItemClass.SubService.PublicTransportTaxi:
                         return Category.TransportTaxi;
                     case ItemClass.SubService.PublicTransportTours:
                         return Category.TransportTours;
+						
                     case ItemClass.SubService.PublicTransportPlane:
-                        return Category.TransportPlane;
+                        if (prefab.m_class.m_level == ItemClass.Level.Level4)
+                            return Category.CargoPlane;
+						else
+						if (prefab.m_class.m_level == ItemClass.Level.Level1)
+                            return Category.TransportPlane;
+						else
+                            return Category.TransportBlimp;		
+						
                     case ItemClass.SubService.IndustrialForestry:
                         return Category.Forestry;
                     case ItemClass.SubService.IndustrialFarming:

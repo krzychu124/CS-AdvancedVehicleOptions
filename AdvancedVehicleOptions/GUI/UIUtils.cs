@@ -9,7 +9,7 @@ namespace SamsamTS
     {
         // Figuring all this was a pain (no documentation whatsoever)
         // So if your are using it for your mod consider thanking me (SamsamTS)
-        // Extended Public Transport UI's code helped me a lot so thanks a lot AcidFire.
+        // Extended Public Transport UI's code helped me a lot so thanks a lot AcidFire
 
         public static UIButton CreateButton(UIComponent parent)
         {

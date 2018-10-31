@@ -39,7 +39,7 @@ namespace AdvancedVehicleOptions.GUI
             "Healthcare", "Deathcare", "Garbage", "Maintenance", "Postal Service",
             "Taxi", "Bus", "Metro", "Tram", "Monorail", "Cable Car",
             "Cargo Train", "Passenger Train",
-            "Cargo Ship", "Passenger Ship", "Plane", "Tours",
+            "Cargo Ship", "Passenger Ship","Ferry", "Cargo Plane", "Passenger Plane", "Blimp", "Tours",
             "Launch Site", "Natural" };
 
         public static readonly string[] vehicleIconList = { "IconCitizenVehicle", "IconCitizenBicycleVehicle",
@@ -47,8 +47,8 @@ namespace AdvancedVehicleOptions.GUI
               "ToolbarIconPolice", "IconPolicyDoubleSentences", "InfoIconFireSafety", "ToolbarIconFireDepartmentHovered",
               "ToolbarIconHealthcare", "ToolbarIconHealthcareHovered", "InfoIconGarbage", "InfoIconMaintenance", "SubBarPublicTransportPost",
               "SubBarPublicTransportTaxi", "SubBarPublicTransportBus", "SubBarPublicTransportMetro", "SubBarPublicTransportTram", "SubBarPublicTransportMonorail", "SubBarPublicTransportCableCar",
-              "IconServiceVehicle", "SubBarPublicTransportTrain",
-              "IconCargoShip", "SubBarPublicTransportShip", "SubBarPublicTransportPlane", "SubBarPublicTransportTours",
+              "SubBarPublicTransportTrain", "SubBarPublicTransportTrain",
+              "IconCargoShip", "SubBarPublicTransportShip",  "IconPolicyPreferFerries", "SubBarPublicTransportPlane", "SubBarPublicTransportPlane", "IconPolicyEducationalBlimps", "SubBarPublicTransportTours",
               "ToolbarIconMonuments", "SubBarFireDepartmentDisaster"};
 
         public UIOptionPanel optionPanel
@@ -97,15 +97,15 @@ namespace AdvancedVehicleOptions.GUI
                 UITabstrip toolStrip = view.FindUIComponent<UITabstrip>("MainToolstrip");
                 m_button = AddUIComponent<UIButton>();
 
-                m_button.normalBgSprite = "IconCitizenVehicle";
+                m_button.normalBgSprite = "InfoIconTrafficCongestion"; 		// previously: "IconCitizenVehicle";
                 m_button.focusedFgSprite = "ToolbarIconGroup6Focused";
                 m_button.hoveredFgSprite = "ToolbarIconGroup6Hovered";
 
-                m_button.size = new Vector2(43f, 49f);
-                m_button.name = "Advanced Vehicle Options";
-                m_button.tooltip = "Advanced Vehicle Options " + ModInfo.version;
+                m_button.size = new Vector2(43f, 47f);					    // previously: new Vector2(43f, 49f);
+			    m_button.name = "Advanced Vehicle Options";
+                m_button.tooltip = "Vehicle Options"; 						// previously: "Advanced Vehicle Options " + ModInfo.version; 
                 m_button.relativePosition = new Vector3(0, 5);
-
+			   
                 m_button.eventButtonStateChanged += (c, s) =>
                 {
                     if (s == UIButton.ButtonState.Focused)
@@ -187,7 +187,7 @@ namespace AdvancedVehicleOptions.GUI
 
             // Title Bar
             m_title = AddUIComponent<UITitleBar>();
-            m_title.iconSprite = "IconCitizenVehicle";
+            m_title.iconSprite = "InfoIconTrafficCongestion";
             m_title.title = "Advanced Vehicle Options " + ModInfo.version;
 
             // Category DropDown

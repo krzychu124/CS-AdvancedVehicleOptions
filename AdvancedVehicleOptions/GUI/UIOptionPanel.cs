@@ -8,9 +8,16 @@ namespace AdvancedVehicleOptions.GUI
 {
     public class UIOptionPanel : UIPanel
     {
+        private const float maxSpeedToKmhConversionFactor = 6.25f;
+       
         private UITextField m_maxSpeed;
         private UITextField m_acceleration;
         private UITextField m_braking;
+        private UITextField m_turning;
+        private UITextField m_springs;
+        private UITextField m_dampers;
+        private UITextField m_leanMultiplier;
+        private UITextField m_nodMultiplier;
         private UICheckBox m_useColors;
         private UIColorField m_color0;
         private UIColorField m_color1;
@@ -39,8 +46,8 @@ namespace AdvancedVehicleOptions.GUI
             base.Start();
             canFocus = true;
             isInteractive = true;
-            width = 315;
-            height = 330;
+            width = 390;
+            height = 370;
 
             SetupControls();
 
@@ -55,14 +62,19 @@ namespace AdvancedVehicleOptions.GUI
 
             if (m_color0 == null) return;
 
-            m_color0.relativePosition = new Vector3(13, 95 - 2);
-            m_color1.relativePosition = new Vector3(13, 120 - 2);
-            m_color2.relativePosition = new Vector3(158, 95 - 2);
-            m_color3.relativePosition = new Vector3(158, 120 - 2);
+            m_color0.relativePosition = new Vector3(13, 140 - 2);
+            m_color1.relativePosition = new Vector3(13, 165 - 2);
+            m_color2.relativePosition = new Vector3(158, 140 - 2);
+            m_color3.relativePosition = new Vector3(158, 165 - 2);
 
-            m_maxSpeed.text = Mathf.RoundToInt(options.maxSpeed * 5).ToString();
+            m_maxSpeed.text = Mathf.RoundToInt(options.maxSpeed * maxSpeedToKmhConversionFactor).ToString();
             m_acceleration.text = options.acceleration.ToString();
             m_braking.text = options.braking.ToString();
+            m_turning.text = options.turning.ToString();
+            m_springs.text = options.springs.ToString();
+            m_dampers.text = options.dampers.ToString();
+            m_leanMultiplier.text = options.leanMultiplier.ToString();
+            m_nodMultiplier.text = options.nodMultiplier.ToString();
             m_useColors.isChecked = options.useColorVariations;
             m_color0.selectedColor = options.color0;
             m_color1.selectedColor = options.color1;
@@ -118,7 +130,7 @@ namespace AdvancedVehicleOptions.GUI
 
             // Acceleration
             UILabel accelerationLabel = panel.AddUIComponent<UILabel>();
-            accelerationLabel.text = "Acceleration/Brake:";
+            accelerationLabel.text = "Acceleration/Brake/Turning:";
             accelerationLabel.textScale = 0.8f;
             accelerationLabel.relativePosition = new Vector3(160, 15);
 
@@ -136,6 +148,56 @@ namespace AdvancedVehicleOptions.GUI
             m_braking.width = 60;
             m_braking.tooltip = "Change the vehicle braking factor";
             m_braking.relativePosition = new Vector3(230, 35);
+            
+            // Turning
+            m_turning = UIUtils.CreateTextField(panel);
+            m_turning.numericalOnly = true;
+            m_turning.allowFloats = true;
+            m_turning.width = 60;
+            m_turning.tooltip = "Change the vehicle turning factor;\nDefines how well the car corners";
+            m_turning.relativePosition = new Vector3(300, 35);
+
+            // Springs
+            UILabel springsLabel = panel.AddUIComponent<UILabel>();
+            springsLabel.text = "Springs/Dampers:";
+            springsLabel.textScale = 0.8f;
+            springsLabel.relativePosition = new Vector3(15, 70);
+
+            m_springs = UIUtils.CreateTextField(panel);
+            m_springs.numericalOnly = true;
+            m_springs.allowFloats = true;
+            m_springs.width = 60;
+            m_springs.tooltip = "Change the vehicle spring factor;\nDefines how much the suspension moves";
+            m_springs.relativePosition = new Vector3(15, 90);
+
+            // Dampers
+            m_dampers = UIUtils.CreateTextField(panel);
+            m_dampers.numericalOnly = true;
+            m_dampers.allowFloats = true;
+            m_dampers.width = 60;
+            m_dampers.tooltip = "Change the vehicle damper factor;\nDefines how quickly the suspension returns to the default state";
+            m_dampers.relativePosition = new Vector3(85, 90);
+
+            // LeanMultiplier
+            UILabel leanMultiplierLabel = panel.AddUIComponent<UILabel>();
+            leanMultiplierLabel.text = "Lean/Nod Multiplier:";
+            leanMultiplierLabel.textScale = 0.8f;
+            leanMultiplierLabel.relativePosition = new Vector3(160, 70);
+
+            m_leanMultiplier = UIUtils.CreateTextField(panel);
+            m_leanMultiplier.numericalOnly = true;
+            m_leanMultiplier.allowFloats = true;
+            m_leanMultiplier.width = 60;
+            m_leanMultiplier.tooltip = "Change the vehicle lean multiplication factor;\nDefines how much the vehicle leans to the sides when turning";
+            m_leanMultiplier.relativePosition = new Vector3(160, 90);
+
+            // NodMultiplier
+            m_nodMultiplier = UIUtils.CreateTextField(panel);
+            m_nodMultiplier.numericalOnly = true;
+            m_nodMultiplier.allowFloats = true;
+            m_nodMultiplier.width = 60;
+            m_nodMultiplier.tooltip = "Change the vehicle nod multiplication factor;\nDefines how much the vehicle nods forward/backward when braking or accelerating";
+            m_nodMultiplier.relativePosition = new Vector3(230, 90);
 
             // Colors
             m_useColors = UIUtils.CreateCheckBox(panel);
@@ -143,39 +205,39 @@ namespace AdvancedVehicleOptions.GUI
             m_useColors.isChecked = true;
             m_useColors.width = width - 40;
             m_useColors.tooltip = "Enable color variations\nA random color is chosen between the four following colors";
-            m_useColors.relativePosition = new Vector3(15, 70);
+            m_useColors.relativePosition = new Vector3(15, 120);
 
             m_color0 = UIUtils.CreateColorField(panel);
             m_color0.name = "AVO-color0";
             m_color0.popupTopmostRoot = false;
-            m_color0.relativePosition = new Vector3(13 , 95 - 2);
+            m_color0.relativePosition = new Vector3(13 , 140 - 2);
             m_color0_hex = UIUtils.CreateTextField(panel);
             m_color0_hex.maxLength = 6;
-            m_color0_hex.relativePosition = new Vector3(55, 95);
+            m_color0_hex.relativePosition = new Vector3(55, 140);
 
             m_color1 = UIUtils.CreateColorField(panel);
             m_color1.name = "AVO-color1";
             m_color1.popupTopmostRoot = false;
-            m_color1.relativePosition = new Vector3(13, 120 - 2);
+            m_color1.relativePosition = new Vector3(13, 165 - 2);
             m_color1_hex = UIUtils.CreateTextField(panel);
             m_color1_hex.maxLength = 6;
-            m_color1_hex.relativePosition = new Vector3(55, 120);
+            m_color1_hex.relativePosition = new Vector3(55, 165);
 
             m_color2 = UIUtils.CreateColorField(panel);
             m_color2.name = "AVO-color2";
             m_color2.popupTopmostRoot = false;
-            m_color2.relativePosition = new Vector3(158, 95 - 2);
+            m_color2.relativePosition = new Vector3(158, 140 - 2);
             m_color2_hex = UIUtils.CreateTextField(panel);
             m_color2_hex.maxLength = 6;
-            m_color2_hex.relativePosition = new Vector3(200, 95);
+            m_color2_hex.relativePosition = new Vector3(200, 140);
 
             m_color3 = UIUtils.CreateColorField(panel);
             m_color3.name = "AVO-color3";
             m_color3.popupTopmostRoot = false;
-            m_color3.relativePosition = new Vector3(158, 120 - 2);
+            m_color3.relativePosition = new Vector3(158, 165 - 2);
             m_color3_hex = UIUtils.CreateTextField(panel);
             m_color3_hex.maxLength = 6;
-            m_color3_hex.relativePosition = new Vector3(200, 120);
+            m_color3_hex.relativePosition = new Vector3(200, 165);
 
             // Enable & BackEngine
             m_enabled = UIUtils.CreateCheckBox(panel);
@@ -183,19 +245,19 @@ namespace AdvancedVehicleOptions.GUI
             m_enabled.isChecked = true;
             m_enabled.width = width - 40;
             m_enabled.tooltip = "Make sure you have at least one vehicle allowed to spawn for that category";
-            m_enabled.relativePosition = new Vector3(15, 155); ;
+            m_enabled.relativePosition = new Vector3(15, 195); ;
 
             m_addBackEngine = UIUtils.CreateCheckBox(panel);
             m_addBackEngine.text = "Replace last car with engine";
             m_addBackEngine.isChecked = false;
             m_addBackEngine.width = width - 40;
             m_addBackEngine.tooltip = "Make the last car of this train be an engine";
-            m_addBackEngine.relativePosition = new Vector3(15, 175);
+            m_addBackEngine.relativePosition = new Vector3(15, 215);
 
             // Capacity
             UIPanel capacityPanel = panel.AddUIComponent<UIPanel>();
             capacityPanel.size = Vector2.zero;
-            capacityPanel.relativePosition = new Vector3(15, 200);
+            capacityPanel.relativePosition = new Vector3(15, 240);
 
             UILabel capacityLabel = capacityPanel.AddUIComponent<UILabel>();
             capacityLabel.text = "Capacity:";
@@ -213,25 +275,25 @@ namespace AdvancedVehicleOptions.GUI
             m_restore.text = "Restore default";
             m_restore.width = 130;
             m_restore.tooltip = "Restore all values to default";
-            m_restore.relativePosition = new Vector3(160, 215);
+            m_restore.relativePosition = new Vector3(160, 255);
 
             // Remove Vehicles
             m_removeLabel = this.AddUIComponent<UILabel>();
             m_removeLabel.text = "Remove vehicles:";
             m_removeLabel.textScale = 0.8f;
-            m_removeLabel.relativePosition = new Vector3(10, height - 60);
+            m_removeLabel.relativePosition = new Vector3(10, height - 65);
 
             m_clearVehicles = UIUtils.CreateButton(this);
             m_clearVehicles.text = "Driving";
             m_clearVehicles.width = 90f;
             m_clearVehicles.tooltip = "Remove all driving vehicles of that type\nHold the SHIFT key to remove all types";
-            m_clearVehicles.relativePosition = new Vector3(10, height - 40);
+            m_clearVehicles.relativePosition = new Vector3(10, height - 45);
 
             m_clearParked = UIUtils.CreateButton(this);
             m_clearParked.text = "Parked";
             m_clearParked.width = 90f;
             m_clearParked.tooltip = "Remove all parked vehicles of that type\nHold the SHIFT key to remove all types";
-            m_clearParked.relativePosition = new Vector3(105, height - 40);
+            m_clearParked.relativePosition = new Vector3(105, height - 45);
 
             panel.BringToFront();
 
@@ -239,6 +301,11 @@ namespace AdvancedVehicleOptions.GUI
             m_maxSpeed.eventTextSubmitted += OnMaxSpeedSubmitted;
             m_acceleration.eventTextSubmitted += OnAccelerationSubmitted;
             m_braking.eventTextSubmitted += OnBrakingSubmitted;
+            m_turning.eventTextSubmitted += OnTurningSubmitted;
+            m_springs.eventTextSubmitted += OnSpringsSubmitted;
+            m_dampers.eventTextSubmitted += OnDampersSubmitted;
+            m_leanMultiplier.eventTextSubmitted += OnleanMultiplierSubmitted;
+            m_nodMultiplier.eventTextSubmitted += OnnodMultiplierSubmitted;
 
             m_useColors.eventCheckChanged += OnCheckChanged;
 
@@ -349,7 +416,7 @@ namespace AdvancedVehicleOptions.GUI
             if (!m_initialized || m_options == null) return;
             m_initialized = false;
 
-            m_options.maxSpeed = float.Parse(text) / 5f;
+            m_options.maxSpeed = float.Parse(text) / maxSpeedToKmhConversionFactor;
 
             m_initialized = true;
         }
@@ -370,6 +437,56 @@ namespace AdvancedVehicleOptions.GUI
             m_initialized = false;
 
             m_options.braking = float.Parse(text);
+
+            m_initialized = true;
+        }
+        
+        protected void OnTurningSubmitted(UIComponent component, string text)
+        {
+            if (!m_initialized || m_options == null) return;
+            m_initialized = false;
+
+            m_options.turning = float.Parse(text);
+
+            m_initialized = true;
+        }
+
+        protected void OnSpringsSubmitted(UIComponent component, string text)
+        {
+            if (!m_initialized || m_options == null) return;
+            m_initialized = false;
+
+            m_options.springs = float.Parse(text);
+
+            m_initialized = true;
+        }
+
+        protected void OnDampersSubmitted(UIComponent component, string text)
+        {
+            if (!m_initialized || m_options == null) return;
+            m_initialized = false;
+
+            m_options.dampers = float.Parse(text);
+
+            m_initialized = true;
+        }
+
+        protected void OnleanMultiplierSubmitted(UIComponent component, string text)
+        {
+            if (!m_initialized || m_options == null) return;
+            m_initialized = false;
+
+            m_options.leanMultiplier = float.Parse(text);
+
+            m_initialized = true;
+        }
+
+        protected void OnnodMultiplierSubmitted(UIComponent component, string text)
+        {
+            if (!m_initialized || m_options == null) return;
+            m_initialized = false;
+
+            m_options.nodMultiplier = float.Parse(text);
 
             m_initialized = true;
         }

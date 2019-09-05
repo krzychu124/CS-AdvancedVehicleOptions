@@ -171,6 +171,56 @@ namespace AdvancedVehicleOptions
                 m_prefab.m_braking = value;
             }
         }
+	// turning
+        public float turning
+        {
+            get { return m_prefab.m_turning; }
+            set
+            {
+                if (m_prefab == null || value <= 0) return;
+                m_prefab.m_turning = value;
+            }
+        }
+        // springs
+        public float springs
+        {
+            get { return m_prefab.m_springs; }
+            set
+            {
+                if (m_prefab == null || value <= 0) return;
+                m_prefab.m_springs = value;
+            }
+        }
+        // dampers
+        public float dampers
+        {
+            get { return m_prefab.m_dampers; }
+            set
+            {
+                if (m_prefab == null || value <= 0) return;
+                m_prefab.m_dampers = value;
+            }
+        }
+        // leanMultiplier
+        public float leanMultiplier
+        {
+            get { return m_prefab.m_leanMultiplier; }
+            set
+            {
+                if (m_prefab == null || value <= 0) return;
+                m_prefab.m_leanMultiplier = value;
+            }
+        }
+        // nodMultiplier
+        public float nodMultiplier
+        {
+            get { return m_prefab.m_nodMultiplier; }
+            set
+            {
+                if (m_prefab == null || value <= 0) return;
+                m_prefab.m_nodMultiplier = value;
+            }
+        }
         // useColorVariations
         public bool useColorVariations
         {
@@ -994,6 +1044,31 @@ namespace AdvancedVehicleOptions
                     options.braking = modded.m_braking;
                     details.Append("braking, ");
                 }
+		if (modded.m_turning != stored.m_turning && options.turning == stored.m_turning)
+                {
+                    options.turning = modded.m_turning;
+                    details.Append("turning, ");
+                }
+                if (modded.m_springs != stored.m_springs && options.springs == stored.m_springs)
+                {
+                    options.springs = modded.m_springs;
+                    details.Append("springs, ");
+                }
+                if (modded.m_dampers != stored.m_dampers && options.dampers == stored.m_dampers)
+                {
+                    options.dampers = modded.m_dampers;
+                    details.Append("dampers, ");
+                }
+                if (modded.m_leanMultiplier != stored.m_leanMultiplier && options.leanMultiplier == stored.m_leanMultiplier)
+                {
+                    options.leanMultiplier = modded.m_leanMultiplier;
+                    details.Append("leanMultiplier, ");
+                }
+                if (modded.m_nodMultiplier != stored.m_nodMultiplier && options.nodMultiplier == stored.m_nodMultiplier)
+                {
+                    options.nodMultiplier = modded.m_nodMultiplier;
+                    details.Append("nodMultiplier, ");
+                }
                 if (modded.m_capacity != stored.m_capacity && options.capacity == stored.m_capacity)
                 {
                     options.capacity = modded.m_capacity;
@@ -1029,6 +1104,11 @@ namespace AdvancedVehicleOptions
             options.maxSpeed = stored.m_maxSpeed;
             options.acceleration = stored.m_acceleration;
             options.braking = stored.m_braking;
+            options.turning = stored.m_turning;
+            options.springs = stored.m_springs;
+            options.dampers = stored.m_dampers;
+            options.leanMultiplier = stored.m_leanMultiplier;
+            options.nodMultiplier = stored.m_nodMultiplier;
             options.useColorVariations = stored.m_useColorVariations;
             options.color0 = stored.m_color0;
             options.color1 = stored.m_color1;
@@ -1063,6 +1143,11 @@ namespace AdvancedVehicleOptions
             m_maxSpeed = options.maxSpeed;
             m_acceleration = options.acceleration;
             m_braking = options.braking;
+            m_turning = options.turning;
+            m_springs = options.springs;
+            m_dampers = options.dampers;
+            m_leanMultiplier = options.leanMultiplier;
+            m_nodMultiplier = options.nodMultiplier;
             m_useColorVariations = options.useColorVariations;
             m_color0 = options.color0;
             m_color1 = options.color1;
@@ -1083,6 +1168,11 @@ namespace AdvancedVehicleOptions
         private float m_maxSpeed;
         private float m_acceleration;
         private float m_braking;
+	private float m_turning;
+        private float m_springs;
+        private float m_dampers;
+        private float m_leanMultiplier;
+        private float m_nodMultiplier;
         private bool m_useColorVariations;
         private HexaColor m_color0;
         private HexaColor m_color1;

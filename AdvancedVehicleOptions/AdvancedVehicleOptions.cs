@@ -76,7 +76,7 @@ namespace AdvancedVehicleOptions
             }
         }
 
-        public const string version = "1.8.5";
+        public const string version = "1.8.6";
     }
 
     public class AdvancedVehicleOptionsLoader : LoadingExtensionBase
@@ -376,12 +376,13 @@ namespace AdvancedVehicleOptions
         public static IEnumerator ActionRemoveExisting(ThreadBase t)
         {
             VehicleInfo info = m_removeInfo;
+            Array16<Vehicle> vehicles = VehicleManager.instance.m_vehicles;
 
-            for (ushort i = 0; i < VehicleManager.instance.m_vehicles.m_size; i++)
+            for (ushort i = 0; i < vehicles.m_buffer.Length; i++)
             {
-                if (VehicleManager.instance.m_vehicles.m_buffer[i].Info != null)
+                if (vehicles.m_buffer[i].Info != null)
                 {
-                    if (info == VehicleManager.instance.m_vehicles.m_buffer[i].Info)
+                    if (info == vehicles.m_buffer[i].Info)
                         VehicleManager.instance.ReleaseVehicle(i);
                 }
 
@@ -392,12 +393,13 @@ namespace AdvancedVehicleOptions
         public static IEnumerator ActionRemoveParked(ThreadBase t)
         {
             VehicleInfo info = m_removeParkedInfo;
+            Array16<VehicleParked> parkedVehicles = VehicleManager.instance.m_parkedVehicles;
 
-            for (ushort i = 0; i < VehicleManager.instance.m_parkedVehicles.m_size; i++)
+            for (ushort i = 0; i < parkedVehicles.m_buffer.Length; i++)
             {
-                if (VehicleManager.instance.m_parkedVehicles.m_buffer[i].Info != null)
+                if (parkedVehicles.m_buffer[i].Info != null)
                 {
-                    if (info == VehicleManager.instance.m_parkedVehicles.m_buffer[i].Info)
+                    if (info == parkedVehicles.m_buffer[i].Info)
                         VehicleManager.instance.ReleaseParkedVehicle(i);
                 }
 
@@ -407,7 +409,7 @@ namespace AdvancedVehicleOptions
 
         public static IEnumerator ActionRemoveExistingAll(ThreadBase t)
         {
-            for (ushort i = 0; i < VehicleManager.instance.m_vehicles.m_size; i++)
+            for (ushort i = 0; i < VehicleManager.instance.m_vehicles.m_buffer.Length; i++)
             {
                 VehicleManager.instance.ReleaseVehicle(i);
                 if (i % 256 == 255) yield return i;
@@ -416,7 +418,7 @@ namespace AdvancedVehicleOptions
 
         public static IEnumerator ActionRemoveParkedAll(ThreadBase t)
         {
-            for (ushort i = 0; i < VehicleManager.instance.m_parkedVehicles.m_size; i++)
+            for (ushort i = 0; i < VehicleManager.instance.m_parkedVehicles.m_buffer.Length; i++)
             {
                 VehicleManager.instance.ReleaseParkedVehicle(i);
                 if (i % 256 == 255) yield return i;

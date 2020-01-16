@@ -649,7 +649,7 @@ namespace AdvancedVehicleOptions
         {
             int count = 0;
             Array16<Vehicle> vehicles = VehicleManager.instance.m_vehicles;
-            for (int i = 0; i < vehicles.m_size; i++)
+            for (uint i = 0; i < vehicles.m_buffer.Length; i++)
             {
                 if ((vehicles.m_buffer[i].m_flags & Vehicle.Flags.Spawned) == Vehicle.Flags.Spawned)
                 {
@@ -708,7 +708,7 @@ namespace AdvancedVehicleOptions
         public static IEnumerator UpdateBackEngines(ThreadBase t)
         {
             Array16<Vehicle> vehicles = VehicleManager.instance.m_vehicles;
-            for (ushort i = 0; i < vehicles.m_size; i++)
+            for (uint i = 0; i < vehicles.m_buffer.Length; i++)
             {
                 try
                 {

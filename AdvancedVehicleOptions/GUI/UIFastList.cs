@@ -3,7 +3,7 @@ using ColossalFramework.UI;
 
 using System;
 
-namespace AdvancedVehicleOptions.GUI
+namespace AdvancedVehicleOptionsUID.GUI
 {
     public interface IUIFastListRow
     {

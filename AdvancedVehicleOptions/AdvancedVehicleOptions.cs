@@ -20,7 +20,7 @@ namespace AdvancedVehicleOptionsUID
             try
             {
                 // Creating setting file
-                GameSettings.AddSettingsFile(new SettingsFile[] { new SettingsFile() { fileName = AdvancedVehicleOptions.settingsFileName } });
+                GameSettings.AddSettingsFile(new SettingsFile[] { new SettingsFile() { fileName = AdvancedVehicleOptionsUID.settingsFileName } });
             }
             catch (Exception e)
             {
@@ -36,7 +36,7 @@ namespace AdvancedVehicleOptionsUID
 
         public string Description
         {
-            get { return "Customize your vehicles, includes all new vehicle categories introduced with the CS:Industries DLC. Last reviewed for CS:Campus v1.12.3-f2."; }
+            get { return "Customize your vehicles. Industries DLC Ready. (Last reviewed for Cities Skylines Campus 1.12.3-f2)"; }
         }
 
         public void OnSettingsUI(UIHelperBase helper)
@@ -54,17 +54,17 @@ namespace AdvancedVehicleOptionsUID
 
                 group.AddSpace(10);
 
-                checkBox = (UICheckBox)group.AddCheckbox("Hide the user interface", AdvancedVehicleOptions.hideGUI.value, (b) =>
+                checkBox = (UICheckBox)group.AddCheckbox("Hide the user interface", AdvancedVehicleOptionsUID.hideGUI.value, (b) =>
                 {
-                    AdvancedVehicleOptions.hideGUI.value = b;
-                    AdvancedVehicleOptions.UpdateGUI();
+                    AdvancedVehicleOptionsUID.hideGUI.value = b;
+                    AdvancedVehicleOptionsUID.UpdateGUI();
 
                 });
                 checkBox.tooltip = "Hide the UI completely if you feel like you are done with it\nand want to save the little bit of memory it takes\nEverything else will still be functional";
 
-                checkBox = (UICheckBox)group.AddCheckbox("Disable warning at map loading", !AdvancedVehicleOptions.onLoadCheck.value, (b) =>
+                checkBox = (UICheckBox)group.AddCheckbox("Disable warning at map loading", !AdvancedVehicleOptionsUID.onLoadCheck.value, (b) =>
                 {
-                    AdvancedVehicleOptions.onLoadCheck.value = !b;
+                    AdvancedVehicleOptionsUID.onLoadCheck.value = !b;
                 });
                 checkBox.tooltip = "Disable service vehicle availability check at the loading of a map";
 
@@ -79,9 +79,9 @@ namespace AdvancedVehicleOptionsUID
         public const string version = "1.9.0";
     }
 
-    public class AdvancedVehicleOptionsLoader : LoadingExtensionBase
+    public class AdvancedVehicleOptionsUIDLoader : LoadingExtensionBase
     {
-        private static AdvancedVehicleOptions instance;
+        private static AdvancedVehicleOptionsUID instance;
 
         #region LoadingExtensionBase overrides
         /// <summary>
@@ -98,14 +98,14 @@ namespace AdvancedVehicleOptionsUID
                     return;
                 }
 
-                AdvancedVehicleOptions.isGameLoaded = true;
+                AdvancedVehicleOptionsUID.isGameLoaded = true;
 
                 if (instance != null)
                 {
                     GameObject.DestroyImmediate(instance.gameObject);
                 }
 
-                instance = new GameObject("AdvancedVehicleOptions").AddComponent<AdvancedVehicleOptions>();
+                instance = new GameObject("AdvancedVehicleOptionsUID").AddComponent<AdvancedVehicleOptionsUID>();
 
                 try
                 {
@@ -147,7 +147,7 @@ namespace AdvancedVehicleOptionsUID
                 if (instance != null)
                     GameObject.Destroy(instance.gameObject);
 
-                AdvancedVehicleOptions.isGameLoaded = false;
+                AdvancedVehicleOptionsUID.isGameLoaded = false;
             }
             catch (Exception e)
             {
@@ -157,9 +157,9 @@ namespace AdvancedVehicleOptionsUID
         #endregion
     }
     
-    public class AdvancedVehicleOptions : MonoBehaviour
+    public class AdvancedVehicleOptionsUID : MonoBehaviour
     {
-        public const string settingsFileName = "AdvancedVehicleOptions";
+        public const string settingsFileName = "AdvancedVehicleOptionsUID";
  
         public static SavedBool hideGUI = new SavedBool("hideGUI", settingsFileName, false, true);
         public static SavedBool onLoadCheck = new SavedBool("onLoadCheck", settingsFileName, true, true);
@@ -169,7 +169,7 @@ namespace AdvancedVehicleOptionsUID
         private static VehicleInfo m_removeInfo;
         private static VehicleInfo m_removeParkedInfo;
 
-        private const string m_fileName = "AdvancedVehicleOptions.xml";
+        private const string m_fileName = "AdvancedVehicleOptionsUID.xml";
 
         public static bool isGameLoaded = false;
         public static Configuration config = new Configuration();
@@ -179,11 +179,11 @@ namespace AdvancedVehicleOptionsUID
             try
             {
                 // Loading config
-                AdvancedVehicleOptions.InitConfig();
+                AdvancedVehicleOptionsUID.InitConfig();
 
-                if (AdvancedVehicleOptions.onLoadCheck)
+                if (AdvancedVehicleOptionsUID.onLoadCheck)
                 {
-                    AdvancedVehicleOptions.CheckAllServicesValidity();
+                    AdvancedVehicleOptionsUID.CheckAllServicesValidity();
                 }
 
                 m_mainPanel = GameObject.FindObjectOfType<GUI.UIMainPanel>();
@@ -514,4 +514,3 @@ namespace AdvancedVehicleOptionsUID
         }
     }
 }
-

@@ -141,7 +141,7 @@ namespace AdvancedVehicleOptionsUID
         {
             try
             {
-                if (AdvancedVehicleOptions.isGameLoaded) OptionsToData();
+                if (AdvancedVehicleOptionsUID.isGameLoaded) OptionsToData();
 
                 // Add back default vehicle options that might not exist on the map
                 // I.E. Snowplow on non-snowy maps
@@ -226,7 +226,7 @@ namespace AdvancedVehicleOptionsUID
                 }
 
 
-                if (AdvancedVehicleOptions.isGameLoaded) DataToOptions();
+                if (AdvancedVehicleOptionsUID.isGameLoaded) DataToOptions();
             }
         }
 

@@ -9,7 +9,7 @@ namespace AdvancedVehicleOptionsUID
     {
         public const string modPrefix = "[Advanced Vehicle Options "+ModInfo.version+"] ";
 
-        public static SavedBool hideDebugMessages = new SavedBool("hideDebugMessages", AdvancedVehicleOptions.settingsFileName, true, true);
+        public static SavedBool hideDebugMessages = new SavedBool("hideDebugMessages", AdvancedVehicleOptionsUID.settingsFileName, true, true);
 
         public static void Log(string message)
         {

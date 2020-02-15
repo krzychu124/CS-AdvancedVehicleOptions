@@ -36,7 +36,7 @@ namespace AdvancedVehicleOptionsUID
 
         public string Description
         {
-            get { return "Customize your vehicles, including new vehicle categories introduced with the CS:Industries DLC. Last reviewed for CS:v1.12.3-f2."; }
+            get { return "Customize your vehicles, includes all new vehicle categories introduced with the CS:Industries DLC. Last reviewed for CS:Campus v1.12.3-f2."; }
         }
 
         public void OnSettingsUI(UIHelperBase helper)

@@ -7,7 +7,7 @@ using System.Reflection;
 
 using UIUtils = SamsamTS.UIUtils;
 
-namespace AdvancedVehicleOptions.GUI
+namespace AdvancedVehicleOptionsUID.GUI
 {
     public class UIMainPanel : UIPanel
     {

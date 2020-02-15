@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using ColossalFramework.UI;
 
-namespace AdvancedVehicleOptions.GUI
+namespace AdvancedVehicleOptionsUID.GUI
 {
     public class UITitleBar : UIPanel
     {

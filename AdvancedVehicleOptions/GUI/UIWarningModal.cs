@@ -4,7 +4,7 @@ using UnityEngine;
 
 using UIUtils = SamsamTS.UIUtils;
 
-namespace AdvancedVehicleOptions.GUI
+namespace AdvancedVehicleOptionsUID.GUI
 {
     public class UIWarningModal : UIPanel
     {

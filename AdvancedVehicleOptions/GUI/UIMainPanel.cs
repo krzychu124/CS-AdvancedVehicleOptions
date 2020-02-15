@@ -29,9 +29,9 @@ namespace AdvancedVehicleOptions.GUI
         private CameraController m_cameraController;
         private uint m_seekStart = 0;
 
-        private const int HEIGHT = 550;
+        private const int HEIGHT = 710;
         private const int WIDTHLEFT = 470;
-        private const int WIDTHRIGHT = 315;
+        private const int WIDTHRIGHT = 390;
 
         public static readonly string[] categoryList = { "All", "Citizen", "Bicycle",
             "Forestry", "Farming", "Ore", "Oil", "Industry", "Player Industry",
@@ -258,7 +258,7 @@ namespace AdvancedVehicleOptions.GUI
             UIPanel panel = AddUIComponent<UIPanel>();
             panel.backgroundSprite = "GenericPanel";
             panel.width = WIDTHRIGHT - 10;
-            panel.height = HEIGHT - 375;
+            panel.height = HEIGHT - 420;
             panel.relativePosition = new Vector3(WIDTHLEFT + 5, offset);
 
             m_preview = panel.AddUIComponent<UITextureSprite>();
@@ -285,7 +285,7 @@ namespace AdvancedVehicleOptions.GUI
 
             // Option panel
             m_optionPanel = AddUIComponent<UIOptionPanel>();
-            m_optionPanel.relativePosition = new Vector3(WIDTHLEFT, height - 330);
+            m_optionPanel.relativePosition = new Vector3(WIDTHLEFT, height - 370);
 
             // Event handlers
             m_fastList.eventSelectedIndexChanged += OnSelectedItemChanged; 

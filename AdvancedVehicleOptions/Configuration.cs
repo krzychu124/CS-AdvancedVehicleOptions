@@ -25,6 +25,11 @@ namespace AdvancedVehicleOptions
             public float maxSpeed;
             public float acceleration;
             public float braking;
+            public float turning;
+            public float springs;
+            public float dampers;
+            public float leanMultiplier;
+            public float nodMultiplier;
             [DefaultValue(true)]
             public bool useColorVariations = true;
             public HexaColor color0;
@@ -68,6 +73,11 @@ namespace AdvancedVehicleOptions
                     s.WriteFloat(options[i].maxSpeed);
                     s.WriteFloat(options[i].acceleration);
                     s.WriteFloat(options[i].braking);
+                    s.WriteFloat(options[i].turning);
+                    s.WriteFloat(options[i].springs);
+                    s.WriteFloat(options[i].dampers);
+                    s.WriteFloat(options[i].leanMultiplier);
+                    s.WriteFloat(options[i].nodMultiplier);
                     s.WriteBool(options[i].useColorVariations);
                     s.WriteUniqueString(options[i].color0.Value);
                     s.WriteUniqueString(options[i].color1.Value);
@@ -101,6 +111,11 @@ namespace AdvancedVehicleOptions
                     data[i].maxSpeed = s.ReadFloat();
                     data[i].acceleration = s.ReadFloat();
                     data[i].braking = s.ReadFloat();
+                    data[i].turning = s.ReadFloat();
+                    data[i].springs = s.ReadFloat();
+                    data[i].dampers = s.ReadFloat();
+                    data[i].leanMultiplier = s.ReadFloat();
+                    data[i].nodMultiplier = s.ReadFloat();
                     data[i].useColorVariations = s.ReadBool();
                     data[i].color0 = new HexaColor(s.ReadUniqueString());
                     data[i].color1 = new HexaColor(s.ReadUniqueString());
@@ -230,6 +245,11 @@ namespace AdvancedVehicleOptions
                 data[i].maxSpeed = options[i].maxSpeed;
                 data[i].acceleration = options[i].acceleration;
                 data[i].braking = options[i].braking;
+                data[i].turning = options[i].turning;
+                data[i].springs = options[i].springs;
+                data[i].dampers = options[i].dampers;
+                data[i].leanMultiplier = options[i].leanMultiplier;
+                data[i].nodMultiplier = options[i].nodMultiplier;
                 data[i].useColorVariations = options[i].useColorVariations;
                 data[i].color0 = options[i].color0;
                 data[i].color1 = options[i].color1;
@@ -256,6 +276,11 @@ namespace AdvancedVehicleOptions
                 options[i].maxSpeed = data[i].maxSpeed;
                 options[i].acceleration = data[i].acceleration;
                 options[i].braking = data[i].braking;
+                options[i].turning = data[i].turning;
+                options[i].springs = data[i].springs;
+                options[i].dampers = data[i].dampers;
+                options[i].leanMultiplier = data[i].leanMultiplier;
+                options[i].nodMultiplier = data[i].nodMultiplier;
                 options[i].useColorVariations = data[i].useColorVariations;
                 options[i].color0 = data[i].color0;
                 options[i].color1 = data[i].color1;

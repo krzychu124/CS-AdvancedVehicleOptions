@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 using System.ComponentModel;
 using System.Collections.Generic;
 
-namespace AdvancedVehicleOptions
+namespace AdvancedVehicleOptionsUID
 {
     [XmlType("ArrayOfVehicleOptions")]
     [Serializable]

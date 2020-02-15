@@ -3,7 +3,7 @@ using ColossalFramework;
 
 using System;
 
-namespace AdvancedVehicleOptions
+namespace AdvancedVehicleOptionsUID
 {
     public class DebugUtils
     {

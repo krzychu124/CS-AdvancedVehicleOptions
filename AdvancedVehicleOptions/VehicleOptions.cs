@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 
-namespace AdvancedVehicleOptions
+namespace AdvancedVehicleOptionsUID
 {
     public class VehicleOptions : IComparable
     {

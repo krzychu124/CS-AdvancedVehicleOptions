@@ -11,7 +11,7 @@ using ColossalFramework;
 using ColossalFramework.Threading;
 using ColossalFramework.UI;
 
-namespace AdvancedVehicleOptions
+namespace AdvancedVehicleOptionsUID
 {
     public class ModInfo : IUserMod
     {
@@ -36,7 +36,7 @@ namespace AdvancedVehicleOptions
 
         public string Description
         {
-            get { return "Customize your vehicles. Industries DLC Ready (Cities Skylines 1.11.0-f3)"; }
+            get { return "Customize your vehicles, including new vehicle categories introduced with the CS:Industries DLC. Last reviewed for CS:v1.12.3-f2."; }
         }
 
         public void OnSettingsUI(UIHelperBase helper)
@@ -76,7 +76,7 @@ namespace AdvancedVehicleOptions
             }
         }
 
-        public const string version = "1.8.7";
+        public const string version = "1.9.0";
     }
 
     public class AdvancedVehicleOptionsLoader : LoadingExtensionBase

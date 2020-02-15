@@ -74,7 +74,7 @@ namespace AdvancedVehicleOptionsUID.GUI
             {
                 UIView view = GetUIView();
 
-                name = "AdvancedVehicleOptions";
+                name = "AdvancedVehicleOptionsUID";
                 backgroundSprite = "UnlockingPanel2";
                 isVisible = false;
                 canFocus = true;
@@ -157,7 +157,7 @@ namespace AdvancedVehicleOptionsUID.GUI
 
                 view.FindUIComponent<UITabContainer>("TSContainer").AddUIComponent<UIPanel>().color = new Color32(0, 0, 0, 0);
 
-                optionList = AdvancedVehicleOptions.config.options;
+                optionList = AdvancedVehicleOptionsUID.config.options;
                 DebugUtils.Log("UI initialized.");
             }
             catch (Exception e)
@@ -293,10 +293,10 @@ namespace AdvancedVehicleOptionsUID.GUI
             m_import.eventClick += (c, t) =>
             {
                 DefaultOptions.RestoreAll();
-                AdvancedVehicleOptions.ImportConfig();
-                optionList = AdvancedVehicleOptions.config.options;
+                AdvancedVehicleOptionsUID.ImportConfig();
+                optionList = AdvancedVehicleOptionsUID.config.options;
             };
-            m_export.eventClick += (c, t) => AdvancedVehicleOptions.ExportConfig();
+            m_export.eventClick += (c, t) => AdvancedVehicleOptionsUID.ExportConfig();
 
             panel.eventMouseDown += (c, p) =>
             {

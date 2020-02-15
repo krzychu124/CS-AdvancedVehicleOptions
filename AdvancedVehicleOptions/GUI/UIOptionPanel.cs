@@ -386,7 +386,7 @@ namespace AdvancedVehicleOptionsUID.GUI
                     }
                 }
 
-                if (!state && !AdvancedVehicleOptions.CheckServiceValidity(m_options.category))
+                if (!state && !AdvancedVehicleOptionsUID.CheckServiceValidity(m_options.category))
                 {
                     GUI.UIWarningModal.instance.message = UIMainPanel.categoryList[(int)m_options.category + 1] + " may not work correctly because no vehicles are allowed to spawn.";
                     UIView.PushModal(GUI.UIWarningModal.instance);
@@ -565,9 +565,9 @@ namespace AdvancedVehicleOptionsUID.GUI
             if (m_options == null) return;
 
             if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-                AdvancedVehicleOptions.ClearVehicles(null, component == m_clearParked);
+                AdvancedVehicleOptionsUID.ClearVehicles(null, component == m_clearParked);
             else
-                AdvancedVehicleOptions.ClearVehicles(m_options, component == m_clearParked);
+                AdvancedVehicleOptionsUID.ClearVehicles(m_options, component == m_clearParked);
         }
     }
 

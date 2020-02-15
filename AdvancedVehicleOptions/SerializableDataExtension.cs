@@ -3,7 +3,7 @@ using System.Linq;
 using ColossalFramework.IO;
 using ICities;
 
-namespace AdvancedVehicleOptions
+namespace AdvancedVehicleOptionsUID
 {
     public class SerializableDataExtension : SerializableDataExtensionBase
     {

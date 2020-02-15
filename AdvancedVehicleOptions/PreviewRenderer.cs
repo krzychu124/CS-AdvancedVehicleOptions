@@ -1,7 +1,7 @@
 ﻿using ColossalFramework;
 using UnityEngine;
 
-namespace AdvancedVehicleOptions
+namespace AdvancedVehicleOptionsUID
 {
     public class PreviewRenderer : MonoBehaviour
     {

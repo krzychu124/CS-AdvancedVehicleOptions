@@ -1,6 +1,9 @@
 # CS-AdvancedVehicleOptions 1.9.0
 
-This version is 1.9.0, tested in a limited environment only. Last changes include a new logo (yeah) und the change of the namespace for the mod. This will stop annyoing messages when user are still subscribed to the original one. 
+This version is 1.9.0, tested in a limited environment only. Last changes include a new logo (yeah) und the change of the namespace for the mod. This should stop annyoing messages when user are still subscribed to the original one. 
+
+26/03 Still error messages on load; should be resolved if moving to Harmony 2.0 / have no idea, how to do that :/
+26/03 New vehicles to be added for new DLC Sunset Harbor
 
 # CS-AdvancedVehicleOptions
 

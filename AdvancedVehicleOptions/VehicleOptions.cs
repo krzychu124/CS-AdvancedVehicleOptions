@@ -507,15 +507,14 @@ namespace AdvancedVehicleOptionsUID
                             return Category.Deathcare;
 			else
                             return Category.Healthcare;
-
-                    case ItemClass.Service.Water:
-		    						
+	    						
                     case ItemClass.Service.Garbage:
                         if (prefab.m_class.m_level == ItemClass.Level.Level3 || prefab.m_class.m_level == ItemClass.Level.Level4)		//Waste Transfer L4 and Waste Collection L3			
 			    return Category.WasteTransfer;
 			else
                             return Category.Garbage;
-		    
+			    
+                    case ItemClass.Service.Water:		    
                     case ItemClass.Service.Road:
                         return Category.Maintenance;
 			

@@ -33,6 +33,7 @@ namespace AdvancedVehicleOptionsUID
             Healthcare,
             Deathcare,
             Garbage,
+	    WasteTransfer,
             Maintenance,
 	    TransportPost,
             TransportTaxi,
@@ -497,32 +498,42 @@ namespace AdvancedVehicleOptionsUID
                             return Category.Prison;
                         else
                             return Category.Police;
+			    
                     case ItemClass.Service.FireDepartment:
                         return Category.FireSafety;
+			
                     case ItemClass.Service.HealthCare:
-                        if (prefab.m_class.m_level == ItemClass.Level.Level1)
-                            return Category.Healthcare;
-                        else
 			if (prefab.m_class.m_level == ItemClass.Level.Level2)
                             return Category.Deathcare;
 			else
                             return Category.Healthcare;
-                    case ItemClass.Service.Garbage:
-                        return Category.Garbage;
+
                     case ItemClass.Service.Water:
+		    						
+                    case ItemClass.Service.Garbage:
+                        if (prefab.m_class.m_level == ItemClass.Level.Level3 || prefab.m_class.m_level == ItemClass.Level.Level4)		//Waste Transfer L4 and Waste Collection L3			
+			    return Category.WasteTransfer;
+			else
+                            return Category.Garbage;
+		    
                     case ItemClass.Service.Road:
                         return Category.Maintenance;
+			
                     case ItemClass.Service.Disaster:
                         return Category.Disaster;
+			
                     case ItemClass.Service.Monument:
                         if (prefab.m_class.m_level == ItemClass.Level.Level5)       // Aviation Club Light Aircrafts
                             return Category.TransportBlimp;
                         else
 			    return Category.Monument;
+			    
                     case ItemClass.Service.Natural:
                         return Category.Natural;
+			
 		    case ItemClass.Service.PlayerIndustry:
                         return Category.IndustryPlayer;
+			
 		    case ItemClass.Service.Fishing:
 			return Category.Fishing;
                 }
@@ -531,8 +542,10 @@ namespace AdvancedVehicleOptionsUID
                 {
                     case ItemClass.SubService.PublicTransportBus:
                         return Category.TransportBus;
+			
                     case ItemClass.SubService.PublicTransportMetro:
                         return Category.TransportMetro;
+			
                     case ItemClass.SubService.PublicTransportTrain:
                         if (prefab.m_class.m_level == ItemClass.Level.Level1)
                             return Category.TransportTrain;
@@ -550,6 +563,7 @@ namespace AdvancedVehicleOptionsUID
 						
                     case ItemClass.SubService.PublicTransportTaxi:
                         return Category.TransportTaxi;
+			
                     case ItemClass.SubService.PublicTransportTours:
                         return Category.TransportTours;
 						
@@ -564,26 +578,37 @@ namespace AdvancedVehicleOptionsUID
 						
                     case ItemClass.SubService.IndustrialForestry:
                         return Category.Forestry;
+			
                     case ItemClass.SubService.IndustrialFarming:
                         return Category.Farming;
+			
                     case ItemClass.SubService.IndustrialOre:
                         return Category.Ore;
+			
                     case ItemClass.SubService.IndustrialOil:
                         return Category.Oil;
+			
                     case ItemClass.SubService.IndustrialGeneric:
                         return Category.IndustryGeneric;
+			
                     case ItemClass.SubService.PublicTransportTram:
                         return Category.Tram;
+			
                     case ItemClass.SubService.PublicTransportMonorail:
                         return Category.Monorail;
+			
                     case ItemClass.SubService.PublicTransportCableCar:
                         return Category.CableCar;
+			
                     case ItemClass.SubService.PublicTransportTrolleybus:
                         return Category.TrolleyBus;  
+			
 		    case ItemClass.SubService.ResidentialHigh:
                         return Category.Bicycle;
+			
                     case ItemClass.SubService.BeautificationParks:
                         return Category.Maintenance;
+			
 		    case ItemClass.SubService.PublicTransportPost:
                         return Category.TransportPost;
                 }
@@ -647,6 +672,9 @@ namespace AdvancedVehicleOptionsUID
 
             ai = vehicleAI as PassengerBlimpAI;
             if (ai != null) return ((PassengerBlimpAI)ai).m_passengerCapacity;
+	    
+	    ai = vehicleAI as PassengerHelicopterAI;
+            if (ai != null) return ((PassengerHelicopterAI)ai).m_passengerCapacity;  
 
             return -1;
         }

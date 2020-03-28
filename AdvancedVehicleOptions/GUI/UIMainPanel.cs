@@ -37,7 +37,7 @@ namespace AdvancedVehicleOptionsUID.GUI
             "Forestry", "Farming", "Ore", "Oil", "Fishing", "Industry", "Player Industry",
             "Police", "Prison", "Fire Safety", "Disaster",
             "Healthcare", "Deathcare", "Garbage", "Maintenance", "Postal Service",
-            "Taxi", "Bus", "Metro", "Tram", "Monorail", "Cable Car",
+            "Taxi", "Bus", "Metro", "Tram", "Monorail", "Cable Car", "Trolley Bus",
             "Cargo Train", "Passenger Train",
             "Cargo Ship", "Passenger Ship","Ferry", "Cargo Plane", "Passenger Plane", "Light Air Traffic", "Tours",
             "Launch Site", "Natural" };
@@ -46,7 +46,7 @@ namespace AdvancedVehicleOptionsUID.GUI
               "IconPolicyForest", "IconPolicyFarming", "IconPolicyOre", "IconPolicyOil", "SubBarIndustryFishing", "IconPolicyNone", "SubBarIndustryUniqueFactory",
               "ToolbarIconPolice", "IconPolicyDoubleSentences", "InfoIconFireSafety", "ToolbarIconFireDepartmentHovered",
               "ToolbarIconHealthcare", "ToolbarIconHealthcareHovered", "InfoIconGarbage", "InfoIconMaintenance", "SubBarPublicTransportPost",
-              "SubBarPublicTransportTaxi", "SubBarPublicTransportBus", "SubBarPublicTransportMetro", "SubBarPublicTransportTram", "SubBarPublicTransportMonorail", "SubBarPublicTransportCableCar",
+              "SubBarPublicTransportTaxi", "SubBarPublicTransportBus", "SubBarPublicTransportMetro", "SubBarPublicTransportTram", "SubBarPublicTransportMonorail", "SubBarPublicTransportCableCar", "SubBarPublicTransportTrolleybus",
               "SubBarPublicTransportTrain", "SubBarPublicTransportTrain",
               "IconCargoShip", "SubBarPublicTransportShip",  "IconPolicyPreferFerries", "SubBarPublicTransportPlane", "SubBarPublicTransportPlane", "IconPolicyEducationalBlimps", "SubBarPublicTransportTours",
               "ToolbarIconMonuments", "SubBarFireDepartmentDisaster"};

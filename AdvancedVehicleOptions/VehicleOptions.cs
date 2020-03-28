@@ -503,7 +503,7 @@ namespace AdvancedVehicleOptionsUID
                         return Category.Disaster;
                     case ItemClass.Service.Monument:
                         if (prefab.m_class.m_level == ItemClass.Level.Level5)       // Aviation Club Light Aircrafts
-                            return Category.TransportPlane;
+                            return Category.TransportBlimp;
                         else
 			    return Category.Monument;
                     case ItemClass.Service.Natural:

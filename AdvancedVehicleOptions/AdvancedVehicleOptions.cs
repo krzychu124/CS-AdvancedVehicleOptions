@@ -511,7 +511,17 @@ namespace AdvancedVehicleOptionsUID
                 type != typeof(GarbageTruckAI) ||
                 type != typeof(HearseAI) ||
                 type != typeof(PassengerCarAI) ||
-                type != typeof(PoliceCarAI));
+                type != typeof(PoliceCarAI)) ||
+		type != typeof(TaxiAI) ||
+		type != typeof(TramAI) ||
+		type != typeof(MaintenanceTruckAI) ||
+		type != typeof(SnowTruckAI) ||
+		type != typeof(CableCarAI) ||
+		type != typeof(TrolleybusAI) ||
+		type != typeof(PassengerFerryAI) ||
+		type != typeof(PassengerBlimpAI) ||
+		type != typeof(PostVanAI) ||
+		type != typeof(PassengerHelicopterAI);
         }
     }
 }

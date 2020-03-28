@@ -33,19 +33,16 @@ namespace AdvancedVehicleOptionsUID.GUI
         private const int WIDTHLEFT = 470;
         private const int WIDTHRIGHT = 390;
 
-        public static readonly string[] categoryList = { "All", "Citizen", "Bicycle",
-            "Forestry", "Farming", "Ore", "Oil", "Fishing", "Industry", "Player Industry",
-            "Police", "Prison", "Fire Safety", "Disaster",
-            "Healthcare", "Deathcare", "Garbage", "Maintenance", "Postal Service",
-            "Taxi", "Bus", "Metro", "Tram", "Monorail", "Cable Car", "Trolley Bus",
-            "Cargo Train", "Passenger Train",
-            "Cargo Ship", "Passenger Ship","Ferry", "Cargo Plane", "Passenger Plane", "Light Air Traffic", "Tours",
-            "Launch Site", "Natural" };
+        public static readonly string[] categoryList = { "All", "Citizen", "Bicycle", "Forestry", "Farming", "Ore", "Oil",
+	    "Fishing", "Industry", "Player Industry", "Police", "Prison", "Fire Safety", "Disaster", "Healthcare", "Deathcare", 
+	    "Garbage", "Waste Transfer", "Maintenance", "Postal Service", "Taxi", "Bus", "Metro", "Tram", "Monorail", "Cable Car",
+	    "Trolley Bus", "Cargo Train", "Passenger Train", "Cargo Ship", "Passenger Ship","Ferry", "Cargo Plane", "Passenger Plane",
+	    "Light Air Traffic", "Tours", "Launch Site", "Natural" };
 
         public static readonly string[] vehicleIconList = { "IconCitizenVehicle", "IconCitizenBicycleVehicle",
               "IconPolicyForest", "IconPolicyFarming", "IconPolicyOre", "IconPolicyOil", "SubBarIndustryFishing", "IconPolicyNone", "SubBarIndustryUniqueFactory",
               "ToolbarIconPolice", "IconPolicyDoubleSentences", "InfoIconFireSafety", "ToolbarIconFireDepartmentHovered",
-              "ToolbarIconHealthcare", "ToolbarIconHealthcareHovered", "InfoIconGarbage", "InfoIconMaintenance", "SubBarPublicTransportPost",
+              "ToolbarIconHealthcare", "ToolbarIconHealthcareHovered", "InfoIconGarbage", "InfoIconGarbage","InfoIconMaintenance", "SubBarPublicTransportPost",
               "SubBarPublicTransportTaxi", "SubBarPublicTransportBus", "SubBarPublicTransportMetro", "SubBarPublicTransportTram", "SubBarPublicTransportMonorail", "SubBarPublicTransportCableCar", "SubBarPublicTransportTrolleybus",
               "SubBarPublicTransportTrain", "SubBarPublicTransportTrain",
               "IconCargoShip", "SubBarPublicTransportShip",  "IconPolicyPreferFerries", "SubBarPublicTransportPlane", "SubBarPublicTransportPlane", "IconPolicyEducationalBlimps", "SubBarPublicTransportTours",

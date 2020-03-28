@@ -39,7 +39,7 @@ namespace AdvancedVehicleOptionsUID.GUI
             "Healthcare", "Deathcare", "Garbage", "Maintenance", "Postal Service",
             "Taxi", "Bus", "Metro", "Tram", "Monorail", "Cable Car",
             "Cargo Train", "Passenger Train",
-            "Cargo Ship", "Passenger Ship","Ferry", "Cargo Plane", "Passenger Plane", "Blimp", "Tours",
+            "Cargo Ship", "Passenger Ship","Ferry", "Cargo Plane", "Passenger Plane", "Light Air Traffic", "Tours",
             "Launch Site", "Natural" };
 
         public static readonly string[] vehicleIconList = { "IconCitizenVehicle", "IconCitizenBicycleVehicle",

@@ -92,9 +92,10 @@ namespace AdvancedVehicleOptionsUID
             try
             {
                 // Is it an actual game ?
-                if (mode != LoadMode.LoadGame && mode != LoadMode.NewGame)
+                if (mode != LoadMode.LoadGame && mode != LoadMode.NewGame && mode != LoadMode.NewGameFromScenario)
                 {
                     DefaultOptions.Clear();
+		    DebugUtils.Log("AVO Incompatible GameMode " + mode);   // reporting no load to log file
                     return;
                 }
 

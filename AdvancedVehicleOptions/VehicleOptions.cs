@@ -336,6 +336,9 @@ namespace AdvancedVehicleOptionsUID
 
                 ai = m_prefab.m_vehicleAI as PassengerBlimpAI;
                 if (ai != null) return ((PassengerBlimpAI)ai).m_passengerCapacity;
+		
+		ai = m_prefab.m_vehicleAI as PassengerHelicopterAI;
+                if (ai != null) return ((PassengerHelicopterAI)ai).m_passengerCapacity;
 				
 		ai = m_prefab.m_vehicleAI as PostVanAI;
                 if (ai != null) return ((PostVanAI)ai).m_mailCapacity;
@@ -407,6 +410,9 @@ namespace AdvancedVehicleOptionsUID
 
                 ai = m_prefab.m_vehicleAI as PassengerBlimpAI;
                 if (ai != null) { ((PassengerBlimpAI)ai).m_passengerCapacity = value; return; }
+		
+		ai = m_prefab.m_vehicleAI as PassengerHelicopterAI;
+                if (ai != null) { ((PassengerHelicopterAI)ai).m_passengerCapacity = value; return; }
 				
 		ai = m_prefab.m_vehicleAI as PostVanAI;
                 if (ai != null) { ((PostVanAI)ai).m_mailCapacity = value; return; }

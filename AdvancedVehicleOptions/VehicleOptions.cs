@@ -23,8 +23,9 @@ namespace AdvancedVehicleOptionsUID
             Farming,
             Ore,
             Oil,
+	    Fishing,
             IndustryGeneric,
-			IndustryPlayer,
+	    IndustryPlayer,
             Police,
             Prison,
             FireSafety,
@@ -33,7 +34,7 @@ namespace AdvancedVehicleOptionsUID
             Deathcare,
             Garbage,
             Maintenance,
-			TransportPost,
+	    TransportPost,
             TransportTaxi,
             TransportBus,
             TransportMetro,
@@ -44,12 +45,12 @@ namespace AdvancedVehicleOptionsUID
             TransportTrain,
             CargoShip,
             TransportShip,
-			TransportFerry,
-			CargoPlane,
+            TransportFerry,
+            CargoPlane,
             TransportPlane,
-			TransportBlimp,
+	    TransportBlimp,
             TransportTours,
-			Monument,
+	    Monument,
             Natural
         }
 
@@ -285,7 +286,7 @@ namespace AdvancedVehicleOptionsUID
                 ai = m_prefab.m_vehicleAI as CargoShipAI;
                 if (ai != null) return ((CargoShipAI)ai).m_cargoCapacity;
 				
-				ai = m_prefab.m_vehicleAI as CargoPlaneAI;
+		ai = m_prefab.m_vehicleAI as CargoPlaneAI;
                 if (ai != null) return ((CargoPlaneAI)ai).m_cargoCapacity;
 
                 ai = m_prefab.m_vehicleAI as CargoTrainAI;
@@ -336,7 +337,7 @@ namespace AdvancedVehicleOptionsUID
                 ai = m_prefab.m_vehicleAI as PassengerBlimpAI;
                 if (ai != null) return ((PassengerBlimpAI)ai).m_passengerCapacity;
 				
-				ai = m_prefab.m_vehicleAI as PostVanAI;
+		ai = m_prefab.m_vehicleAI as PostVanAI;
                 if (ai != null) return ((PostVanAI)ai).m_mailCapacity;
 
                 return -1;
@@ -407,7 +408,7 @@ namespace AdvancedVehicleOptionsUID
                 ai = m_prefab.m_vehicleAI as PassengerBlimpAI;
                 if (ai != null) { ((PassengerBlimpAI)ai).m_passengerCapacity = value; return; }
 				
-				ai = m_prefab.m_vehicleAI as PostVanAI;
+		ai = m_prefab.m_vehicleAI as PostVanAI;
                 if (ai != null) { ((PostVanAI)ai).m_mailCapacity = value; return; }
             }
         }
@@ -489,9 +490,9 @@ namespace AdvancedVehicleOptionsUID
                         if (prefab.m_class.m_level == ItemClass.Level.Level1)
                             return Category.Healthcare;
                         else
-						if (prefab.m_class.m_level == ItemClass.Level.Level2)
+			if (prefab.m_class.m_level == ItemClass.Level.Level2)
                             return Category.Deathcare;
-						else
+			else
                             return Category.Healthcare;
                     case ItemClass.Service.Garbage:
                         return Category.Garbage;
@@ -504,8 +505,10 @@ namespace AdvancedVehicleOptionsUID
                         return Category.Monument;
                     case ItemClass.Service.Natural:
                         return Category.Natural;
-					case ItemClass.Service.PlayerIndustry:
+		    case ItemClass.Service.PlayerIndustry:
                         return Category.IndustryPlayer;
+		    case ItemClass.Service.Fishing:
+			return Category.Fishing;
                 }
 
                 switch (prefab.m_class.m_subService)
@@ -523,10 +526,10 @@ namespace AdvancedVehicleOptionsUID
                     case ItemClass.SubService.PublicTransportShip:
                         if (prefab.m_class.m_level == ItemClass.Level.Level4)
                             return Category.CargoShip;
-						else
-						if (prefab.m_class.m_level == ItemClass.Level.Level1)
+			else
+			if (prefab.m_class.m_level == ItemClass.Level.Level1)
                             return Category.TransportShip;
-						else
+			else
                             return Category.TransportFerry;
 						
                     case ItemClass.SubService.PublicTransportTaxi:
@@ -537,10 +540,10 @@ namespace AdvancedVehicleOptionsUID
                     case ItemClass.SubService.PublicTransportPlane:
                         if (prefab.m_class.m_level == ItemClass.Level.Level4)
                             return Category.CargoPlane;
-						else
-						if (prefab.m_class.m_level == ItemClass.Level.Level1)
+			else
+			if (prefab.m_class.m_level == ItemClass.Level.Level1)
                             return Category.TransportPlane;
-						else
+			else
                             return Category.TransportBlimp;		
 						
                     case ItemClass.SubService.IndustrialForestry:
@@ -563,7 +566,7 @@ namespace AdvancedVehicleOptionsUID
                         return Category.Bicycle;
                     case ItemClass.SubService.BeautificationParks:
                         return Category.Maintenance;
-					case ItemClass.SubService.PublicTransportPost:
+		    case ItemClass.SubService.PublicTransportPost:
                         return Category.TransportPost;
                 }
 
@@ -600,9 +603,6 @@ namespace AdvancedVehicleOptionsUID
             ai = vehicleAI as BusAI;
             if (ai != null) return ((BusAI)ai).m_passengerCapacity;
 
-            /*ai = prefab.m_vehicleAI as FireTruckAI;
-            if (ai != null) return ((FireTruckAI)ai).m_firemanCount;*/
-
             ai = vehicleAI as HearseAI;
             if (ai != null) return ((HearseAI)ai).m_corpseCapacity + ((HearseAI)ai).m_driverCount;
 
@@ -626,9 +626,6 @@ namespace AdvancedVehicleOptionsUID
 
             ai = vehicleAI as PassengerBlimpAI;
             if (ai != null) return ((PassengerBlimpAI)ai).m_passengerCapacity;
-
-            /*ai = prefab.m_vehicleAI as PoliceCarAI;
-            if (ai != null) return ((PoliceCarAI)ai).m_policeCount;*/
 
             return -1;
         }

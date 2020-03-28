@@ -41,6 +41,7 @@ namespace AdvancedVehicleOptionsUID
             Tram,
             Monorail,
             CableCar,
+	    TrolleyBus,
             CargoTrain,
             TransportTrain,
             CargoShip,
@@ -330,6 +331,9 @@ namespace AdvancedVehicleOptionsUID
 
                 ai = m_prefab.m_vehicleAI as CableCarAI;
                 if (ai != null) return ((CableCarAI)ai).m_passengerCapacity;
+		
+		ai = m_prefab.m_vehicleAI as TrolleybusAI;
+                if (ai != null) return ((TrolleybusAI)ai).m_passengerCapacity;
 
                 ai = m_prefab.m_vehicleAI as PassengerFerryAI;
                 if (ai != null) return ((PassengerFerryAI)ai).m_passengerCapacity;
@@ -405,7 +409,10 @@ namespace AdvancedVehicleOptionsUID
                 ai = m_prefab.m_vehicleAI as CableCarAI;
                 if (ai != null) { ((CableCarAI)ai).m_passengerCapacity = value; return; }
 
-                ai = m_prefab.m_vehicleAI as PassengerFerryAI;
+                ai = m_prefab.m_vehicleAI as TrolleybusAI;
+                if (ai != null) { ((TrolleybusAI)ai).m_passengerCapacity = value; return; }
+		
+		ai = m_prefab.m_vehicleAI as PassengerFerryAI;
                 if (ai != null) { ((PassengerFerryAI)ai).m_passengerCapacity = value; return; }
 
                 ai = m_prefab.m_vehicleAI as PassengerBlimpAI;
@@ -571,7 +578,9 @@ namespace AdvancedVehicleOptionsUID
                         return Category.Monorail;
                     case ItemClass.SubService.PublicTransportCableCar:
                         return Category.CableCar;
-                    case ItemClass.SubService.ResidentialHigh:
+                    case ItemClass.SubService.PublicTransportTrolleybus:
+                        return Category.TrolleyBus;  
+		    case ItemClass.SubService.ResidentialHigh:
                         return Category.Bicycle;
                     case ItemClass.SubService.BeautificationParks:
                         return Category.Maintenance;
@@ -630,7 +639,10 @@ namespace AdvancedVehicleOptionsUID
             ai = vehicleAI as CableCarAI;
             if (ai != null) return ((CableCarAI)ai).m_passengerCapacity;
 
-            ai = vehicleAI as PassengerFerryAI;
+            ai = vehicleAI as TrolleybusAI;
+            if (ai != null) return ((TrolleybusAI)ai).m_passengerCapacity;
+	   
+	    ai = vehicleAI as PassengerFerryAI;
             if (ai != null) return ((PassengerFerryAI)ai).m_passengerCapacity;
 
             ai = vehicleAI as PassengerBlimpAI;

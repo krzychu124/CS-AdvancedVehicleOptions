@@ -36,7 +36,7 @@ namespace AdvancedVehicleOptionsUID
 
         public string Description
         {
-            get { return "Customize your vehicles. (Last reviewed for Cities Skylines Sunset Harbor 1.13.0-f7)"; }
+            get { return "Customize your vehicles. (for Cities Skylines Sunset Harbor 1.13.0-f7)"; }
         }
 
         public void OnSettingsUI(UIHelperBase helper)

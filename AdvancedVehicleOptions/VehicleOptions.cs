@@ -503,10 +503,10 @@ namespace AdvancedVehicleOptionsUID
                         return Category.FireSafety;
 			
                     case ItemClass.Service.HealthCare:
-			if (prefab.m_class.m_level == ItemClass.Level.Level2)
-                            return Category.Deathcare;
-			else
+                        if (prefab.m_class.m_level == ItemClass.Level.Level1 || prefab.m_class.m_level == ItemClass.Level.Level3)
                             return Category.Healthcare;
+                        else
+			    return Category.Deathcare;
 	    						
                     case ItemClass.Service.Garbage:
                         if (prefab.m_class.m_level == ItemClass.Level.Level3 || prefab.m_class.m_level == ItemClass.Level.Level4)		//Waste Transfer L4 and Waste Collection L3			

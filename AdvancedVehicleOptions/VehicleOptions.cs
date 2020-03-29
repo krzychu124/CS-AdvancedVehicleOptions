@@ -278,7 +278,9 @@ namespace AdvancedVehicleOptionsUID
             get
             {
                 VehicleAI ai;
-
+				
+		//AVO only wants to display  Cargo Capacity or Passenger Capacity - not any other fancy values
+		
                 ai = m_prefab.m_vehicleAI as AmbulanceAI;
                 if (ai != null) return ((AmbulanceAI)ai).m_patientCapacity;
 
@@ -300,8 +302,9 @@ namespace AdvancedVehicleOptionsUID
                 ai = m_prefab.m_vehicleAI as GarbageTruckAI;
                 if (ai != null) return ((GarbageTruckAI)ai).m_cargoCapacity;
 
-                ai = m_prefab.m_vehicleAI as FireTruckAI;
-                if (ai != null) return ((FireTruckAI)ai).m_fireFightingRate;
+                //Do not display the Firefighting Rate capacity
+		//ai = m_prefab.m_vehicleAI as FireTruckAI;
+                //if (ai != null) return ((FireTruckAI)ai).m_fireFightingRate;
 
                 ai = m_prefab.m_vehicleAI as HearseAI;
                 if (ai != null) return ((HearseAI)ai).m_corpseCapacity;
@@ -314,9 +317,10 @@ namespace AdvancedVehicleOptionsUID
 
                 ai = m_prefab.m_vehicleAI as PassengerTrainAI;
                 if (ai != null) return ((PassengerTrainAI)ai).m_passengerCapacity;
-
-                ai = m_prefab.m_vehicleAI as PoliceCarAI;
-                if (ai != null) return ((PoliceCarAI)ai).m_crimeCapacity;
+               
+	       //Do not display the Crime capacity 
+                //ai = m_prefab.m_vehicleAI as PoliceCarAI;
+                //if (ai != null) return ((PoliceCarAI)ai).m_crimeCapacity;
 
                 ai = m_prefab.m_vehicleAI as TaxiAI;
                 if (ai != null) return ((TaxiAI)ai).m_passengerCapacity;
@@ -324,8 +328,9 @@ namespace AdvancedVehicleOptionsUID
                 ai = m_prefab.m_vehicleAI as TramAI;
                 if (ai != null) return ((TramAI)ai).m_passengerCapacity;
 
-                ai = m_prefab.m_vehicleAI as MaintenanceTruckAI;
-                if (ai != null) return ((MaintenanceTruckAI)ai).m_maintenanceCapacity;
+                //Do not display the Maintenaince capacity 
+                //ai = m_prefab.m_vehicleAI as MaintenanceTruckAI;
+                //if (ai != null) return ((MaintenanceTruckAI)ai).m_maintenanceCapacity;
 
                 ai = m_prefab.m_vehicleAI as SnowTruckAI;
                 if (ai != null) return ((SnowTruckAI)ai).m_cargoCapacity;
@@ -377,8 +382,9 @@ namespace AdvancedVehicleOptionsUID
                 ai = m_prefab.m_vehicleAI as GarbageTruckAI;
                 if (ai != null) { ((GarbageTruckAI)ai).m_cargoCapacity = value; return; }
 
-                ai = m_prefab.m_vehicleAI as FireTruckAI;
-                if (ai != null) { ((FireTruckAI)ai).m_fireFightingRate = value; return; }
+                //Do not display the Firefighting Rate capacity
+                //ai = m_prefab.m_vehicleAI as FireTruckAI;
+                //if (ai != null) { ((FireTruckAI)ai).m_fireFightingRate = value; return; }
 
                 ai = m_prefab.m_vehicleAI as HearseAI;
                 if (ai != null) { ((HearseAI)ai).m_corpseCapacity = value; return; }
@@ -392,8 +398,9 @@ namespace AdvancedVehicleOptionsUID
                 ai = m_prefab.m_vehicleAI as PassengerTrainAI;
                 if (ai != null) { ((PassengerTrainAI)ai).m_passengerCapacity = value; return; }
 
-                ai = m_prefab.m_vehicleAI as PoliceCarAI;
-                if (ai != null) { ((PoliceCarAI)ai).m_crimeCapacity = value; return; }
+                //Do not display the Crime capacity 
+		//ai = m_prefab.m_vehicleAI as PoliceCarAI;
+                //if (ai != null) { ((PoliceCarAI)ai).m_crimeCapacity = value; return; }
 
                 ai = m_prefab.m_vehicleAI as TaxiAI;
                 if (ai != null) { ((TaxiAI)ai).m_passengerCapacity = value; return; }
@@ -401,9 +408,10 @@ namespace AdvancedVehicleOptionsUID
                 ai = m_prefab.m_vehicleAI as TramAI;
                 if (ai != null) { ((TramAI)ai).m_passengerCapacity = value; return; }
 
-                ai = m_prefab.m_vehicleAI as MaintenanceTruckAI;
-                if (ai != null) { ((MaintenanceTruckAI)ai).m_maintenanceCapacity = value; return; }
-
+                //Do not display the Maintenaince Rate capacity
+                //ai = m_prefab.m_vehicleAI as MaintenanceTruckAI;
+                //if (ai != null) { ((MaintenanceTruckAI)ai).m_maintenanceCapacity = value; return; }
+		
                 ai = m_prefab.m_vehicleAI as SnowTruckAI;
                 if (ai != null) { ((SnowTruckAI)ai).m_cargoCapacity = value; return; }
 

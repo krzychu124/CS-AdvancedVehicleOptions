@@ -3,17 +3,19 @@ This version is 1.9.0a, tested in a limited environment only. Adds compatibility
 
 New Options are visible in the Mod Option panel of Cities Skylines.
 - Game Balancing : Hide capacity value for vehicles without passenger/cargo capacity; can be turned off, default setting: ON
-- Compatibility : Hide Spawn option for game controlled vehicles (eg bus); can be turned off, default setting: ON
+- Compatibility : Hide Spawn option for game controlled vehicles (eg bus); cannot be turned off, default setting: ON
 - Compatibility : If Color Vehicle Expander is present and active, disable Coloring; cannot be turned off, default setting: ON
 - Compatibility : If TLM is present and active, disable some vehicle parameters; cannot be turned off, default setting: ON
 - Compatibility : If IPT is present and active, disable some vehicle parameters; can be turned off, default setting: ON
+
+New Category for Intercity Bus
 
 # CS-AdvancedVehicleOptions 1.9.0
 
 This version is 1.9.0, tested in a limited environment only. Last changes include a new logo (yeah) und the change of the namespace for the mod. This should stop annyoing messages when user are still subscribed to the original one. 
 
-26/03 Still error messages on load
-26/03 New vehicles added for new DLC Sunset Harbor
+- Issue on load: Still error messages when opening an existing savegame (one time only due to exception on loading values)
+- Added new vehicle categories for new DLC Sunset Harbor
 
 # CS-AdvancedVehicleOptions
 

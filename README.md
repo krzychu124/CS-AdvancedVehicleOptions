@@ -1,9 +1,12 @@
+# CS-AdvancedVehicleOptions 1.9.0a
+This version is 1.9.0a, tested in a limited environment only. Adds compatibility patches to the game (vehicle spawning), ITP/TLM (vehicle spawning, vehicle parameters), Vehicle Color Expander (coloring parameters).
+
 # CS-AdvancedVehicleOptions 1.9.0
 
 This version is 1.9.0, tested in a limited environment only. Last changes include a new logo (yeah) und the change of the namespace for the mod. This should stop annyoing messages when user are still subscribed to the original one. 
 
-26/03 Still error messages on load; should be resolved if moving to Harmony 2.0 / have no idea, how to do that :/
-26/03 New vehicles to be added for new DLC Sunset Harbor
+26/03 Still error messages on load
+26/03 New vehicles added for new DLC Sunset Harbor
 
 # CS-AdvancedVehicleOptions
 

@@ -33,16 +33,19 @@ namespace AdvancedVehicleOptionsUID.GUI
         private const int WIDTHLEFT = 470;
         private const int WIDTHRIGHT = 390;
 
-        public static readonly string[] categoryList = { "All", "Citizen", "Bicycle", "Forestry", "Farming", "Ore", "Oil",
-	    "Fishing", "Industry", "Player Industry", "Police", "Prison", "Fire Safety", "Disaster", "Healthcare", "Deathcare", 
-	    "Garbage", "Waste Transfer", "Maintenance", "Postal Service", "Taxi", "Bus", "Metro", "Tram", "Monorail", "Cable Car",
-	    "Trolley Bus", "Cargo Train", "Passenger Train", "Cargo Ship", "Passenger Ship","Ferry", "Cargo Plane", "Passenger Plane",
-	    "Light Air Traffic", "Tours", "Launch Site", "Natural" };
+        public static readonly string[] categoryList = { "All", "Citizen", "Bicycle",
+            "Forestry", "Farming", "Ore", "Oil", "Fishing", "Industry", "Player Industry",
+            "Police", "Prison", "Fire Safety", "Disaster",
+            "Healthcare", "Deathcare", "Garbage", "Waste Transfer", "Maintenance", "Postal Service",
+            "Taxi", "Bus", "Metro", "Tram", "Monorail", "Cable Car", "Trolley Bus",
+            "Cargo Train", "Passenger Train",
+            "Cargo Ship", "Passenger Ship","Ferry", "Cargo Plane", "Passenger Plane", "Light Air Traffic", "Tours",
+            "Launch Site", "Natural" };
 
         public static readonly string[] vehicleIconList = { "IconCitizenVehicle", "IconCitizenBicycleVehicle",
               "IconPolicyForest", "IconPolicyFarming", "IconPolicyOre", "IconPolicyOil", "SubBarIndustryFishing", "IconPolicyNone", "SubBarIndustryUniqueFactory",
               "ToolbarIconPolice", "IconPolicyDoubleSentences", "InfoIconFireSafety", "ToolbarIconFireDepartmentHovered",
-              "ToolbarIconHealthcare", "ToolbarIconHealthcareHovered", "InfoIconGarbage", "InfoIconGarbage","InfoIconMaintenance", "SubBarPublicTransportPost",
+              "ToolbarIconHealthcare", "ToolbarIconHealthcareHovered", "InfoIconGarbage", "InfoIconGarbage", "InfoIconMaintenance", "SubBarPublicTransportPost",
               "SubBarPublicTransportTaxi", "SubBarPublicTransportBus", "SubBarPublicTransportMetro", "SubBarPublicTransportTram", "SubBarPublicTransportMonorail", "SubBarPublicTransportCableCar", "SubBarPublicTransportTrolleybus",
               "SubBarPublicTransportTrain", "SubBarPublicTransportTrain",
               "IconCargoShip", "SubBarPublicTransportShip",  "IconPolicyPreferFerries", "SubBarPublicTransportPlane", "SubBarPublicTransportPlane", "IconPolicyEducationalBlimps", "SubBarPublicTransportTours",
@@ -239,17 +242,17 @@ namespace AdvancedVehicleOptionsUID.GUI
             UILabel configLabel = this.AddUIComponent<UILabel>();
             configLabel.text = "Configuration file:";
             configLabel.textScale = 0.8f;
-            configLabel.relativePosition = new Vector3(10, height - 60);
+            configLabel.relativePosition = new Vector3(10, height - 65);
 
             m_import = UIUtils.CreateButton(this);
             m_import.text = "Import";
             m_import.tooltip = "Import the configuration";
-            m_import.relativePosition = new Vector3(10, height - 40);
+            m_import.relativePosition = new Vector3(10, height - 45);
 
             m_export = UIUtils.CreateButton(this);
             m_export.text = "Export";
             m_export.tooltip = "Export the configuration";
-            m_export.relativePosition = new Vector3(105, height - 40);
+            m_export.relativePosition = new Vector3(105, height - 45);
 
             // Preview
             UIPanel panel = AddUIComponent<UIPanel>();
@@ -358,7 +361,7 @@ namespace AdvancedVehicleOptionsUID.GUI
         private void FollowNextVehicle()
         {
             Array16<Vehicle> vehicles = VehicleManager.instance.m_vehicles;
-            VehicleOptions options = m_optionPanel.m_options;
+            // VehicleOptions options = m_optionPanel.m_options;    (commenting out as never used)
 
             for (uint i = (m_seekStart + 1) % vehicles.m_size; i != m_seekStart; i = (i + 1) % vehicles.m_size)
             {

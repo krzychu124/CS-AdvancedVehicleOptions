@@ -90,8 +90,8 @@ namespace SamsamTS
             dropDown.disabledBgSprite = "ButtonMenuDisabled";
             dropDown.hoveredBgSprite = "ButtonMenuHovered";
             dropDown.focusedBgSprite = "ButtonMenu";
-            dropDown.listWidth = 90;
-            dropDown.listHeight = 480;
+            dropDown.listWidth = 95;
+            dropDown.listHeight = 510;
             dropDown.foregroundSpriteMode = UIForegroundSpriteMode.Stretch;
             dropDown.popupColor = new Color32(45, 52, 61, 255);
             dropDown.popupTextColor = new Color32(170, 170, 170, 255);

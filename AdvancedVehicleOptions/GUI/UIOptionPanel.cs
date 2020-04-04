@@ -4,6 +4,8 @@ using ColossalFramework.Threading;
 
 using UIUtils = SamsamTS.UIUtils;
 
+using AdvancedVehicleOptionsUID.Compatibility;
+
 namespace AdvancedVehicleOptionsUID.GUI
 {
     public class UIOptionPanel : UIPanel
@@ -66,7 +68,7 @@ namespace AdvancedVehicleOptionsUID.GUI
             m_color1.relativePosition = new Vector3(13, 165 - 2);
             m_color2.relativePosition = new Vector3(158, 140 - 2);
             m_color3.relativePosition = new Vector3(158, 165 - 2);
-
+			
             m_maxSpeed.text = Mathf.RoundToInt(options.maxSpeed * maxSpeedToKmhConversionFactor).ToString();
             m_acceleration.text = options.acceleration.ToString();
             m_braking.text = options.braking.ToString();
@@ -91,7 +93,94 @@ namespace AdvancedVehicleOptionsUID.GUI
 
             m_capacity.text = options.capacity.ToString();
             m_capacity.parent.isVisible = options.hasCapacity;
+			
+			//DebugUtils.Log("GameBalanceOptionsptions " + AdvancedVehicleOptionsUID.GameBalanceOptions);		
+			//DebugUtils.Log("NonPaxCargo - Do Not Show Capacity " + options.isNonPaxCargo);		
+			//DebugUtils.Log("Capacity - Do Not Show Capacity " + options.hasCapacity);	
+	
+			//Only display Cargo Capacity or Passenger Capacity - not any other values
+			if (options.isNonPaxCargo == true && options.hasCapacity == true && AdvancedVehicleOptionsUID.GameBalanceOptions == true) 
+			{			
+				m_capacity.parent.isVisible = true;
+			}
+			else
+				if (options.isNonPaxCargo == true && options.hasCapacity == true && AdvancedVehicleOptionsUID.GameBalanceOptions == false)
+			{
+					m_capacity.parent.isVisible = false;
+			}
 
+			//Compatibility Patch for Vehicle Color Expander - hide all controls, if mod is active. Not relating to PublicTransport only, but all vehicles
+			if (VCXCompatibilityPatch.IsVCXActive())
+			{    
+				m_useColors.isInteractive = false;
+				m_useColors.isEnabled = false;
+				m_useColors.text = "Colors are managed by Vehicle Color Expander";
+				m_useColors.tooltip = "Vehicle Colors are managed by Vehicle Color Expander.";
+				m_color0.isEnabled = false;	
+				m_color0.isInteractive = false;
+				m_color0_hex.isInteractive = false;
+				m_color0_hex.isVisible = false;
+				m_color1.isInteractive = false;
+				m_color1.isEnabled = false;					
+				m_color1_hex.isInteractive = false;		
+				m_color1_hex.isVisible = false;				
+				m_color2.isInteractive = false;			
+				m_color2.isEnabled = false;
+				m_color2_hex.isInteractive = false;
+				m_color2_hex.isVisible = false;				
+				m_color3.isInteractive = false;	
+				m_color3.isEnabled = false;
+				m_color3_hex.isInteractive = false;	
+				m_color3_hex.isVisible = false;			
+			}				
+						
+			//DebugUtils.Log("IsIPTActive " + IPTCompatibilityPatch.IsIPTActive());	
+			//DebugUtils.Log("OverrideIPT " + AdvancedVehicleOptionsUID.OverrideIPT);	
+			//DebugUtils.Log("IsPublicTransport " + options.isPublicTransport);	
+			
+			// Compatibility Patch for IPT, TLM and Cities Skylines Vehicle Spawning, Vehicle values. Only affecting Public Transport
+			m_maxSpeed.isInteractive = true;	
+			m_enabled.isInteractive = true;
+			m_enabled.isEnabled = true;
+			m_capacity.isInteractive = true;
+			m_enabled.text = "Allow this vehicle to spawn";
+			m_enabled.tooltip = "Make sure you have at least one vehicle allowed to spawn for that category";
+			
+			if ((options.isPublicTransportGame == true) && AdvancedVehicleOptionsUID.SpawnControl == true)
+			{
+				m_enabled.isInteractive = false;
+			    m_enabled.isEnabled = false;
+                m_enabled.text = "Spawning is managed by Cities:Skylines";	
+			    m_enabled.tooltip = "The game will take care for spawning public transport vehicles.";
+			}
+			
+			if (IPTCompatibilityPatch.IsIPTActive() == true && AdvancedVehicleOptionsUID.OverrideIPT == true && options.isPublicTransport == true)
+			{
+				m_maxSpeed.isInteractive = false;
+				m_maxSpeed.text = "IPT";	
+				m_capacity.isInteractive = false;
+				m_capacity.text = "IPT";				
+			}
+	
+			if (IPTCompatibilityPatch.IsIPTActive() && options.isPublicTransport == true)
+			{
+				m_enabled.isInteractive = false;
+				m_enabled.isEnabled = false;
+				m_enabled.text = "Spawning is managed by IPT";
+				m_enabled.tooltip = "Improved Public Transport will take care for public transport spawning vehicles.";
+			}
+
+			if (TLMCompatibilityPatch.IsTLMActive() && options.isPublicTransport == true)
+			{
+				m_enabled.isInteractive = false;
+				m_enabled.isEnabled = false;
+				m_enabled.text = "Spawning is managed by TLM";	
+				m_enabled.tooltip = "Transport Lines Manager will take care for public transport spawning vehicles.";
+				m_capacity.isInteractive = false;
+				m_capacity.text = "TLM";		
+			}
+			// Compatibility Patch section ends
+			
             string name = options.localizedName;
             if (name.Length > 20) name = name.Substring(0, 20) + "...";
             m_removeLabel.text = "Remove vehicles (" + name + "):";
@@ -238,7 +327,7 @@ namespace AdvancedVehicleOptionsUID.GUI
             m_color3_hex = UIUtils.CreateTextField(panel);
             m_color3_hex.maxLength = 6;
             m_color3_hex.relativePosition = new Vector3(200, 165);
-
+			
             // Enable & BackEngine
             m_enabled = UIUtils.CreateCheckBox(panel);
             m_enabled.text = "Allow this vehicle to spawn";
@@ -269,7 +358,7 @@ namespace AdvancedVehicleOptionsUID.GUI
             m_capacity.width = 110;
             m_capacity.tooltip = "Change the capacity of the vehicle";
             m_capacity.relativePosition = new Vector3(0, 20);
-
+			
             // Restore default
             m_restore = UIUtils.CreateButton(panel);
             m_restore.text = "Restore default";

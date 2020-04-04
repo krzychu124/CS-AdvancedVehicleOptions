@@ -481,7 +481,7 @@ namespace AdvancedVehicleOptionsUID.GUI
                 m_scrollbar.isVisible = isVisible;
             }
 
-            float H = m_rowHeight * m_rowsData.m_size;
+            //float H = m_rowHeight * m_rowsData.m_size;    (commenting out as never used)
             float scrollSize = height * height / (m_rowHeight * m_rowsData.m_size);
             float amount = stepSize * height / (m_rowHeight * m_rowsData.m_size);
 

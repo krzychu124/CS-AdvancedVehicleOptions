@@ -76,9 +76,8 @@ namespace AdvancedVehicleOptionsUID
                 {
                     AdvancedVehicleOptionsUID.GameBalanceOptions.value = b;
                 });
-                checkBox.tooltip = "Allows changes the Firefighting Rate for Fire Engines, the Crime Rate for Police Cars\nand the Maintenance Rate for Maintenance Vehicles. Can de-balance the intended gameplay.";
-				
-				
+                checkBox.tooltip = "Allows changes the Firefighting Rate for Fire Engines, the Crime Rate Capacity\nfor Police Cars and the Maintenance Rate for Maintenance Vehicles.\n\nCan de-balance the intended gameplay.";
+						
 				UIHelperBase group_compatibility= helper.AddGroup("Compatibility");
 				
                 checkBox = (UICheckBox) group_compatibility.AddCheckbox("Hide the Spawn Control for game-controlled Public Transport vehicles", AdvancedVehicleOptionsUID.SpawnControl.value, (b) =>
@@ -87,8 +86,11 @@ namespace AdvancedVehicleOptionsUID
                 });
 				
                 checkBox.tooltip = "Disable the Spawn Control for Bus, Trolley Bus, Tram, Monorail and Metro\nas Cities Skylines will control the spawning in the game's line manager.\n\nAVO is unable to control the vehicle spawning for these since DLC Campus.";				
+				
+				//AVO allows the game to control all spawning - standard behaviour, this option is not shown
+				checkBox.enabled = false;
 
-                checkBox = (UICheckBox) group_compatibility.AddCheckbox("Vehicle Color Expander: Ignores AVO Vehicle Coloring", AdvancedVehicleOptionsUID.OverrideVCX.value, (b) =>
+                checkBox = (UICheckBox) group_compatibility.AddCheckbox("Vehicle Color Expander: Priority over AVO Vehicle Coloring", AdvancedVehicleOptionsUID.OverrideVCX.value, (b) =>
                 {
                     AdvancedVehicleOptionsUID.OverrideVCX.value = b;
                 });
@@ -102,7 +104,7 @@ namespace AdvancedVehicleOptionsUID
  			        checkBox.label.text = "Vehicle Color Expander: Mod is not active";
 				}
 				
-                checkBox = (UICheckBox) group_compatibility.AddCheckbox("Transport Lines Manager: Ignores AVO Spawn Control", AdvancedVehicleOptionsUID.OverrideVCX.value, (b) =>
+                checkBox = (UICheckBox) group_compatibility.AddCheckbox("Transport Lines Manager: Priority over AVO Spawn Control", AdvancedVehicleOptionsUID.OverrideVCX.value, (b) =>
                 {
                     AdvancedVehicleOptionsUID.OverrideTLM.value = b;
                 });
@@ -113,10 +115,10 @@ namespace AdvancedVehicleOptionsUID
 				
 				if (!TLMCompatibilityPatch.IsTLMActive())
 				{
-				    checkBox.label.text = "Transport Line Manager: Mod is not active";	
+				    checkBox.label.text = "Transport Lines Manager: Mod is not active";	
 				}
 				
-                checkBox = (UICheckBox) group_compatibility.AddCheckbox("Improved Public Transport: Overwrites AVO vehicle parameters", AdvancedVehicleOptionsUID.OverrideIPT.value, (b) =>
+                checkBox = (UICheckBox) group_compatibility.AddCheckbox("Improved Public Transport: Priority over AVO vehicle settings", AdvancedVehicleOptionsUID.OverrideIPT.value, (b) =>
                 {
                     AdvancedVehicleOptionsUID.OverrideIPT.value = b;
                 });

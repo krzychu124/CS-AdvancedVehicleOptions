@@ -1,6 +1,13 @@
 # CS-AdvancedVehicleOptions 1.9.0a
 This version is 1.9.0a, tested in a limited environment only. Adds compatibility patches to the game (vehicle spawning), ITP/TLM (vehicle spawning, vehicle parameters), Vehicle Color Expander (coloring parameters).
 
+New Options are visible in the Mod Option panel of Cities Skylines.
+- Game Balancing : Hide capacity value for vehicles without passenger/cargo capacity; can be turned off, default setting: ON
+- Compatibility : Hide Spawn option for game controlled vehicles (eg bus); can be turned off, default setting: ON
+- Compatibility : If Color Vehicle Expander is present and active, disable Coloring; cannot be turned off, default setting: ON
+- Compatibility : If TLM is present and active, disable some vehicle parameters; cannot be turned off, default setting: ON
+- Compatibility : If IPT is present and active, disable some vehicle parameters; can be turned off, default setting: ON
+
 # CS-AdvancedVehicleOptions 1.9.0
 
 This version is 1.9.0, tested in a limited environment only. Last changes include a new logo (yeah) und the change of the namespace for the mod. This should stop annyoing messages when user are still subscribed to the original one. 

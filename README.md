@@ -16,6 +16,7 @@ This version is 1.9.0, tested in a limited environment only. Last changes includ
 
 - Issue on load: Still error messages when opening an existing savegame (one time only due to exception on loading values)
 - Added new vehicle categories for new DLC Sunset Harbor
+- Compatibility towards More Vehicles, no more cargo train issues
 
 # CS-AdvancedVehicleOptions
 

@@ -38,6 +38,7 @@ namespace AdvancedVehicleOptionsUID
 			TransportPost,
             TransportTaxi,
             TransportBus,
+			TransportIntercityBus,
             TransportMetro,
 			Tram,
             Monorail,
@@ -514,6 +515,12 @@ namespace AdvancedVehicleOptionsUID
 			                                         || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportMonorail; }
 		}
 
+		// Define all vehicles, with class Intercity Bus to exclude from editing block ITP TLM
+		public bool isIntercityBus
+		{
+			get { return prefab.m_class.m_level == ItemClass.Level.Level3; } 
+		}
+
         public bool isTrailer
         {
             get { return m_engine != null; }
@@ -579,7 +586,10 @@ namespace AdvancedVehicleOptionsUID
                 switch (prefab.m_class.m_subService)
                 {
                     case ItemClass.SubService.PublicTransportBus:
-                        return Category.TransportBus;
+					    if (prefab.m_class.m_level == ItemClass.Level.Level3)
+                            return Category.TransportIntercityBus;
+                        else
+					     	return Category.TransportBus;
 						
                     case ItemClass.SubService.PublicTransportMetro:
                         return Category.TransportMetro;

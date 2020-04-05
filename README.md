@@ -10,6 +10,8 @@ New Options are visible in the Mod Option panel of Cities Skylines.
 
 New Category for Intercity Bus
 
+Support for categorizing properly Bus trailers. SteamID config file r1.
+
 # CS-AdvancedVehicleOptions 1.9.0
 
 This version is 1.9.0, tested in a limited environment only. Last changes include a new logo (yeah) und the change of the namespace for the mod. This should stop annyoing messages when user are still subscribed to the original one. 

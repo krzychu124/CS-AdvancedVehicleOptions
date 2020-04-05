@@ -146,7 +146,7 @@ namespace AdvancedVehicleOptionsUID.GUI
 			m_enabled.text = "Allow this vehicle to spawn";
 			m_enabled.tooltip = "Make sure you have at least one vehicle allowed to spawn for that category";
 			
-			if ((options.isPublicTransportGame == true) && AdvancedVehicleOptionsUID.SpawnControl == true && options.isIntercityBus == false)
+			if ((options.isPublicTransportGame == true) && AdvancedVehicleOptionsUID.SpawnControl == true && options.isUncontrolledPublicTransport == false)
 			{
 				m_enabled.isInteractive = false;
 			    m_enabled.isEnabled = false;
@@ -154,7 +154,7 @@ namespace AdvancedVehicleOptionsUID.GUI
 			    m_enabled.tooltip = "The game will take care for spawning public transport vehicles.";
 			}
 			
-			if (IPTCompatibilityPatch.IsIPTActive() == true && AdvancedVehicleOptionsUID.OverrideIPT == true && options.isPublicTransport == true && options.isIntercityBus == false)
+			if (IPTCompatibilityPatch.IsIPTActive() == true && AdvancedVehicleOptionsUID.OverrideIPT == true && options.isPublicTransport == true && options.isUncontrolledPublicTransport == false)
 			{
 				m_maxSpeed.isInteractive = false;
 				m_maxSpeed.text = "IPT";	
@@ -162,7 +162,7 @@ namespace AdvancedVehicleOptionsUID.GUI
 				m_capacity.text = "IPT";				
 			}
 	
-			if (IPTCompatibilityPatch.IsIPTActive() && options.isPublicTransport == true && options.isIntercityBus == false)
+			if (IPTCompatibilityPatch.IsIPTActive() && options.isPublicTransport == true && options.isUncontrolledPublicTransport == false)
 			{
 				m_enabled.isInteractive = false;
 				m_enabled.isEnabled = false;
@@ -170,7 +170,7 @@ namespace AdvancedVehicleOptionsUID.GUI
 				m_enabled.tooltip = "Improved Public Transport will take care for public transport spawning vehicles.";
 			}
 
-			if (TLMCompatibilityPatch.IsTLMActive() && options.isPublicTransport == true && options.isIntercityBus == false)
+			if (TLMCompatibilityPatch.IsTLMActive() && options.isPublicTransport == true && options.isUncontrolledPublicTransport == false)
 			{
 				m_enabled.isInteractive = false;
 				m_enabled.isEnabled = false;

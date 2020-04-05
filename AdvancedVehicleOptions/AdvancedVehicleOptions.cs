@@ -46,7 +46,7 @@ namespace AdvancedVehicleOptionsUID
             try
             {
                 UICheckBox checkBox;	
-				UIHelperBase group_general = helper.AddGroup("General Settings                                                " + Name);
+				UIHelperBase group_general = helper.AddGroup("General Settings                                                " + Name + " " + revision);
 
                 checkBox = (UICheckBox)group_general.AddCheckbox("Disable debug messages logging", DebugUtils.hideDebugMessages.value, (b) =>
                 {
@@ -141,6 +141,7 @@ namespace AdvancedVehicleOptionsUID
         }
 
         public const string version = "1.9.0a";
+		public const string revision = "r1";
     }
 
     public class AdvancedVehicleOptionsUIDLoader : LoadingExtensionBase
@@ -279,6 +280,7 @@ namespace AdvancedVehicleOptionsUID
             }
             else if (hideGUI && m_mainPanel != null)
             {
+              	//m_mainPanel.enabled = false;	
                 GameObject.Destroy(m_mainPanel.gameObject);
                 m_mainPanel = null;
             }

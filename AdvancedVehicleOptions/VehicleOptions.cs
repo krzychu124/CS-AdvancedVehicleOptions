@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 
+using AdvancedVehicleOptionsUID.Compatibility;
+
 namespace AdvancedVehicleOptionsUID
 {
     public class VehicleOptions : IComparable
@@ -516,9 +518,9 @@ namespace AdvancedVehicleOptionsUID
 		}
 
 		// Define all vehicles, with class Intercity Bus to exclude from editing block ITP TLM
-		public bool isIntercityBus
+		public bool isUncontrolledPublicTransport
 		{
-			get { return prefab.m_class.m_level == ItemClass.Level.Level3; } 
+			get { return prefab.m_class.m_level == ItemClass.Level.Level3 || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportCableCar; } 
 		}
 
         public bool isTrailer
@@ -533,10 +535,42 @@ namespace AdvancedVehicleOptionsUID
 
         public Category category
         {
-            get
+	        get
             {
                 if (prefab == null) return Category.None;
-
+					
+				// Categorizing Bus, Trolley Bus, Fire Engine and Police Car trailers, which are actual created from Industrial trailers.
+				// The game does not support Bus trailers, so asset creators attaching Industrial trailers to the Bus.	
+				// Checking, if the vehicle has a trailer (if not, it is a trailer itself) and if Service is Industrial. Then read out 
+				// TrailerRef SteamIDs from patch file and verify against the current SteamID.
+				
+				if (hasTrailer == false && prefab.m_class.m_service == ItemClass.Service.Industrial)
+				{
+					for (int i=0; i < TrailerRef.isBus.Length; i++) 
+					{            
+						if (steamID == TrailerRef.isBus[i])
+				            return Category.TransportBus;			
+					}
+					
+//					for (int i=0; i < TrailerRef.isPolice.Length; i++) 
+//					{            
+//						if (steamID == TrailerRef.isPolice[i])
+//				            return Category.Police;			
+//					}
+//					
+//					for (int i=0; i < TrailerRef.isFire.Length; i++) 
+//					{            
+//						if (steamID == TrailerRef.isFire[i])
+//				            return Category.FireSafety;			
+//					}
+//					
+//					for (int i=0; i < TrailerRef.isTrolley.Length; i++) 
+//					{            
+//						if (steamID == TrailerRef.isTrolley[i])
+//				            return Category.TrolleyBus;			
+//					}
+				}
+				
                 switch (prefab.m_class.m_service)
                 {
                     case ItemClass.Service.PoliceDepartment:
@@ -577,10 +611,10 @@ namespace AdvancedVehicleOptionsUID
                         return Category.Natural;
 						
 					case ItemClass.Service.PlayerIndustry:
-                        return Category.IndustryPlayer;
+     					return Category.IndustryPlayer;
 						
 					case ItemClass.Service.Fishing:
-						return Category.Fishing;
+						return Category.Fishing;				
                 }
 
                 switch (prefab.m_class.m_subService)
@@ -660,7 +694,7 @@ namespace AdvancedVehicleOptionsUID
 					case ItemClass.SubService.PublicTransportPost:
                         return Category.TransportPost;
                 }
-
+		
                 return Category.Citizen;
             }
         }

@@ -38,7 +38,7 @@ namespace AdvancedVehicleOptionsUID
 
         public string Description
         {
-            get { return "Customize your vehicles (for Cities Skylines Sunset Harbor 1.13.0-f7)."; }
+            get { return "Customize your vehicles (for Cities Skylines Sunset Harbor 1.13.0-f8)."; }
         }
 
         public void OnSettingsUI(UIHelperBase helper)
@@ -46,7 +46,8 @@ namespace AdvancedVehicleOptionsUID
             try
             {
                 UICheckBox checkBox;	
-				UIHelperBase group_general = helper.AddGroup("General Settings                                                " + Name + " " + revision);
+				UITextField TextField;
+				UIHelperBase group_general = helper.AddGroup("General Settings                                                   " + Name);
 
                 checkBox = (UICheckBox)group_general.AddCheckbox("Disable debug messages logging", DebugUtils.hideDebugMessages.value, (b) =>
                 {
@@ -109,7 +110,7 @@ namespace AdvancedVehicleOptionsUID
                     AdvancedVehicleOptionsUID.OverrideTLM.value = b;
                 });
 				
-			checkBox.tooltip = "Permanent setting, if Transport Lines Manager (by Klyte) is active.\nIf user wants to change these values, change must be done in Transport Lines\nManager.Spawning of Public Transport Vehicles is permanently disabled.\n\nAVO will not allow user to edit Capacity values for Public Transport vehicles.";				
+				checkBox.tooltip = "Permanent setting, if Transport Lines Manager (by Klyte) is active.\nIf user wants to change these values, change must be done in Transport Lines\nManager.Spawning of Public Transport Vehicles is permanently disabled.\n\nAVO will not allow user to edit Capacity values for Public Transport vehicles.";				
 				checkBox.readOnly = true;
 				checkBox.label.textColor = Color.gray;
 				
@@ -131,8 +132,13 @@ namespace AdvancedVehicleOptionsUID
 				    checkBox.label.text = "Improved Public Transport: Mod is not active";
 					checkBox.label.textColor = Color.gray;
 			    }
-		
+				
+				group_compatibility.AddSpace(20);
+				TextField = (UITextField) group_compatibility.AddTextfield("Vehicle Trailer compatibility references last updated:", TrailerRef.Revision, (value) => Debug.Log(""), (value) => Debug.Log(""));
+				TextField.tooltip = "This field shows the vehicle list revision date for the Bus, Trolley Bus, Fire and Police\ntrailers, which are in real life industry trailers, but have been re-categorized by AVO.";
+				TextField.readOnly = true;
 			}	
+			
             catch (Exception e)
             {
                 DebugUtils.Log("OnSettingsUI failed");
@@ -140,8 +146,7 @@ namespace AdvancedVehicleOptionsUID
             }
         }
 
-        public const string version = "1.9.0a";
-		public const string revision = "r1";
+        public const string version = "1.9.1";
     }
 
     public class AdvancedVehicleOptionsUIDLoader : LoadingExtensionBase

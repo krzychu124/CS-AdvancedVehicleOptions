@@ -2,10 +2,14 @@ using System.Collections.Generic;
 using System.Linq;
 using ColossalFramework.Plugins;
 
+// Vehicle Trailer References - Last Revision:	1.9.1	06 Apr 2020
+
 namespace AdvancedVehicleOptionsUID.Compatibility
 {
     public class TrailerRef
     {
+		public static string Revision = "06 Apr 2020 / 1.9.1";
+		
         public static string[] isBus = { "450635180",
 										 "549021554",
 										 "708669447",

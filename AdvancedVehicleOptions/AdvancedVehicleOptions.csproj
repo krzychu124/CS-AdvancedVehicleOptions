@@ -57,6 +57,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compatibility\IPTCompatibilityPatch.cs" />
+    <Compile Include="Compatibility\TLMCompatibilityPatch.cs" />
+    <Compile Include="Compatibility\TrailerVehiclesCompatibilityPatch.cs" />
+    <Compile Include="Compatibility\VCXCompatibilityPatch.cs" />
     <Compile Include="DebugUtils.cs" />
     <Compile Include="GUI\UIFastList.cs" />
     <Compile Include="GUI\UIOptionPanel.cs" />
@@ -72,7 +76,32 @@
     <Compile Include="SerializableDataExtension.cs" />
     <Compile Include="VehicleOptions.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Artwork\aircraft.png" />
+    <Content Include="Artwork\avo p0.png" />
+    <Content Include="Artwork\avo p1.png" />
+    <Content Include="Artwork\avo p2.png" />
+    <Content Include="Artwork\avo p3.png" />
+    <Content Include="Artwork\avo p4.png" />
+    <Content Include="Artwork\dodge.png" />
+    <Content Include="Artwork\fireengine.png" />
+    <Content Include="Artwork\logo after dark.png" />
+    <Content Include="Artwork\logo campus.png" />
+    <Content Include="Artwork\logo green cities.png" />
+    <Content Include="Artwork\logo industries.png" />
+    <Content Include="Artwork\logo mass transit.png" />
+    <Content Include="Artwork\logo natural disasters.png" />
+    <Content Include="Artwork\logo parklife.png" />
+    <Content Include="Artwork\logo snowfall.png" />
+    <Content Include="Artwork\logo sunset harbour.png" />
+    <Content Include="Artwork\mini avo p0.png" />
+    <Content Include="Artwork\police car.png" />
+    <Content Include="Artwork\postauto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Artwork\avo p0.pdn" />
+    <None Include="Artwork\logo mass transit.pdn" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>mkdir "%25LOCALAPPDATA%25\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)"

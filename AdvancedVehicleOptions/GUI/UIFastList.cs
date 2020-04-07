@@ -330,6 +330,7 @@ namespace AdvancedVehicleOptionsUID.GUI
         /// This update the list even if the position remind the same
         /// </summary>
         /// <param name="pos">Index position in the list</param>
+		
         public void DisplayAt(float pos)
         {
             if (m_rowsData == null || m_rowHeight <= 0) return;

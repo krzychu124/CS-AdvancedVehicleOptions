@@ -171,7 +171,8 @@ namespace AdvancedVehicleOptionsUID.GUI
             }
         }
 
-        /*public override void OnDestroy()
+		// Hide the GUI Button from Mainpanel
+        public override void OnDestroy()
         {
             base.OnDestroy();
 
@@ -179,7 +180,7 @@ namespace AdvancedVehicleOptionsUID.GUI
 
             if (m_button != null) GameObject.Destroy(m_button.gameObject);
             GameObject.Destroy(m_optionPanel.gameObject);
-        }*/
+        }
 
         private void SetupControls()
         {

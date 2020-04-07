@@ -100,6 +100,16 @@ namespace AdvancedVehicleOptionsUID.GUI
             m_name.text = m_options.localizedName;
 
             m_disabled.isVisible = !options.enabled;
+			
+            //Verify if the vehicle is a Public Transport, where the game controls spawning; if disabled/deactivated set to enabled
+			if ((options.isPublicTransportGame == true) && AdvancedVehicleOptionsUID.SpawnControl == true && options.isUncontrolledPublicTransport == false)
+			{
+				if (options.enabled == false)
+ 				  options.enabled = true;
+			}
+
+            m_disabled.isVisible = !options.enabled;
+			
             m_name.textColor = options.enabled ? new Color32(255, 255, 255, 255) : new Color32(128, 128, 128, 255);
 
             m_steamIcon.tooltip = m_options.steamID;

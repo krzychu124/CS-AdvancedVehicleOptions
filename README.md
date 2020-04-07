@@ -1,5 +1,5 @@
 # CS-AdvancedVehicleOptions 1.9.1
-This version is 1.9.0a, tested in a limited environment only. Adds compatibility patches to the game (vehicle spawning), ITP/TLM (vehicle spawning, vehicle parameters), Vehicle Color Expander (coloring parameters).
+This version is 1.9.1, tested in a limited environment only. Adds compatibility patches to the game (vehicle spawning), ITP/TLM (vehicle spawning, vehicle parameters), Vehicle Color Expander (coloring parameters).
 
 New Options are visible in the Mod Option panel of Cities Skylines.
 - Game Balancing : Hide capacity value for vehicles without passenger/cargo capacity; can be turned off, default setting: ON

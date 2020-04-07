@@ -313,6 +313,7 @@ namespace AdvancedVehicleOptionsUID.GUI
         /// <summary>
         /// Clear the list
         /// </summary>
+		
         public void Clear()
         {
             m_rowsData.Clear();
@@ -369,6 +370,7 @@ namespace AdvancedVehicleOptionsUID.GUI
         /// <summary>
         /// Refresh the display
         /// </summary>
+		
         public void Refresh()
         {
             DisplayAt(m_pos);

@@ -8,9 +8,13 @@ New Options are visible in the Mod Option panel of Cities Skylines.
 - Compatibility : If TLM is present and active, disable some vehicle parameters; cannot be turned off, default setting: ON
 - Compatibility : If IPT is present and active, disable some vehicle parameters; can be turned off, default setting: ON
 
+Compatibility logic - if vehicle spawning is controlled by game, the vehicle will always be turned on (even if it was disabled before)
+
 New Category for Intercity Bus
 
 Support for categorizing properly Bus trailers. SteamID config file 06-Apr-2020 for 1.9.1.
+
+Hiding GUI works again
 
 # CS-AdvancedVehicleOptions 1.9.0
 

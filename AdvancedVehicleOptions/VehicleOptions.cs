@@ -569,6 +569,18 @@ namespace AdvancedVehicleOptionsUID
 //						if (steamID == TrailerRef.isTrolley[i])
 //				            return Category.TrolleyBus;			
 //					}
+//
+					for (int i=0; i < TrailerRef.isOil.Length; i++) 
+					{            
+						if (steamID == TrailerRef.isOil[i])
+				            return Category.Oil;			
+					}
+
+					for (int i=0; i < TrailerRef.isForestry.Length; i++) 
+					{            
+						if (steamID == TrailerRef.isForestry[i])
+				            return Category.Forestry;			
+					}
 				}
 				
                 switch (prefab.m_class.m_service)

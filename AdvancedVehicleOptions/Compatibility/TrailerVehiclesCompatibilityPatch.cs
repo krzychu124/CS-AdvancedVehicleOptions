@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using ColossalFramework.Plugins;
 
-// Vehicle Trailer References - Last Revision:	1.9.1	06 Apr 2020
+// Vehicle Trailer References - Last Revision:	1.9.1	09 Apr 2020
 
 namespace AdvancedVehicleOptionsUID.Compatibility
 {
     public class TrailerRef
     {
-		public static string Revision = "06 Apr 2020 / 1.9.1";
+		public static string Revision = "09 Apr 2020 / 1.9.1";
 		
         public static string[] isBus = { "450635180",
 										 "549021554",
@@ -57,5 +57,12 @@ namespace AdvancedVehicleOptionsUID.Compatibility
 //		public static string[] isFire = { "SteamID" };
 		
 //		public static string[] isTrolley = { "SteamID" };
+
+		public static string[] isOil = { "532884994" };
+
+		public static string[] isForestry = { "1352419789",
+											  "1805346788",
+										      "677028035",
+											  "511858259" };
     }
 }

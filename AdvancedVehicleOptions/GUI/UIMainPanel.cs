@@ -33,20 +33,20 @@ namespace AdvancedVehicleOptionsUID.GUI
         private const int WIDTHLEFT = 470;
         private const int WIDTHRIGHT = 390;
 
-        public static readonly string[] categoryList = { "All", "Citizen", "Bicycle",
-            "Forestry", "Farming", "Ore", "Oil", "Fishing", "Industry", "Player Industry",
-            "Police", "Prison", "Fire Safety", "Disaster",
+        public static readonly string[] categoryList = { "All Vehicles", "Citizen", "Bicycle",
+            "Industry - Forestry", "Industry - Farming", "Industry - Ore", "Industry - Oil", "Industry - Fishing", "Industry - Delivery", "Industry - Factories",
+            "Police", "Prison", "Fire Safety", "Disaster Response",
             "Healthcare", "Deathcare", "Garbage", "Waste Transfer", "Maintenance", "Postal Service",
-            "Taxi", "Bus", "Intercity Bus", "Metro", "Tram", "Monorail", "Cable Car", "Trolley Bus",
-            "Cargo Train", "Passenger Train",
-            "Cargo Ship", "Passenger Ship","Ferry", "Cargo Plane", "Passenger Plane", "Light Air Traffic", "Tours",
+            "Bus", "Intercity Bus", "Taxi", "Metro", "Tram", "Monorail", "Cable Car", "Trolley Bus",
+            "Train - Cargo", "Train - Passenger",
+            "Ship - Cargo", "Ship - Cruise","Ship - Ferry", "Plane - Cargo", "Plane - Passenger", "Local Air Traffic", "Tourism & Tours",
             "Launch Site", "Natural" };
 
         public static readonly string[] vehicleIconList = { "IconCitizenVehicle", "IconCitizenBicycleVehicle",
               "IconPolicyForest", "IconPolicyFarming", "IconPolicyOre", "IconPolicyOil", "SubBarIndustryFishing", "IconPolicyNone", "SubBarIndustryUniqueFactory",
               "ToolbarIconPolice", "IconPolicyDoubleSentences", "InfoIconFireSafety", "ToolbarIconFireDepartmentHovered",
               "ToolbarIconHealthcare", "ToolbarIconHealthcareHovered", "InfoIconGarbage", "InfoIconGarbage", "InfoIconMaintenance", "SubBarPublicTransportPost",
-              "SubBarPublicTransportTaxi", "SubBarPublicTransportBus", "SubBarPublicTransportBus", "SubBarPublicTransportMetro", "SubBarPublicTransportTram", "SubBarPublicTransportMonorail", "SubBarPublicTransportCableCar", "SubBarPublicTransportTrolleybus",
+              "SubBarPublicTransportBus", "SubBarPublicTransportBus", "SubBarPublicTransportTaxi", "SubBarPublicTransportMetro", "SubBarPublicTransportTram", "SubBarPublicTransportMonorail", "SubBarPublicTransportCableCar", "SubBarPublicTransportTrolleybus",
               "SubBarPublicTransportTrain", "SubBarPublicTransportTrain",
               "IconCargoShip", "SubBarPublicTransportShip",  "IconPolicyPreferFerries", "SubBarPublicTransportPlane", "SubBarPublicTransportPlane", "IconPolicyEducationalBlimps", "SubBarPublicTransportTours",
               "ToolbarIconMonuments", "SubBarFireDepartmentDisaster"};
@@ -199,7 +199,7 @@ namespace AdvancedVehicleOptionsUID.GUI
             label.text = "Category :";
 
             m_category = UIUtils.CreateDropDown(this);
-            m_category.width = 150;
+            m_category.width = 175;
 
             for (int i = 0; i < categoryList.Length; i++)
                 m_category.AddItem(categoryList[i]);

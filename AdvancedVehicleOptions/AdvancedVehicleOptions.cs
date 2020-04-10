@@ -97,7 +97,7 @@ namespace AdvancedVehicleOptionsUID
                     AdvancedVehicleOptionsUID.OverrideVCX.value = b;
                 });
 				
-                checkBox.tooltip = "Permanent setting, if Vehicle Color Expander (by Klyte) is active.\nThe color management is controlled by Vehicle Color Expander.\n\nAVO will not allow user to edit any vehicle colors.";	
+                checkBox.tooltip = "Permanent setting, if Vehicle Color Expander (by Klyte) is active.\nThe color management is controlled by Vehicle Color Expander.\n\nValues must be configured in Vehicle Color Expander.";	
 				checkBox.readOnly = true;
 				checkBox.label.textColor = Color.gray;
 				
@@ -111,7 +111,7 @@ namespace AdvancedVehicleOptionsUID
                     AdvancedVehicleOptionsUID.OverrideTLM.value = b;
                 });
 				
-				checkBox.tooltip = "Permanent setting, if Transport Lines Manager (by Klyte) is active.\nIf user wants to change these values, change must be done in Transport Lines\nManager.Spawning of Public Transport Vehicles is permanently disabled.\n\nAVO will not allow user to edit Capacity values for Public Transport vehicles.";				
+				checkBox.tooltip = "Permanent setting, if Transport Lines Manager (by Klyte) is active.\nCapacity and Spawn Control are disabled for Public Transport vehicles.\n\nValues must be configured in Transport Lines Manager.";				
 				checkBox.readOnly = true;
 				checkBox.label.textColor = Color.gray;
 				
@@ -125,13 +125,13 @@ namespace AdvancedVehicleOptionsUID
                     AdvancedVehicleOptionsUID.OverrideIPT.value = b;
                 });
 				
-                checkBox.tooltip = "If enabled, Improved Public Transport (by BloodyPenguin) will manage\nCapacity and Maximum Speed values for Public Transport Vehicles.\nSpawn Control for Public Transport Vehicles is permanently disabled.\nIf user wants to change these values, change must be done in Improved\nPublic Transport.\n\nAVO will not allow user to edit Capacity and Maximum Speed values\nfor Public Transport vehicles.";
+                checkBox.tooltip = "Permanent setting, if Improved Public Transport (by BloodyPenguin) is active.\nSpawn Control, Capacity and Maximum Speed values are disabled for Public Transport vehicles.\n\nValues must be configured in Improved Public Transport.";
+        		checkBox.readOnly  = true;				
+				checkBox.label.textColor = Color.gray;
 				
 				if (!IPTCompatibilityPatch.IsIPTActive())
 				{
-        			checkBox.readOnly  = true;
 				    checkBox.label.text = "Improved Public Transport: Mod is not active";
-					checkBox.label.textColor = Color.gray;
 			    }
 				
 				group_compatibility.AddSpace(20);

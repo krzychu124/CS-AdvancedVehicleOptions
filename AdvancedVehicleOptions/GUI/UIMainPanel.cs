@@ -33,7 +33,7 @@ namespace AdvancedVehicleOptionsUID.GUI
         private const int WIDTHLEFT = 470;
         private const int WIDTHRIGHT = 390;
 
-        public static readonly string[] categoryList = { "All Vehicles", "Citizen", "Bicycle",
+        public static readonly string[] categoryList = { "All Vehicles", "Citizen - Cars", "Citizen - Bicycle",
             "Industry - Forestry", "Industry - Farming", "Industry - Ore", "Industry - Oil", "Industry - Fishing", "Industry - Delivery", "Industry - Factories",
             "Police", "Prison", "Fire Safety", "Disaster Response",
             "Healthcare", "Deathcare", "Garbage", "Waste Transfer", "Maintenance", "Postal Service",

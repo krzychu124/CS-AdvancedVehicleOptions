@@ -47,6 +47,7 @@ namespace AdvancedVehicleOptionsUID
             {
                 UICheckBox checkBox;	
 				UITextField TextField;
+				UIButton Button;
 				UIHelperBase group_general = helper.AddGroup("General Settings                                                   " + Name);
 
                 checkBox = (UICheckBox)group_general.AddCheckbox("Disable debug messages logging", DebugUtils.hideDebugMessages.value, (b) =>
@@ -128,7 +129,7 @@ namespace AdvancedVehicleOptionsUID
 				
 				if (!IPTCompatibilityPatch.IsIPTActive())
 				{
-        			checkBox.readOnly  = !IPTCompatibilityPatch.IsIPTActive();
+        			checkBox.readOnly  = true;
 				    checkBox.label.text = "Improved Public Transport: Mod is not active";
 					checkBox.label.textColor = Color.gray;
 			    }
@@ -137,6 +138,20 @@ namespace AdvancedVehicleOptionsUID
 				TextField = (UITextField) group_compatibility.AddTextfield("Vehicle Trailer compatibility references last updated:", TrailerRef.Revision, (value) => Debug.Log(""), (value) => Debug.Log(""));
 				TextField.tooltip = "This field shows the vehicle list revision date for the Bus, Trolley Bus, Fire and Police\ntrailers, which are in real life industry trailers, but have been re-categorized by AVO.";
 				TextField.readOnly = true;
+				
+				UIHelperBase group_support = helper.AddGroup("Support");
+				
+				Button = (UIButton) group_support.AddButton("Open the Advanced Vehicle Options Wiki", () =>
+                {
+                    Application.OpenURL("https://github.com/CityGecko/CS-AdvancedVehicleOptions/wiki/Advanced-Vehicle-Options-Introduction");
+                });
+				Button.textScale = 0.8f;
+				
+				Button = (UIButton) group_support.AddButton("Open Cities:Skylines log folder (output_log.txt)", () =>
+                {
+                    Utils.OpenInFileBrowser(Application.dataPath);
+                });
+				Button.textScale = 0.8f;
 			}	
 			
             catch (Exception e)

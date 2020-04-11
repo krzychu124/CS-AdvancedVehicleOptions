@@ -92,7 +92,7 @@ namespace AdvancedVehicleOptionsUID
 				//AVO allows the game to control all spawning - standard behaviour, this option is not shown
 				checkBox.enabled = false;
 
-                checkBox = (UICheckBox) group_compatibility.AddCheckbox("Vehicle Color Expander: Priority over AVO Vehicle Coloring", AdvancedVehicleOptionsUID.OverrideVCX.value, (b) =>
+                checkBox = (UICheckBox) group_compatibility.AddCheckbox("Vehicle Color Expander: Priority over AVO vehicle coloring", AdvancedVehicleOptionsUID.OverrideVCX.value, (b) =>
                 {
                     AdvancedVehicleOptionsUID.OverrideVCX.value = b;
                 });
@@ -106,18 +106,18 @@ namespace AdvancedVehicleOptionsUID
  			        checkBox.label.text = "Vehicle Color Expander: Mod is not active";
 				}
 				
-                checkBox = (UICheckBox) group_compatibility.AddCheckbox("Transport Lines Manager: Priority over AVO Spawn Control", AdvancedVehicleOptionsUID.OverrideVCX.value, (b) =>
+                checkBox = (UICheckBox) group_compatibility.AddCheckbox("Transport Lines Manager: Priority over AVO vehicle settings", AdvancedVehicleOptionsUID.OverrideVCX.value, (b) =>
                 {
                     AdvancedVehicleOptionsUID.OverrideTLM.value = b;
                 });
 				
-				checkBox.tooltip = "Permanent setting, if Transport Lines Manager (by Klyte) is active.\nCapacity and Spawn Control are disabled for Public Transport vehicles.\n\nValues must be configured in Transport Lines Manager.";				
-				checkBox.readOnly = true;
-				checkBox.label.textColor = Color.gray;
+				checkBox.tooltip = "If enabled, Capacity and Spawn Control are disabled for Public Transport vehicles.\nValues must be configured in Transport Lines Manager (by Klyte).\n\nIf disabled, only the Spawn Control for certain vehicles will be disabled.";				
+				//checkBox.readOnly = true;
 				
 				if (!TLMCompatibilityPatch.IsTLMActive())
 				{
 				    checkBox.label.text = "Transport Lines Manager: Mod is not active";	
+					checkBox.label.textColor = Color.gray;
 				}
 				
                 checkBox = (UICheckBox) group_compatibility.AddCheckbox("Improved Public Transport: Priority over AVO vehicle settings", AdvancedVehicleOptionsUID.OverrideIPT.value, (b) =>
@@ -125,13 +125,13 @@ namespace AdvancedVehicleOptionsUID
                     AdvancedVehicleOptionsUID.OverrideIPT.value = b;
                 });
 				
-                checkBox.tooltip = "Permanent setting, if Improved Public Transport (by BloodyPenguin) is active.\nSpawn Control, Capacity and Maximum Speed values are disabled for Public Transport vehicles.\n\nValues must be configured in Improved Public Transport.";
-        		checkBox.readOnly  = true;				
-				checkBox.label.textColor = Color.gray;
+                checkBox.tooltip = "If enabled, Capacity, Maximum Speed and Spawn Control are disabled for Public Transport vehicles.\nValues must be configured in Improved Public Transport (by BloodyPenguin).\n\nIf disabled, only the Spawn Control for certain vehicles will be disabled.";
+        		//checkBox.readOnly  = true;				
 				
 				if (!IPTCompatibilityPatch.IsIPTActive())
 				{
 				    checkBox.label.text = "Improved Public Transport: Mod is not active";
+			    	checkBox.label.textColor = Color.gray;
 			    }
 				
 				group_compatibility.AddSpace(20);
@@ -161,7 +161,7 @@ namespace AdvancedVehicleOptionsUID
             }
         }
 
-        public const string version = "1.9.1";
+        public const string version = "1.9.2";
     }
 
     public class AdvancedVehicleOptionsUIDLoader : LoadingExtensionBase

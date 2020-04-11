@@ -40,12 +40,12 @@ namespace AdvancedVehicleOptionsUID
 			TransportPost,
             TransportBus,
 			TransportIntercityBus,
+			TrolleyBus,
             TransportTaxi,
             TransportMetro,
 			Tram,
             Monorail,
             CableCar,
-			TrolleyBus,
             CargoTrain,
             TransportTrain,
             CargoShip,
@@ -213,7 +213,7 @@ namespace AdvancedVehicleOptionsUID
             get { return m_prefab.m_leanMultiplier; }
             set
             {
-                if (m_prefab == null || value <= 0) return;
+				if (m_prefab == null) return;
                 m_prefab.m_leanMultiplier = value;
             }
         }
@@ -223,7 +223,7 @@ namespace AdvancedVehicleOptionsUID
             get { return m_prefab.m_nodMultiplier; }
             set
             {
-                if (m_prefab == null || value <= 0) return;
+                if (m_prefab == null) return;
                 m_prefab.m_nodMultiplier = value;
             }
         }
@@ -520,7 +520,11 @@ namespace AdvancedVehicleOptionsUID
 		// Define all vehicles, with class Intercity Bus to exclude from editing block ITP TLM
 		public bool isUncontrolledPublicTransport
 		{
-			get { return prefab.m_class.m_level == ItemClass.Level.Level3 || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportCableCar; } 
+			get { return prefab.m_class.m_level == ItemClass.Level.Level3 
+                                                || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportCableCar 
+                                                || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportPlane 												
+                                                || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportTrain 	
+		                                    	|| prefab.m_class.m_subService == ItemClass.SubService.PublicTransportShip;  }
 		}
 
         public bool isTrailer

@@ -1,3 +1,15 @@
+# CS-AdvancedVehicleOptions 1.9.2
+
+Change the Mod Option Panel
+- Compatibility : If TLM is present and active, disable some vehicle parameters; can be turned off, default setting: ON
+- Compatibility : If IPT is present and active, disable some vehicle parameters; can be turned off, default setting: ON
+
+Note: Disabling the option will make the values for editing available, however, the Spawn Control for Bus, Trolley Bus, Metro, Tram and Monorail is still under control of the game, TLM or IPT. The vehicles must be configured in the respective transport line managers.
+
+Lean Modifier and Nod Mulltiplier are not saved if zero or negative value. Now remembers and loads values properly (eg. for trains or helicopters).
+
+Trolley Bus to show next to Bus and Intercity Bus
+
 # CS-AdvancedVehicleOptions 1.9.1
 This version is 1.9.1, tested in a limited environment only. Adds compatibility patches to the game (vehicle spawning), ITP/TLM (vehicle spawning, vehicle parameters), Vehicle Color Expander (coloring parameters).
 

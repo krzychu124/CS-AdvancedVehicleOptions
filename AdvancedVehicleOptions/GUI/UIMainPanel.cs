@@ -37,7 +37,7 @@ namespace AdvancedVehicleOptionsUID.GUI
             "Industry - Forestry", "Industry - Farming", "Industry - Ore", "Industry - Oil", "Industry - Fishing", "Industry - Delivery", "Industry - Factories",
             "Police", "Prison", "Fire Safety", "Disaster Response",
             "Healthcare", "Deathcare", "Garbage", "Waste Transfer", "Maintenance", "Postal Service",
-            "Bus", "Intercity Bus", "Taxi", "Metro", "Tram", "Monorail", "Cable Car", "Trolley Bus",
+            "Bus", "Intercity Bus", "Trolley Bus", "Taxi", "Metro", "Tram", "Monorail", "Cable Car", 
             "Train - Cargo", "Train - Passenger",
             "Ship - Cargo", "Ship - Cruise","Ship - Ferry", "Plane - Cargo", "Plane - Passenger", "Local Air Traffic", "Tourism & Tours",
             "Launch Site", "Natural" };
@@ -46,7 +46,7 @@ namespace AdvancedVehicleOptionsUID.GUI
               "IconPolicyForest", "IconPolicyFarming", "IconPolicyOre", "IconPolicyOil", "SubBarIndustryFishing", "IconPolicyNone", "SubBarIndustryUniqueFactory",
               "ToolbarIconPolice", "IconPolicyDoubleSentences", "InfoIconFireSafety", "ToolbarIconFireDepartmentHovered",
               "ToolbarIconHealthcare", "ToolbarIconHealthcareHovered", "InfoIconGarbage", "InfoIconGarbage", "InfoIconMaintenance", "SubBarPublicTransportPost",
-              "SubBarPublicTransportBus", "SubBarPublicTransportBus", "SubBarPublicTransportTaxi", "SubBarPublicTransportMetro", "SubBarPublicTransportTram", "SubBarPublicTransportMonorail", "SubBarPublicTransportCableCar", "SubBarPublicTransportTrolleybus",
+              "SubBarPublicTransportBus", "SubBarPublicTransportBus", "SubBarPublicTransportTrolleybus", "SubBarPublicTransportTaxi", "SubBarPublicTransportMetro", "SubBarPublicTransportTram", "SubBarPublicTransportMonorail", "SubBarPublicTransportCableCar", 
               "SubBarPublicTransportTrain", "SubBarPublicTransportTrain",
               "IconCargoShip", "SubBarPublicTransportShip",  "IconPolicyPreferFerries", "SubBarPublicTransportPlane", "SubBarPublicTransportPlane", "IconPolicyEducationalBlimps", "SubBarPublicTransportTours",
               "ToolbarIconMonuments", "SubBarFireDepartmentDisaster"};

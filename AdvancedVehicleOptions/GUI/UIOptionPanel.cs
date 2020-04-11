@@ -150,8 +150,23 @@ namespace AdvancedVehicleOptionsUID.GUI
 			{
 				m_enabled.isInteractive = false;
 			    m_enabled.isEnabled = false;
-                m_enabled.text = "Spawning is managed by Cities:Skylines";	
+                
+				if (IPTCompatibilityPatch.IsIPTActive() == true)
+				{
+				m_enabled.text = "Spawning is managed by IPT";
+				m_enabled.tooltip = "Improved Public Transport will take care for public transport spawning vehicles.";		
+				}
+				else
+				if (TLMCompatibilityPatch.IsTLMActive() == true)
+				{
+				m_enabled.text = "Spawning is managed by TLM";
+				m_enabled.tooltip = "Transport Lines Manager will take care for public transport spawning vehicles.";		
+				}
+				else
+				{
+				m_enabled.text = "Spawning is managed by Cities:Skylines";	
 			    m_enabled.tooltip = "The game will take care for spawning public transport vehicles.";
+				}
 			}
 			
 			if (IPTCompatibilityPatch.IsIPTActive() == true && AdvancedVehicleOptionsUID.OverrideIPT == true && options.isPublicTransport == true && options.isUncontrolledPublicTransport == false)
@@ -161,24 +176,13 @@ namespace AdvancedVehicleOptionsUID.GUI
 				m_capacity.isInteractive = false;
 				m_capacity.text = "IPT";				
 			}
-	
-			if (IPTCompatibilityPatch.IsIPTActive() && options.isPublicTransport == true && options.isUncontrolledPublicTransport == false)
+			
+			if (TLMCompatibilityPatch.IsTLMActive() == true && AdvancedVehicleOptionsUID.OverrideTLM == true && options.isPublicTransport == true && options.isUncontrolledPublicTransport == false)
 			{
-				m_enabled.isInteractive = false;
-				m_enabled.isEnabled = false;
-				m_enabled.text = "Spawning is managed by IPT";
-				m_enabled.tooltip = "Improved Public Transport will take care for public transport spawning vehicles.";
-			}
-
-			if (TLMCompatibilityPatch.IsTLMActive() && options.isPublicTransport == true && options.isUncontrolledPublicTransport == false)
-			{
-				m_enabled.isInteractive = false;
-				m_enabled.isEnabled = false;
-				m_enabled.text = "Spawning is managed by TLM";	
-				m_enabled.tooltip = "Transport Lines Manager will take care for public transport spawning vehicles.";
 				m_capacity.isInteractive = false;
-				m_capacity.text = "TLM";		
+				m_capacity.text = "TLM";				
 			}
+	
 			// Compatibility Patch section ends
 			
             string name = options.localizedName;

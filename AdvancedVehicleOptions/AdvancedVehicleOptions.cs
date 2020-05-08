@@ -86,7 +86,7 @@ namespace AdvancedVehicleOptionsUID
                 {
                     AdvancedVehicleOptionsUID.SpeedUnitOption.value = b;
                 });
-                checkBox.tooltip = "Changes display of unit of speed from mph to kmh.";
+                checkBox.tooltip = "Changes display of unit of speed from mph to km/h.";
 
 // Checkbox for Game Balancing	
 

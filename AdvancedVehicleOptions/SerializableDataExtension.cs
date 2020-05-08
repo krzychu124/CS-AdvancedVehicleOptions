@@ -8,7 +8,7 @@ namespace AdvancedVehicleOptionsUID
     public class SerializableDataExtension : SerializableDataExtensionBase
     {
         private const string ID = "AVO";
-        private const int VERSION = 2;
+        private const int VERSION = 3;
 
         public override void OnLoadData()
         {
@@ -24,6 +24,7 @@ namespace AdvancedVehicleOptionsUID
             {
                 return;
             }
+
             var data = serializableDataManager.LoadData(ID);
             using (var ms = new MemoryStream(data))
             {

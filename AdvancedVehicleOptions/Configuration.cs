@@ -15,6 +15,7 @@ namespace AdvancedVehicleOptionsUID
     {
         public class VehicleData
         {
+            public bool oldversion = true;
             #region serialized
             [XmlAttribute("name")]
             public string name;
@@ -38,6 +39,10 @@ namespace AdvancedVehicleOptionsUID
             public HexaColor color3;
             [DefaultValue(-1)]
             public int capacity = -1;
+            [DefaultValue(-1)]
+            public int specialcapacity = -1;
+            [DefaultValue(false)]
+            public bool isLargeVehicle = false;
             #endregion
 
             public bool isCustomAsset
@@ -84,6 +89,8 @@ namespace AdvancedVehicleOptionsUID
                     s.WriteUniqueString(options[i].color2.Value);
                     s.WriteUniqueString(options[i].color3.Value);
                     s.WriteInt32(options[i].capacity);
+                    s.WriteInt32(options[i].specialcapacity);
+                    s.WriteBool(options[i].isLargeVehicle);
                 }
             }
             catch (Exception e)
@@ -102,6 +109,8 @@ namespace AdvancedVehicleOptionsUID
                 int count = s.ReadInt32();
                 data = new VehicleData[count];
 
+                DebugUtils.Log("AVO Savegame Version " + s.version);
+
                 for (int i = 0; i < count; i++)
                 {
                     data[i] = new VehicleData();
@@ -111,17 +120,28 @@ namespace AdvancedVehicleOptionsUID
                     data[i].maxSpeed = s.ReadFloat();
                     data[i].acceleration = s.ReadFloat();
                     data[i].braking = s.ReadFloat();
-                    data[i].turning = s.ReadFloat();
-                    data[i].springs = s.ReadFloat();
-                    data[i].dampers = s.ReadFloat();
-                    data[i].leanMultiplier = s.ReadFloat();
-                    data[i].nodMultiplier = s.ReadFloat();
+                    
+                    if (s.version >= 2)                                          // Skip loading new vehicle propertiers for all versions below 1.9.0
+                    {
+                        data[i].turning = s.ReadFloat();
+                        data[i].springs = s.ReadFloat();
+                        data[i].dampers = s.ReadFloat();
+                        data[i].leanMultiplier = s.ReadFloat();
+                        data[i].nodMultiplier = s.ReadFloat();
+                    }
+
                     data[i].useColorVariations = s.ReadBool();
                     data[i].color0 = new HexaColor(s.ReadUniqueString());
                     data[i].color1 = new HexaColor(s.ReadUniqueString());
                     data[i].color2 = new HexaColor(s.ReadUniqueString());
                     data[i].color3 = new HexaColor(s.ReadUniqueString());
                     data[i].capacity = s.ReadInt32();
+
+                    if (s.version >= 3)                                         // Skip loading Special Capacity for all versions below 1.9.3
+                    {
+                        data[i].specialcapacity = s.ReadInt32();             
+                        data[i].isLargeVehicle = s.ReadBool();
+                    }
                 }
             }
             catch (Exception e)
@@ -256,6 +276,8 @@ namespace AdvancedVehicleOptionsUID
                 data[i].color2 = options[i].color2;
                 data[i].color3 = options[i].color3;
                 data[i].capacity = options[i].capacity;
+                data[i].specialcapacity = options[i].specialcapacity;
+                data[i].isLargeVehicle = options[i].isLargeVehicle;
             }
         }
 
@@ -287,6 +309,8 @@ namespace AdvancedVehicleOptionsUID
                 options[i].color2 = data[i].color2;
                 options[i].color3 = data[i].color3;
                 options[i].capacity = data[i].capacity;
+                options[i].specialcapacity = data[i].specialcapacity;
+                options[i].isLargeVehicle = data[i].isLargeVehicle;
             }
 
             VehicleOptions.UpdateTransfertVehicles();

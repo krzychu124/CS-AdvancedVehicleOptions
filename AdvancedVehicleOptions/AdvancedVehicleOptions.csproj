@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Compatibility\IPTCompatibilityPatch.cs" />
+    <Compile Include="Compatibility\NoBigTruckCompatibilityPatch.cs" />
     <Compile Include="Compatibility\TLMCompatibilityPatch.cs" />
     <Compile Include="Compatibility\TrailerVehiclesCompatibilityPatch.cs" />
     <Compile Include="Compatibility\VCXCompatibilityPatch.cs" />

@@ -25,9 +25,9 @@ namespace AdvancedVehicleOptionsUID
             Farming,
             Ore,
             Oil,
-			Fishing,
+            Fishing,
             IndustryGeneric,
-			IndustryPlayer,
+            IndustryPlayer,
             Police,
             Prison,
             FireSafety,
@@ -35,27 +35,27 @@ namespace AdvancedVehicleOptionsUID
             Healthcare,
             Deathcare,
             Garbage,
-			WasteTransfer,
+            WasteTransfer,
             Maintenance,
-			TransportPost,
+            TransportPost,
             TransportBus,
-			TransportIntercityBus,
-			TrolleyBus,
+            TransportIntercityBus,
+            TrolleyBus,
             TransportTaxi,
             TransportMetro,
-			Tram,
+            Tram,
             Monorail,
             CableCar,
             CargoTrain,
             TransportTrain,
             CargoShip,
             TransportShip,
-			TransportFerry,
-			CargoPlane,
+            TransportFerry,
+            CargoPlane,
             TransportPlane,
-			TransportBlimp,
+            TransportBlimp,
             TransportTours,
-			Monument,
+            Monument,
             Natural
         }
 
@@ -66,8 +66,8 @@ namespace AdvancedVehicleOptionsUID
             get { return m_prefab.name; }
             set
             {
-                if(value == null) return;
-                
+                if (value == null) return;
+
                 VehicleInfo prefab = PrefabCollection<VehicleInfo>.FindLoaded(value);
                 if (prefab == null)
                     DebugUtils.Log("Couldn't find " + value);
@@ -177,7 +177,7 @@ namespace AdvancedVehicleOptionsUID
                 m_prefab.m_braking = value;
             }
         }
-	// turning
+        // turning
         public float turning
         {
             get { return m_prefab.m_turning; }
@@ -213,7 +213,7 @@ namespace AdvancedVehicleOptionsUID
             get { return m_prefab.m_leanMultiplier; }
             set
             {
-				if (m_prefab == null) return;
+                if (m_prefab == null) return;
                 m_prefab.m_leanMultiplier = value;
             }
         }
@@ -274,7 +274,72 @@ namespace AdvancedVehicleOptionsUID
                 m_prefab.m_color3 = value;
             }
         }
-		
+
+        public bool isLargeVehicle
+        {
+            get { return m_prefab.m_isLargeVehicle; }
+            set
+            {
+                if (m_prefab == null) return;
+                m_prefab.m_isLargeVehicle = value;
+            }
+        }
+
+        //specialcapacity - some vehicles have an additional property
+        [DefaultValue(-1)]
+        public int specialcapacity
+        {
+            get
+            {
+                VehicleAI ai;
+
+                ai = m_prefab.m_vehicleAI as WaterTruckAI;
+                if (ai != null) return ((WaterTruckAI)ai).m_pumpingRate;
+
+                ai = m_prefab.m_vehicleAI as TaxiAI;
+                if (ai != null) return ((TaxiAI)ai).m_travelCapacity;
+
+                ai = m_prefab.m_vehicleAI as PoliceCarAI;
+                if (ai != null) return ((PoliceCarAI)ai).m_criminalCapacity;
+
+                ai = m_prefab.m_vehicleAI as FireCopterAI;
+                if (ai != null) return ((FireCopterAI)ai).m_fireFightingCapacity;
+
+                ai = m_prefab.m_vehicleAI as AmbulanceCopterAI;
+                if (ai != null) return ((AmbulanceCopterAI)ai).m_travelCapacity;
+
+                ai = m_prefab.m_vehicleAI as FishingBoatAI;
+                if (ai != null) return ((FishingBoatAI)ai).m_fishingRate;
+
+                return -1;
+            }
+
+            set
+            {
+                if (m_prefab == null || capacity == -1 || value <= 0) return;
+
+                VehicleAI ai;
+
+                ai = m_prefab.m_vehicleAI as WaterTruckAI;
+                if (ai != null) { ((WaterTruckAI)ai).m_pumpingRate = value; return; }
+
+                ai = m_prefab.m_vehicleAI as TaxiAI;
+                if (ai != null) { ((TaxiAI)ai).m_travelCapacity = value; return; }
+
+                ai = m_prefab.m_vehicleAI as PoliceCarAI;
+                if (ai != null) { ((PoliceCarAI)ai).m_criminalCapacity = value; return; }
+
+                ai = m_prefab.m_vehicleAI as FireCopterAI;
+                if (ai != null) { ((FireCopterAI)ai).m_fireFightingCapacity = value; return; }
+
+                ai = m_prefab.m_vehicleAI as AmbulanceCopterAI;
+                if (ai != null) { ((AmbulanceCopterAI)ai).m_travelCapacity = value; return; }
+
+                ai = m_prefab.m_vehicleAI as FishingBoatAI;
+                if (ai != null) { ((FishingBoatAI)ai).m_fishingRate = value; return; }
+            }
+        }
+
         // capacity
         [DefaultValue(-1)]
         public int capacity
@@ -282,17 +347,20 @@ namespace AdvancedVehicleOptionsUID
             get
             {
                 VehicleAI ai;
-				
+
                 ai = m_prefab.m_vehicleAI as AmbulanceAI;
                 if (ai != null) return ((AmbulanceAI)ai).m_patientCapacity;
+
+                ai = m_prefab.m_vehicleAI as AmbulanceCopterAI;
+                if (ai != null) return ((AmbulanceCopterAI)ai).m_patientCapacity;
 
                 ai = m_prefab.m_vehicleAI as BusAI;
                 if (ai != null) return ((BusAI)ai).m_passengerCapacity;
 
                 ai = m_prefab.m_vehicleAI as CargoShipAI;
                 if (ai != null) return ((CargoShipAI)ai).m_cargoCapacity;
-				
-				ai = m_prefab.m_vehicleAI as CargoPlaneAI;
+
+                ai = m_prefab.m_vehicleAI as CargoPlaneAI;
                 if (ai != null) return ((CargoPlaneAI)ai).m_cargoCapacity;
 
                 ai = m_prefab.m_vehicleAI as CargoTrainAI;
@@ -304,8 +372,11 @@ namespace AdvancedVehicleOptionsUID
                 ai = m_prefab.m_vehicleAI as GarbageTruckAI;
                 if (ai != null) return ((GarbageTruckAI)ai).m_cargoCapacity;
 
- 				ai = m_prefab.m_vehicleAI as FireTruckAI;
-			    if (ai != null) return ((FireTruckAI)ai).m_fireFightingRate;
+                ai = m_prefab.m_vehicleAI as FireTruckAI;
+                if (ai != null) return ((FireTruckAI)ai).m_fireFightingRate;
+
+                ai = m_prefab.m_vehicleAI as FireCopterAI;
+                if (ai != null) return ((FireCopterAI)ai).m_fireFightingRate;
 
                 ai = m_prefab.m_vehicleAI as HearseAI;
                 if (ai != null) return ((HearseAI)ai).m_corpseCapacity;
@@ -319,30 +390,33 @@ namespace AdvancedVehicleOptionsUID
                 ai = m_prefab.m_vehicleAI as PassengerTrainAI;
                 if (ai != null) return ((PassengerTrainAI)ai).m_passengerCapacity;
 
-				ai = m_prefab.m_vehicleAI as PoliceCarAI;
-				if (ai != null) return ((PoliceCarAI)ai).m_crimeCapacity;
-				
+                ai = m_prefab.m_vehicleAI as PoliceCarAI;
+                if (ai != null) return ((PoliceCarAI)ai).m_crimeCapacity;
+
+                ai = m_prefab.m_vehicleAI as PoliceCopterAI;
+                if (ai != null) return ((PoliceCopterAI)ai).m_crimeCapacity;
+
                 ai = m_prefab.m_vehicleAI as TaxiAI;
                 if (ai != null) return ((TaxiAI)ai).m_passengerCapacity;
 
                 ai = m_prefab.m_vehicleAI as TramAI;
                 if (ai != null) return ((TramAI)ai).m_passengerCapacity;
 
-				ai = m_prefab.m_vehicleAI as MaintenanceTruckAI;
-				if (ai != null) return ((MaintenanceTruckAI)ai).m_maintenanceCapacity;
-				
-				ai = m_prefab.m_vehicleAI as ParkMaintenanceVehicleAI;
-				if (ai != null) return ((ParkMaintenanceVehicleAI)ai).m_maintenanceCapacity;
-				
-				ai = m_prefab.m_vehicleAI as WaterTruckAI;
-				if (ai != null) return ((WaterTruckAI)ai).m_cargoCapacity;
-				
+                ai = m_prefab.m_vehicleAI as MaintenanceTruckAI;
+                if (ai != null) return ((MaintenanceTruckAI)ai).m_maintenanceCapacity;
+
+                ai = m_prefab.m_vehicleAI as ParkMaintenanceVehicleAI;
+                if (ai != null) return ((ParkMaintenanceVehicleAI)ai).m_maintenanceCapacity;
+
+                ai = m_prefab.m_vehicleAI as WaterTruckAI;
+                if (ai != null) return ((WaterTruckAI)ai).m_cargoCapacity;
+
                 ai = m_prefab.m_vehicleAI as SnowTruckAI;
                 if (ai != null) return ((SnowTruckAI)ai).m_cargoCapacity;
 
                 ai = m_prefab.m_vehicleAI as CableCarAI;
                 if (ai != null) return ((CableCarAI)ai).m_passengerCapacity;
-				
+
                 ai = m_prefab.m_vehicleAI as TrolleybusAI;
                 if (ai != null) return ((TrolleybusAI)ai).m_passengerCapacity;
 
@@ -351,12 +425,21 @@ namespace AdvancedVehicleOptionsUID
 
                 ai = m_prefab.m_vehicleAI as PassengerBlimpAI;
                 if (ai != null) return ((PassengerBlimpAI)ai).m_passengerCapacity;
-				
-				ai = m_prefab.m_vehicleAI as PostVanAI;
+
+                ai = m_prefab.m_vehicleAI as PostVanAI;
                 if (ai != null) return ((PostVanAI)ai).m_mailCapacity;
-				
-				ai = m_prefab.m_vehicleAI as PassengerHelicopterAI;
+
+                ai = m_prefab.m_vehicleAI as PassengerHelicopterAI;
                 if (ai != null) return ((PassengerHelicopterAI)ai).m_passengerCapacity;
+
+                ai = m_prefab.m_vehicleAI as DisasterResponseCopterAI;
+                if (ai != null) return ((DisasterResponseCopterAI)ai).m_efficiency;
+
+                ai = m_prefab.m_vehicleAI as DisasterResponseVehicleAI;
+                if (ai != null) return ((DisasterResponseVehicleAI)ai).m_efficiency;
+
+                ai = m_prefab.m_vehicleAI as FishingBoatAI;
+                if (ai != null) return ((FishingBoatAI)ai).m_capacity;
 
                 return -1;
             }
@@ -369,12 +452,15 @@ namespace AdvancedVehicleOptionsUID
                 ai = m_prefab.m_vehicleAI as AmbulanceAI;
                 if (ai != null) { ((AmbulanceAI)ai).m_patientCapacity = value; return; }
 
+                ai = m_prefab.m_vehicleAI as AmbulanceCopterAI;
+                if (ai != null) { ((AmbulanceCopterAI)ai).m_patientCapacity = value; return; }
+
                 ai = m_prefab.m_vehicleAI as BusAI;
                 if (ai != null) { ((BusAI)ai).m_passengerCapacity = value; return; }
 
                 ai = m_prefab.m_vehicleAI as CargoShipAI;
                 if (ai != null) { ((CargoShipAI)ai).m_cargoCapacity = value; return; }
-				
+
                 ai = m_prefab.m_vehicleAI as CargoPlaneAI;
                 if (ai != null) { ((CargoPlaneAI)ai).m_cargoCapacity = value; return; }
 
@@ -387,9 +473,12 @@ namespace AdvancedVehicleOptionsUID
                 ai = m_prefab.m_vehicleAI as GarbageTruckAI;
                 if (ai != null) { ((GarbageTruckAI)ai).m_cargoCapacity = value; return; }
 
-		        ai = m_prefab.m_vehicleAI as FireTruckAI;
+                ai = m_prefab.m_vehicleAI as FireTruckAI;
                 if (ai != null) { ((FireTruckAI)ai).m_fireFightingRate = value; return; }
-			
+
+                ai = m_prefab.m_vehicleAI as FireCopterAI;
+                if (ai != null) { ((FireCopterAI)ai).m_fireFightingRate = value; return; }
+
                 ai = m_prefab.m_vehicleAI as HearseAI;
                 if (ai != null) { ((HearseAI)ai).m_corpseCapacity = value; return; }
 
@@ -402,30 +491,33 @@ namespace AdvancedVehicleOptionsUID
                 ai = m_prefab.m_vehicleAI as PassengerTrainAI;
                 if (ai != null) { ((PassengerTrainAI)ai).m_passengerCapacity = value; return; }
 
-			    ai = m_prefab.m_vehicleAI as PoliceCarAI;
-				if (ai != null) { ((PoliceCarAI)ai).m_crimeCapacity = value; return; }
-	        					
+                ai = m_prefab.m_vehicleAI as PoliceCarAI;
+                if (ai != null) { ((PoliceCarAI)ai).m_crimeCapacity = value; return; }
+
+                ai = m_prefab.m_vehicleAI as PoliceCopterAI;
+                if (ai != null) { ((PoliceCopterAI)ai).m_crimeCapacity = value; return; }
+
                 ai = m_prefab.m_vehicleAI as TaxiAI;
                 if (ai != null) { ((TaxiAI)ai).m_passengerCapacity = value; return; }
 
                 ai = m_prefab.m_vehicleAI as TramAI;
                 if (ai != null) { ((TramAI)ai).m_passengerCapacity = value; return; }
 
-    			ai = m_prefab.m_vehicleAI as MaintenanceTruckAI;
-				if (ai != null) { ((MaintenanceTruckAI)ai).m_maintenanceCapacity = value; return; }
-				
-				ai = m_prefab.m_vehicleAI as ParkMaintenanceVehicleAI;
-				if (ai != null) { ((ParkMaintenanceVehicleAI)ai).m_maintenanceCapacity = value; return; }
-				
-    			ai = m_prefab.m_vehicleAI as WaterTruckAI;
-				if (ai != null) { ((WaterTruckAI)ai).m_cargoCapacity = value; return; }
+                ai = m_prefab.m_vehicleAI as MaintenanceTruckAI;
+                if (ai != null) { ((MaintenanceTruckAI)ai).m_maintenanceCapacity = value; return; }
+
+                ai = m_prefab.m_vehicleAI as ParkMaintenanceVehicleAI;
+                if (ai != null) { ((ParkMaintenanceVehicleAI)ai).m_maintenanceCapacity = value; return; }
+
+                ai = m_prefab.m_vehicleAI as WaterTruckAI;
+                if (ai != null) { ((WaterTruckAI)ai).m_cargoCapacity = value; return; }
 
                 ai = m_prefab.m_vehicleAI as SnowTruckAI;
                 if (ai != null) { ((SnowTruckAI)ai).m_cargoCapacity = value; return; }
 
                 ai = m_prefab.m_vehicleAI as CableCarAI;
                 if (ai != null) { ((CableCarAI)ai).m_passengerCapacity = value; return; }
-				
+
                 ai = m_prefab.m_vehicleAI as TrolleybusAI;
                 if (ai != null) { ((TrolleybusAI)ai).m_passengerCapacity = value; return; }
 
@@ -434,14 +526,21 @@ namespace AdvancedVehicleOptionsUID
 
                 ai = m_prefab.m_vehicleAI as PassengerBlimpAI;
                 if (ai != null) { ((PassengerBlimpAI)ai).m_passengerCapacity = value; return; }
-				
-				ai = m_prefab.m_vehicleAI as PassengerHelicopterAI;
-                if (ai != null) { ((PassengerHelicopterAI)ai).m_passengerCapacity = value; return; }
-				
-				ai = m_prefab.m_vehicleAI as PostVanAI;
+
+                ai = m_prefab.m_vehicleAI as PostVanAI;
                 if (ai != null) { ((PostVanAI)ai).m_mailCapacity = value; return; }
-	            }
+
+                ai = m_prefab.m_vehicleAI as DisasterResponseCopterAI;
+                if (ai != null) { ((DisasterResponseCopterAI)ai).m_efficiency = value; return; }
+
+                ai = m_prefab.m_vehicleAI as DisasterResponseVehicleAI;
+                if (ai != null) { ((DisasterResponseVehicleAI)ai).m_efficiency = value; return; }
+
+                ai = m_prefab.m_vehicleAI as FishingBoatAI;
+                if (ai != null) { ((FishingBoatAI)ai).m_capacity = value; return; }
+            }
         }
+
         #endregion
 
         public static VehicleInfo prefabUpdateUnits = null;
@@ -452,6 +551,7 @@ namespace AdvancedVehicleOptionsUID
         private ItemClass.Placement m_placementStyle;
         private string m_localizedName;
         private bool m_hasCapacity = false;
+        private bool m_hasSpecialCapacity = false;
         private string m_steamID;
 
         public VehicleOptions() { }
@@ -481,6 +581,11 @@ namespace AdvancedVehicleOptionsUID
             get { return m_hasCapacity; }
         }
 
+        public bool hasSpecialCapacity
+        {
+            get { return m_hasSpecialCapacity; }
+        }
+
         public bool hasTrailer
         {
             get { return m_prefab.m_trailers != null && m_prefab.m_trailers.Length > 0; }
@@ -490,42 +595,57 @@ namespace AdvancedVehicleOptionsUID
         {
             get { return hasTrailer && (m_prefab.m_vehicleType == VehicleInfo.VehicleType.Train || m_prefab.m_vehicleType == VehicleInfo.VehicleType.Tram || m_prefab.m_vehicleType == VehicleInfo.VehicleType.Metro || m_prefab.m_vehicleType == VehicleInfo.VehicleType.Monorail); }
         }
-		
-		// Define all vehicles, which have no passengers or cargo capacities
-		public bool isNonPaxCargo
-		{
-			get { return prefab.m_class.m_service == ItemClass.Service.FireDepartment 
-                                        		  || prefab.m_class.m_service == ItemClass.Service.PoliceDepartment
-                                                  || prefab.m_class.m_service == ItemClass.Service.Water 
-												  || prefab.m_class.m_service == ItemClass.Service.Road
-											      || prefab.m_class.m_subService == ItemClass.SubService.BeautificationParks; }
-		}
 
-		// Check if vehicle is in the Public Transport Group, used for Compability Patch IPT, TLM
-		public bool isPublicTransport
-		{
-			get { return prefab.m_class.m_service == ItemClass.Service.PublicTransport; }
-		}
+        // Define all vehicles, which have no passengers or cargo capacities
+        public bool isNonPaxCargo
+        {
+            get { return prefab.m_class.m_service == ItemClass.Service.FireDepartment
+                                                  || prefab.m_class.m_service == ItemClass.Service.PoliceDepartment
+                                                  || prefab.m_class.m_service == ItemClass.Service.HealthCare
+                                                  || prefab.m_class.m_service == ItemClass.Service.Disaster && prefab.m_class.m_level == ItemClass.Level.Level2
+                                                  || prefab.m_class.m_service == ItemClass.Service.Water
+                                                  || prefab.m_class.m_service == ItemClass.Service.Road
+                                                  || prefab.m_class.m_subService == ItemClass.SubService.BeautificationParks; }
+        }
 
-		// Define all vehicles, where AVO cannot longer control the spawning
-		public bool isPublicTransportGame
-		{
-			get { return prefab.m_class.m_subService == ItemClass.SubService.PublicTransportBus
-			                                         || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportTrolleybus
-			                                         || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportTram
-												     || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportMetro
-			                                         || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportMonorail; }
-		}
+        // Check if vehicle is in the Industry Generic group for delivery
+        public bool isDelivery
+        {
+            get { return prefab.m_class.m_subService == ItemClass.SubService.IndustrialGeneric; }
+        }
 
-		// Define all vehicles, with class Intercity Bus to exclude from editing block ITP TLM
-		public bool isUncontrolledPublicTransport
-		{
-			get { return prefab.m_class.m_level == ItemClass.Level.Level3 
-                                                || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportCableCar 
-                                                || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportPlane 												
-                                                || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportTrain 	
-		                                    	|| prefab.m_class.m_subService == ItemClass.SubService.PublicTransportShip;  }
-		}
+        // Check if vehicle is in the Public Transport Group, used for Compability Patch IPT, TLM
+        public bool isPublicTransport
+        {
+            get { return prefab.m_class.m_service == ItemClass.Service.PublicTransport; }
+        }
+
+        // Define all vehicles, where AVO cannot longer control the spawning (Bus, Biofuel Bus, Trolley Bus, Tour Bus, Tram, Metro, Helicopter, Ferry, Blimp, Monorail)
+        public bool isPublicTransportGame
+        {
+            get { return prefab.m_class.m_subService == ItemClass.SubService.PublicTransportBus && prefab.m_class.m_level == ItemClass.Level.Level1
+                                                     || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportBus && prefab.m_class.m_level == ItemClass.Level.Level2
+                                                     || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportTrolleybus
+                                                     || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportTours && prefab.m_class.m_level == ItemClass.Level.Level3
+                                                     || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportTram
+                                                     || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportMetro
+                                                     || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportPlane && prefab.m_class.m_level == ItemClass.Level.Level3
+                                                     || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportShip && prefab.m_class.m_level == ItemClass.Level.Level2
+                                                     || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportPlane && prefab.m_class.m_level == ItemClass.Level.Level2
+                                                     || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportMonorail; }
+        }
+
+
+        // Class Intercity Bus, Cargo Train, Cargo Plane, Cargo Ship, Postal Service und Tours to be excluded as not in scope of IPT and TLM
+        public bool isNotPublicTransportMod
+        {
+            get { return prefab.m_class.m_subService == ItemClass.SubService.PublicTransportBus && prefab.m_class.m_level == ItemClass.Level.Level3
+                                                     || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportTours
+                                                     || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportShip && prefab.m_class.m_level == ItemClass.Level.Level4
+                                                     || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportTrain && prefab.m_class.m_level == ItemClass.Level.Level4
+                                                     || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportPlane && prefab.m_class.m_level == ItemClass.Level.Level4
+                                                     || prefab.m_class.m_subService == ItemClass.SubService.PublicTransportPost; }
+        }
 
         public bool isTrailer
         {
@@ -537,7 +657,131 @@ namespace AdvancedVehicleOptionsUID
             get { return m_localizedName; }
         }
 
-        public Category category
+        public int ReturnLineOverviewType
+        {
+            get
+            {
+                switch (prefab.m_class.m_subService)
+                {
+                    case ItemClass.SubService.PublicTransportBus:
+                        return 0;
+                    case ItemClass.SubService.PublicTransportTrolleybus:
+                        return 1;
+                    case ItemClass.SubService.PublicTransportTram:
+                        return 2;
+                    case ItemClass.SubService.PublicTransportMetro:
+                        return 3;
+                    case ItemClass.SubService.PublicTransportShip:
+                        return 5;
+                    case ItemClass.SubService.PublicTransportPlane:
+                        return 6;
+                    case ItemClass.SubService.PublicTransportMonorail:
+                        return 7;
+                    case ItemClass.SubService.PublicTransportTours:
+                        return 10;
+                }
+
+                return -1;
+            }
+        }
+
+        public string SpecialCapacityString
+        {
+            get
+            {
+                switch (m_prefab.m_vehicleAI)
+                { case FireCopterAI _:
+                        return "FireFighting Capacity: ";
+                    case PoliceCarAI _:
+                        return "Criminal Capacity: ";
+                    case WaterTruckAI _:
+                        return "Pumping Rate: ";
+                    case TaxiAI _:
+                        return "Travel Distance: ";
+                    case AmbulanceCopterAI _:
+                        return "Travel Distance: ";
+                    case FishingBoatAI _:
+                        return "Fishing Rate: ";
+                }
+                return "Unspecified Capacity: ";
+            }
+        }
+
+        public string CapacityString
+        {
+            get
+            {
+                switch (m_prefab.m_vehicleAI)
+                { case PassengerPlaneAI _:
+                    case PassengerBlimpAI _:
+                    case BusAI _:
+                    case TrolleybusAI _:
+                    case TaxiAI _:
+                    case PassengerHelicopterAI _:
+                    case PassengerFerryAI _:
+                    case PassengerShipAI _:
+                    case PassengerTrainAI _:
+                    case TramAI _:
+                    case CableCarAI _:
+                        return "Passenger Capactiy: ";
+
+                    case CargoPlaneAI _:
+                    case CargoTruckAI _:
+                    case GarbageTruckAI _:
+                    case SnowTruckAI _:
+                    case WaterTruckAI _:
+                    case CargoShipAI _:
+                    case CargoTrainAI _:
+                    case FishingBoatAI _:
+                        return "Cargo Capacity: ";
+
+                    case PostVanAI _:
+                        return "Mail Capacity:";
+
+                    case MaintenanceTruckAI _:
+                    case ParkMaintenanceVehicleAI _:
+                        return "Maintenance Capacity:";
+
+                    case AmbulanceAI _:
+                    case AmbulanceCopterAI _:
+                        return "Patient Capacity:";
+
+                    case HearseAI _:
+                        return "Corpse Capacity:";
+
+                    case PoliceCarAI _:
+                    case PoliceCopterAI _:
+                        return "Crime Capacity Rate:";
+
+                    case FireTruckAI _:
+                    case FireCopterAI _:
+                        return "Fire Fighting Rate:";
+
+                    case DisasterResponseVehicleAI _:
+                    case DisasterResponseCopterAI _:
+                        return "Efficency Rate:";
+                }
+                return "Capacity: ";
+            }
+        }
+
+        public bool ValidateIsBusTrailer
+        {
+            get
+            {
+                if (hasTrailer == false && prefab.m_class.m_service == ItemClass.Service.Industrial)
+                {
+                    for (int i = 0; i < TrailerRef.isBus.Length; i++)
+                    {
+                        if (steamID == TrailerRef.isBus[i])
+                            return true;
+                    }
+                }
+                return false;
+            }
+        }
+
+    public Category category
         {
 	        get
             {
@@ -555,7 +799,9 @@ namespace AdvancedVehicleOptionsUID
 						if (steamID == TrailerRef.isBus[i])
 				            return Category.TransportBus;			
 					}
-					
+
+//					Preparation for Ninjanoobslayers upcoming Vehicle/Trailer combinations
+//					
 //					for (int i=0; i < TrailerRef.isPolice.Length; i++) 
 //					{            
 //						if (steamID == TrailerRef.isPolice[i])
@@ -585,7 +831,19 @@ namespace AdvancedVehicleOptionsUID
 						if (steamID == TrailerRef.isForestry[i])
 				            return Category.Forestry;			
 					}
-				}
+
+                    for (int i = 0; i < TrailerRef.isOre.Length; i++)
+                    {
+                        if (steamID == TrailerRef.isOre[i])
+                            return Category.Ore;
+                    }
+
+                    for (int i = 0; i < TrailerRef.isGeneric.Length; i++)
+                    {
+                        if (steamID == TrailerRef.isGeneric[i])
+                            return Category.IndustryGeneric;
+                    }
+                }
 				
                 switch (prefab.m_class.m_service)
                 {
@@ -927,6 +1185,7 @@ namespace AdvancedVehicleOptionsUID
             }
 
             m_hasCapacity = capacity != -1;
+            m_hasSpecialCapacity = specialcapacity != -1;
         }
 
         public int CompareTo(object o)
@@ -1219,6 +1478,18 @@ namespace AdvancedVehicleOptionsUID
                     details.Append("capacity, ");
                 }
 
+                if (modded.m_specialcapacity != stored.m_specialcapacity && options.specialcapacity == stored.m_specialcapacity)
+                {
+                    options.specialcapacity = modded.m_specialcapacity;
+                    details.Append("specialcapacity, ");
+                }
+
+                if (modded.m_isLargeVehicle != stored.m_isLargeVehicle && options.isLargeVehicle == stored.m_isLargeVehicle)
+                {
+                    options.isLargeVehicle = modded.m_isLargeVehicle;
+                    details.Append("isLargeVehicle, ");
+                }
+
                 if (details.Length > 0)
                 {
                     details.Length -= 2;
@@ -1259,6 +1530,8 @@ namespace AdvancedVehicleOptionsUID
             options.color2 = stored.m_color2;
             options.color3 = stored.m_color3;
             options.capacity = stored.m_capacity;
+            options.specialcapacity = stored.m_specialcapacity;
+            options.isLargeVehicle = stored.m_isLargeVehicle;
             prefab.m_placementStyle = stored.m_placementStyle;
         }
 
@@ -1298,7 +1571,9 @@ namespace AdvancedVehicleOptionsUID
             m_color2 = options.color2;
             m_color3 = options.color3;
             m_capacity = options.capacity;
+            m_specialcapacity = options.specialcapacity;  
             m_placementStyle = options.placementStyle;
+            m_isLargeVehicle = options.isLargeVehicle;
 
             if (prefab.m_trailers != null && prefab.m_trailers.Length > 0)
             {
@@ -1312,7 +1587,7 @@ namespace AdvancedVehicleOptionsUID
         private float m_maxSpeed;
         private float m_acceleration;
         private float m_braking;
-	private float m_turning;
+	    private float m_turning;
         private float m_springs;
         private float m_dampers;
         private float m_leanMultiplier;
@@ -1323,8 +1598,10 @@ namespace AdvancedVehicleOptionsUID
         private HexaColor m_color2;
         private HexaColor m_color3;
         private int m_capacity;
+        private int m_specialcapacity;             
         private ItemClass.Placement m_placementStyle;
         private VehicleInfo m_lastTrailer;
         private int m_probability;
+        private bool m_isLargeVehicle;
     }
 }

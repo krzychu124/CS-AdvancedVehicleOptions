@@ -38,7 +38,7 @@ namespace AdvancedVehicleOptionsUID
 
         public string Description
         {
-            get { return "Customize your vehicles (for Cities Skylines Sunset Harbor 1.13.0-f8)."; }
+            get { return "Customize your vehicles (supports Cities Skylines Sunset Harbor 1.13.0-f8)."; }
         }
 
         public void OnSettingsUI(UIHelperBase helper)
@@ -48,7 +48,10 @@ namespace AdvancedVehicleOptionsUID
                 UICheckBox checkBox;	
 				UITextField TextField;
 				UIButton Button;
-				UIHelperBase group_general = helper.AddGroup("General Settings                                                   " + Name);
+
+// Section for General Settings
+
+                UIHelperBase group_general = helper.AddGroup("General Settings                                                   " + Name);
 
                 checkBox = (UICheckBox)group_general.AddCheckbox("Disable debug messages logging", DebugUtils.hideDebugMessages.value, (b) =>
                 {
@@ -64,7 +67,8 @@ namespace AdvancedVehicleOptionsUID
                     AdvancedVehicleOptionsUID.UpdateGUI();
 
                 });
-                checkBox.tooltip = "Hide the UI completely if you feel like you are done with it and want to\nsave the little bit of memory it takes. Everything else will still be functional.";
+                checkBox.tooltip = "Hide the UI completely if you feel like you are done with it and want to save\n" +
+                                   "the little bit of memory it takes. Everything else will still be functional.";
 
                 checkBox = (UICheckBox)group_general.AddCheckbox("Disable warning for no available services at map loading", !AdvancedVehicleOptionsUID.onLoadCheck.value, (b) =>
                 {
@@ -72,78 +76,100 @@ namespace AdvancedVehicleOptionsUID
                 });
                 checkBox.tooltip = "Disable the check for missing service vehicles assigned in any category when loading a map.";
 
-                UIHelperBase group_balance = helper.AddGroup("Game Balancing");
-				
-                checkBox = (UICheckBox)group_balance.AddCheckbox("Enable capacity values for non-cargo and non-passenger vehicles", AdvancedVehicleOptionsUID.GameBalanceOptions.value, (b) =>
+// Section for Game Balancing
+
+                UIHelperBase group_balance = helper.AddGroup("Gameplay & Balancing");
+
+// Checkbox for SpeedUnitOption kmh vs mph	
+
+                checkBox = (UICheckBox)group_balance.AddCheckbox("Display Miles per Hour (mph) instead of Kilometer per Hour (km/h)", AdvancedVehicleOptionsUID.SpeedUnitOption.value, (b) =>
+                {
+                    AdvancedVehicleOptionsUID.SpeedUnitOption.value = b;
+                });
+                checkBox.tooltip = "Changes display of unit of speed from mph to kmh.";
+
+// Checkbox for Game Balancing	
+
+                checkBox = (UICheckBox)group_balance.AddCheckbox("Enable various values for non-cargo and non-passenger vehicles", AdvancedVehicleOptionsUID.GameBalanceOptions.value, (b) =>
                 {
                     AdvancedVehicleOptionsUID.GameBalanceOptions.value = b;
                 });
-                checkBox.tooltip = "Allows changes the Firefighting Rate for Fire Engines, the Crime Rate Capacity\nfor Police Cars and the Maintenance Rate for Maintenance Vehicles.\n\nCan de-balance the intended gameplay.";
-						
-				UIHelperBase group_compatibility= helper.AddGroup("Compatibility");
-				
-                checkBox = (UICheckBox) group_compatibility.AddCheckbox("Hide the Spawn Control for game-controlled Public Transport vehicles", AdvancedVehicleOptionsUID.SpawnControl.value, (b) =>
+                checkBox.tooltip = "Allows changes the Firefighting Rate and Capacity for Fire Safety, the Crime Rate Capacity\n" +
+                                   "for Police Vehicles and the Maintenance and Pumping Rate for Maintenance Vehicles.\n\n" +
+                                   "Can de-balance the intended gameplay. Some values are not documented.";
+
+// Section for Compatibility
+
+                UIHelperBase group_compatibility = helper.AddGroup("Compatibility");
+
+// Checkbox for Overriding Incompability Warnings
+
+                checkBox = (UICheckBox)group_compatibility.AddCheckbox("Display Compatibility Warnings for Mods", AdvancedVehicleOptionsUID.OverrideCompatibilityWarnings.value, (b) =>
                 {
-                    AdvancedVehicleOptionsUID.SpawnControl.value = b;
+                    AdvancedVehicleOptionsUID.OverrideCompatibilityWarnings.value = b;
                 });
-				
-                checkBox.tooltip = "Disable the Spawn Control for Bus, Trolley Bus, Tram, Monorail and Metro\nas Cities Skylines will control the spawning in the game's line manager.\n\nAVO is unable to control the vehicle spawning for these since DLC Campus.";				
-				
-				//AVO allows the game to control all spawning - standard behaviour, this option is not shown
-				checkBox.enabled = false;
+
+                checkBox.tooltip = "If enabled, settings which can be modified in Improved Public Transport\n" +
+                                   "(by BloodyPenguin) and Transport Lines Manager (by Klyte) will be shown\n" +
+                                   "with warning color. Values should be edited in these mods only.\n\n" +
+                                   "If disabled, the coloring will not shown.";
+                //True, if AVO shall shall color shared mod setting values in red.
+
+// Checkbox for Vehicle Color Expander
 
                 checkBox = (UICheckBox) group_compatibility.AddCheckbox("Vehicle Color Expander: Priority over AVO vehicle coloring", AdvancedVehicleOptionsUID.OverrideVCX.value, (b) =>
                 {
                     AdvancedVehicleOptionsUID.OverrideVCX.value = b;
                 });
 				
-                checkBox.tooltip = "Permanent setting, if Vehicle Color Expander (by Klyte) is active.\nThe color management is controlled by Vehicle Color Expander.\n\nValues must be configured in Vehicle Color Expander.";	
+                checkBox.tooltip = "Permanent setting, if Vehicle Color Expander (by Klyte) is active.\n" +
+                                   "The color management is controlled by Vehicle Color Expander.\n\n" +
+                                   "Values will be configured in Vehicle Color Expander.";	
+				
+				//True, if AVO shall not override Vehicle Color Expander settings. As there is not Settings for Vehicle Color Expander. AVO will show the option, but user cannot change anything as long readOnly is True.
 				checkBox.readOnly = true;
-				checkBox.label.textColor = Color.gray;
+				checkBox.label.textColor = Color.gray;		
 				
 				if (!VCXCompatibilityPatch.IsVCXActive())
 				{
- 			        checkBox.label.text = "Vehicle Color Expander: Mod is not active";
+				    checkBox.enabled  = false;	//Do not show the option Checkbox, if Vehicle Color Expander is not active.
 				}
-				
-                checkBox = (UICheckBox) group_compatibility.AddCheckbox("Transport Lines Manager: Priority over AVO vehicle settings", AdvancedVehicleOptionsUID.OverrideVCX.value, (b) =>
+		
+// Checkbox for No Big Trucks
+
+                checkBox = (UICheckBox)group_compatibility.AddCheckbox("No Big Trucks: Classify Generic Industry vehicles as Large Vehicle", AdvancedVehicleOptionsUID.ControlTruckDelivery.value, (b) =>
                 {
-                    AdvancedVehicleOptionsUID.OverrideTLM.value = b;
+                    AdvancedVehicleOptionsUID.ControlTruckDelivery.value = b;
                 });
-				
-				checkBox.tooltip = "If enabled, Capacity and Spawn Control are disabled for Public Transport vehicles.\nValues must be configured in Transport Lines Manager (by Klyte).\n\nIf disabled, only the Spawn Control for certain vehicles will be disabled.";				
-				//checkBox.readOnly = true;
-				
-				if (!TLMCompatibilityPatch.IsTLMActive())
-				{
-				    checkBox.label.text = "Transport Lines Manager: Mod is not active";	
-					checkBox.label.textColor = Color.gray;
-				}
-				
-                checkBox = (UICheckBox) group_compatibility.AddCheckbox("Improved Public Transport: Priority over AVO vehicle settings", AdvancedVehicleOptionsUID.OverrideIPT.value, (b) =>
+
+                checkBox.tooltip = "If enabled, Delivery Trucks can be tagged as Large Vehicles.\n" +
+                                   "Dispatch will be blocked by No Big Trucks (by MacSergey).\n\n" +
+                                   "Warning: Experimental feature and may have impact on the simulation.";
+                //True, if AVO shall be enabled to classify Generic Industry vehicles as Large Vehicles, so No Big Trucks can suppress the dispatch to small buildings.
+
+                if (!NoBigTruckCompatibilityPatch.IsNBTActive())
                 {
-                    AdvancedVehicleOptionsUID.OverrideIPT.value = b;
-                });
-				
-                checkBox.tooltip = "If enabled, Capacity, Maximum Speed and Spawn Control are disabled for Public Transport vehicles.\nValues must be configured in Improved Public Transport (by BloodyPenguin).\n\nIf disabled, only the Spawn Control for certain vehicles will be disabled.";
-        		//checkBox.readOnly  = true;				
-				
-				if (!IPTCompatibilityPatch.IsIPTActive())
-				{
-				    checkBox.label.text = "Improved Public Transport: Mod is not active";
-			    	checkBox.label.textColor = Color.gray;
-			    }
-				
-				group_compatibility.AddSpace(20);
-				TextField = (UITextField) group_compatibility.AddTextfield("Vehicle Trailer compatibility references last updated:", TrailerRef.Revision, (value) => Debug.Log(""), (value) => Debug.Log(""));
-				TextField.tooltip = "This field shows the vehicle list revision date for the Bus, Trolley Bus, Fire and Police\ntrailers, which are in real life industry trailers, but have been re-categorized by AVO.";
+                    checkBox.enabled = false;   //Do not show the option Checkbox, if No Big Trucks is not active.
+                }
+
+// Add a Spacer
+                group_compatibility.AddSpace(20);
+
+// Add Trailer Compatibility Reference
+
+                TextField = (UITextField) group_compatibility.AddTextfield("Vehicle Trailer compatibility references last updated:", TrailerRef.Revision, (value) => Debug.Log(""), (value) => Debug.Log(""));
+				TextField.tooltip = "This field shows the vehicle list revision date for the Bus, Trolley Bus, Fire and Police\n" +
+                                    "trailers, which are in real life industry trailers, but have been re-categorized by AVO.";
 				TextField.readOnly = true;
-				
-				UIHelperBase group_support = helper.AddGroup("Support");
+
+ // Support Section with Wiki and Output-Log	
+
+                UIHelperBase group_support = helper.AddGroup("Support");
 				
 				Button = (UIButton) group_support.AddButton("Open the Advanced Vehicle Options Wiki", () =>
                 {
-                    Application.OpenURL("https://github.com/CityGecko/CS-AdvancedVehicleOptions/wiki/Advanced-Vehicle-Options-Introduction");
+                    SimulationManager.instance.SimulationPaused = true;
+                    Application.OpenURL("https://github.com/CityGecko/CS-AdvancedVehicleOptions/wiki");
                 });
 				Button.textScale = 0.8f;
 				
@@ -161,7 +187,7 @@ namespace AdvancedVehicleOptionsUID
             }
         }
 
-        public const string version = "1.9.2";
+        public const string version = "1.9.3";
     }
 
     public class AdvancedVehicleOptionsUIDLoader : LoadingExtensionBase
@@ -242,18 +268,19 @@ namespace AdvancedVehicleOptionsUID
         }
         #endregion
     }
-    
+
     public class AdvancedVehicleOptionsUID : MonoBehaviour
     {
         public const string settingsFileName = "AdvancedVehicleOptionsUID";
- 
+
         public static SavedBool hideGUI = new SavedBool("hideGUI", settingsFileName, false, true);
         public static SavedBool onLoadCheck = new SavedBool("onLoadCheck", settingsFileName, true, true);
-		public static SavedBool GameBalanceOptions = new SavedBool("GameBalanceOptions", settingsFileName, false, true);
-		public static SavedBool SpawnControl = new SavedBool("SpawnControl", settingsFileName, true, true);
-		public static SavedBool OverrideVCX = new SavedBool("OverrideVCX", settingsFileName, true, true);
-		public static SavedBool OverrideTLM = new SavedBool("OverrideTLM", settingsFileName, true, true);
-		public static SavedBool OverrideIPT = new SavedBool("OverrideIPT", settingsFileName, true, true);
+        public static SavedBool GameBalanceOptions = new SavedBool("GameBalanceOptions", settingsFileName, false, true);
+        public static SavedBool SpeedUnitOption = new SavedBool("SpeedUnitOption", settingsFileName, false, true);
+        public static SavedBool SpawnControl = new SavedBool("SpawnControl", settingsFileName, true, true);    // Internal use only
+        public static SavedBool OverrideVCX = new SavedBool("OverrideVCX", settingsFileName, true, true);
+        public static SavedBool OverrideCompatibilityWarnings = new SavedBool("OverrideCompatibilityWarnings", settingsFileName, true, true);
+        public static SavedBool ControlTruckDelivery = new SavedBool("ControlTruckDeliver", settingsFileName, true, true);
 
         private static GUI.UIMainPanel m_mainPanel;
 
@@ -291,16 +318,16 @@ namespace AdvancedVehicleOptionsUID
 
         public static void UpdateGUI()
         {
-            if(!isGameLoaded) return;
-            
-            if(!hideGUI && m_mainPanel == null)
+            if (!isGameLoaded) return;
+
+            if (!hideGUI && m_mainPanel == null)
             {
                 // Creating GUI
                 m_mainPanel = UIView.GetAView().AddUIComponent(typeof(GUI.UIMainPanel)) as GUI.UIMainPanel;
             }
             else if (hideGUI && m_mainPanel != null)
             {
-              	//m_mainPanel.enabled = false;	
+                //m_mainPanel.enabled = false;	
                 GameObject.Destroy(m_mainPanel.gameObject);
                 m_mainPanel = null;
             }
@@ -314,7 +341,7 @@ namespace AdvancedVehicleOptionsUID
             // Store modded values
             DefaultOptions.StoreAllModded();
 
-            if(config.data != null)
+            if (config.data != null)
             {
                 config.DataToOptions();
 
@@ -332,7 +359,7 @@ namespace AdvancedVehicleOptionsUID
             {
                 // Import config
                 ImportConfig();
-                return;                
+                return;
             }
             else
             {
@@ -392,9 +419,21 @@ namespace AdvancedVehicleOptionsUID
             // Update existing vehicles
             new EnumerableActionThread(VehicleOptions.UpdateCapacityUnits);
             new EnumerableActionThread(VehicleOptions.UpdateBackEngines);
-            
+
             DebugUtils.Log("Configuration imported");
             LogVehicleListSteamID();
+        }
+
+        public static void ResetConfig()
+        {  
+            // Checking for conflicts
+            DefaultOptions.CheckForConflicts();
+
+            // Update existing vehicles
+            new EnumerableActionThread(VehicleOptions.UpdateCapacityUnits);
+            new EnumerableActionThread(VehicleOptions.UpdateBackEngines);
+
+            DebugUtils.Log("Configuration reset");
         }
 
         /// <summary>
@@ -403,6 +442,11 @@ namespace AdvancedVehicleOptionsUID
         public static void ExportConfig()
         {
             config.Serialize(m_fileName);
+			DebugUtils.Log("Configuration exported");
+			
+            // display a message for the user in the panel			
+            ExceptionPanel panel = UIView.library.ShowModal<ExceptionPanel>("ExceptionPanel");
+            panel.SetMessage("Advanced Vehicle Options", "Your configuration has been exported. \n\nThe configuration file can be found here:\n<Steam Install Path>/steamapps/common/\nCities_Skylines/AdvancedVehicleOptionsUID.xml", false);
         }
 
         public static void CheckAllServicesValidity()
@@ -535,9 +579,9 @@ namespace AdvancedVehicleOptionsUID
             return v;
         }
 
-        /// <summary>
-        /// Check if there are new vehicles and add them to the options list
-        /// </summary>
+        // <summary>
+        // Check if there are new vehicles and add them to the options list
+        // </summary>
         private static void CompileVehiclesList()
         {
             List<VehicleOptions> optionsList = new List<VehicleOptions>();

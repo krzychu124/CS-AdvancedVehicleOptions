@@ -17,11 +17,14 @@ namespace AdvancedVehicleOptionsUID.GUI
         private UIFastList m_fastList;
         private UIButton m_import;
         private UIButton m_export;
+        private UIButton m_resetall;
         private UITextureSprite m_preview;
         private UISprite m_followVehicle;
+		private UISprite m_removeVehicle;
         private UIOptionPanel m_optionPanel;
 
         public UIButton m_button;
+        public ushort FollowVehicleInstanceID;
 
         private VehicleOptions[] m_optionsList;
         private PreviewRenderer m_previewRenderer;
@@ -97,13 +100,13 @@ namespace AdvancedVehicleOptionsUID.GUI
                 UITabstrip toolStrip = view.FindUIComponent<UITabstrip>("MainToolstrip");
                 m_button = AddUIComponent<UIButton>();
 
-                m_button.normalBgSprite = "InfoIconTrafficCongestion"; 		// previously: "IconCitizenVehicle";
+                m_button.normalBgSprite = "InfoIconTrafficCongestion";
                 m_button.focusedFgSprite = "ToolbarIconGroup6Focused";
                 m_button.hoveredFgSprite = "ToolbarIconGroup6Hovered";
 
-                m_button.size = new Vector2(43f, 47f);					    // previously: new Vector2(43f, 49f);
+                m_button.size = new Vector2(43f, 47f);
 			    m_button.name = "Advanced Vehicle Options";
-                m_button.tooltip = "Vehicle Options"; 						// previously: "Advanced Vehicle Options " + ModInfo.version; 
+                m_button.tooltip = "Vehicle Options";
                 m_button.relativePosition = new Vector3(0, 5);
 			   
                 m_button.eventButtonStateChanged += (c, s) =>
@@ -186,6 +189,10 @@ namespace AdvancedVehicleOptionsUID.GUI
         {
             float offset = 40f;
 
+            //Beta Testing Timestamp 
+            //DateTime now = DateTime.Now;
+            //m_title.title = "Advanced Vehicle Options " + ModInfo.version + " " + now;
+
             // Title Bar
             m_title = AddUIComponent<UITitleBar>();
             m_title.iconSprite = "InfoIconTrafficCongestion";
@@ -241,19 +248,27 @@ namespace AdvancedVehicleOptionsUID.GUI
 
             // Configuration file buttons
             UILabel configLabel = this.AddUIComponent<UILabel>();
-            configLabel.text = "Configuration file:";
+            configLabel.text = "Actions for Vehicle Configuration:";
             configLabel.textScale = 0.8f;
-            configLabel.relativePosition = new Vector3(10, height - 65);
+            configLabel.relativePosition = new Vector3(16, height - 65);
 
             m_import = UIUtils.CreateButton(this);
             m_import.text = "Import";
+            m_import.width = 80;
             m_import.tooltip = "Import the configuration";
             m_import.relativePosition = new Vector3(10, height - 45);
 
             m_export = UIUtils.CreateButton(this);
             m_export.text = "Export";
+            m_export.width = 80;
             m_export.tooltip = "Export the configuration";
-            m_export.relativePosition = new Vector3(105, height - 45);
+            m_export.relativePosition = new Vector3(95, height - 45);
+
+            m_resetall = UIUtils.CreateButton(this);
+            m_resetall.text = "Reset all";
+            m_resetall.width = 80;
+            m_resetall.tooltip = "Reset full configuration";
+            m_resetall.relativePosition = new Vector3(180, height - 45);
 
             // Preview
             UIPanel panel = AddUIComponent<UIPanel>();
@@ -271,19 +286,32 @@ namespace AdvancedVehicleOptionsUID.GUI
 
             m_preview.texture = m_previewRenderer.texture;
 
-            // Follow
+            // Follow a vehicle
             if (m_cameraController != null)
             {
                 m_followVehicle = AddUIComponent<UISprite>();
                 m_followVehicle.spriteName = "LocationMarkerFocused";
                 m_followVehicle.width = m_followVehicle.spriteInfo.width;
                 m_followVehicle.height = m_followVehicle.spriteInfo.height;
-                m_followVehicle.tooltip = "Click here to cycle through the existing vehicles of that type";
+                m_followVehicle.tooltip = "Click here to cycle through the existing vehicles of that type.\nHold Shift Key down for zooming directly to vehicle.";
                 m_followVehicle.relativePosition = new Vector3(panel.relativePosition.x + panel.width - m_followVehicle.width - 5, panel.relativePosition.y + 5);
 
                 m_followVehicle.eventClick += (c, p) => FollowNextVehicle();
             }
+			
+			//Remove the followed vehicle
+			{
+				m_removeVehicle = AddUIComponent<UISprite>();
+                m_removeVehicle.Hide();
+                m_removeVehicle.spriteName = "IconPolicyOldTown";
+                m_removeVehicle.width = m_removeVehicle.spriteInfo.width -12;
+                m_removeVehicle.height = m_removeVehicle.spriteInfo.height -12;
+                m_removeVehicle.tooltip = "Click here to remove the selected vehicle.";
+                m_removeVehicle.relativePosition = new Vector3(panel.relativePosition.x + panel.width - m_removeVehicle.width - 33, panel.relativePosition.y + 7);
 
+                m_removeVehicle.eventClick += (c, p) => RemoveThisVehicle();
+            }
+			
             // Option panel
             m_optionPanel = AddUIComponent<UIOptionPanel>();
             m_optionPanel.relativePosition = new Vector3(WIDTHLEFT, height - 370);
@@ -298,6 +326,25 @@ namespace AdvancedVehicleOptionsUID.GUI
                 optionList = AdvancedVehicleOptionsUID.config.options;
             };
             m_export.eventClick += (c, t) => AdvancedVehicleOptionsUID.ExportConfig();
+
+            m_resetall.eventClick += (c, t) =>
+            {
+                   ConfirmPanel.ShowModal("Confirm Reset Configuration", "Customized settings for all vehicles will be reset.\n\n" +
+                                                                         "Proceed with Configuration reset ?",(comp, ret) =>
+                   {
+                    if (ret != 1)
+                        return;
+
+                    DefaultOptions.RestoreAll();
+                    AdvancedVehicleOptionsUID.ResetConfig();
+                    optionList = AdvancedVehicleOptionsUID.config.options;
+
+                    ExceptionPanel resetpanel = UIView.library.ShowModal<ExceptionPanel>("ExceptionPanel");
+                    resetpanel.SetMessage("Advanced Vehicle Options", "All vehicle configuration and customized settings\n" +
+                                                                      "have been reset to the Game Defaults.", false);
+                });
+
+            };
 
             panel.eventMouseDown += (c, p) =>
             {
@@ -359,9 +406,22 @@ namespace AdvancedVehicleOptionsUID.GUI
             m_followVehicle.isVisible = m_preview.parent.isVisible = m_optionPanel.isVisible;
         }
 
+        private void RemoveThisVehicle()
+        {
+            //DebugUtils.Log("Current vehicle instance: " + FollowVehicleInstanceID);
+
+            if (FollowVehicleInstanceID != 0)
+            {
+                SimulationManager.instance.AddAction(() => VehicleManager.instance.ReleaseVehicle(FollowVehicleInstanceID));
+                m_removeVehicle.Hide();
+            }
+        }
+
         private void FollowNextVehicle()
         {
             Array16<Vehicle> vehicles = VehicleManager.instance.m_vehicles;
+            FollowVehicleInstanceID = 0;
+            m_removeVehicle.Hide();
             // VehicleOptions options = m_optionPanel.m_options;    (commenting out as never used)
 
             for (uint i = (m_seekStart + 1) % vehicles.m_size; i != m_seekStart; i = (i + 1) % vehicles.m_size)
@@ -385,7 +445,11 @@ namespace AdvancedVehicleOptionsUID.GUI
                     GameAreaManager.instance.ClampPoint(ref targetPosition);
                     if (targetPosition != pos) continue;
 
-                    m_cameraController.SetTarget(instanceID, ToolsModifierControl.cameraController.transform.position, false);
+                    m_cameraController.SetTarget(instanceID, ToolsModifierControl.cameraController.transform.position, Input.GetKey(KeyCode.LeftShift) | Input.GetKey(KeyCode.RightShift));
+
+                    FollowVehicleInstanceID = instanceID.Vehicle;
+                    //DebugUtils.Log("Identified last vehicle instance: " + FollowVehicleInstanceID);
+                    m_removeVehicle.Show();
 
                     m_seekStart = (i + 1) % vehicles.m_size;
                     return;
@@ -400,6 +464,7 @@ namespace AdvancedVehicleOptionsUID.GUI
 
             VehicleOptions options = m_fastList.rowsData[i] as VehicleOptions;
 
+            m_removeVehicle.Hide();
             m_optionPanel.Show(options);
             m_followVehicle.isVisible = m_preview.parent.isVisible = true;
 

@@ -83,7 +83,7 @@ namespace SamsamTS
             dropDown.atlas = GetAtlas("Ingame");
             dropDown.size = new Vector2(90f, 30f);
             dropDown.listBackground = "GenericPanelLight";
-            dropDown.itemHeight = 25;
+            dropDown.itemHeight = 30;
             dropDown.itemHover = "ListItemHover";
             dropDown.itemHighlight = "ListItemHighlight";
             dropDown.normalBgSprite = "ButtonMenu";
@@ -91,7 +91,7 @@ namespace SamsamTS
             dropDown.hoveredBgSprite = "ButtonMenuHovered";
             dropDown.focusedBgSprite = "ButtonMenu";
             dropDown.listWidth = 95;
-            dropDown.listHeight = 500;
+            dropDown.listHeight = 510;
             dropDown.foregroundSpriteMode = UIForegroundSpriteMode.Stretch;
             dropDown.popupColor = new Color32(45, 52, 61, 255);
             dropDown.popupTextColor = new Color32(170, 170, 170, 255);

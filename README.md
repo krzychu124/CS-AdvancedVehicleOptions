@@ -1,3 +1,8 @@
+# CS-AdvancedVehicleOptions 1.9.4
+
+Passenger Helicopter Fix:
+The Passenger Helicopter accepts again changes to the passenger capacity (was "read only" before)
+
 # CS-AdvancedVehicleOptions 1.9.3
 
 Vehicle Configuration:

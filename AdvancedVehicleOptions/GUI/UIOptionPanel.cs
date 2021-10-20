@@ -566,8 +566,8 @@ namespace AdvancedVehicleOptionsUID.GUI
 
                 VehicleOptions.prefabUpdateEngine = m_options.prefab;
                 VehicleOptions.prefabUpdateUnits = m_options.prefab;
-                new EnumerableActionThread(VehicleOptions.UpdateBackEngines);
-                new EnumerableActionThread(VehicleOptions.UpdateCapacityUnits);
+                SimulationManager.instance.AddAction(VehicleOptions.UpdateBackEngines);
+                SimulationManager.instance.AddAction(VehicleOptions.UpdateCapacityUnits);
 
                 Show(m_options);
 
@@ -623,7 +623,7 @@ namespace AdvancedVehicleOptionsUID.GUI
                 if (m_options.addBackEngine == state)
                 {
                     VehicleOptions.prefabUpdateEngine = m_options.prefab;
-                    new EnumerableActionThread(VehicleOptions.UpdateBackEngines);
+                    SimulationManager.instance.AddAction(VehicleOptions.UpdateBackEngines);
                 }
             }
             else if (component == m_useColors && m_options.useColorVariations != state)
@@ -731,7 +731,7 @@ namespace AdvancedVehicleOptionsUID.GUI
 
             m_options.capacity = int.Parse(text);
             VehicleOptions.prefabUpdateUnits = m_options.prefab;
-            new EnumerableActionThread(VehicleOptions.UpdateCapacityUnits);
+            SimulationManager.instance.AddAction(VehicleOptions.UpdateCapacityUnits);
 
             m_initialized = true;
         }
@@ -743,7 +743,7 @@ namespace AdvancedVehicleOptionsUID.GUI
 
             m_options.specialcapacity = int.Parse(text);
             VehicleOptions.prefabUpdateUnits = m_options.prefab;
-            new EnumerableActionThread(VehicleOptions.UpdateCapacityUnits);
+            SimulationManager.instance.AddAction(VehicleOptions.UpdateCapacityUnits);
 
             m_initialized = true;
         }

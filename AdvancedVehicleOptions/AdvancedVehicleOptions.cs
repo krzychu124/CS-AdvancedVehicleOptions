@@ -373,8 +373,8 @@ namespace AdvancedVehicleOptionsUID
             DefaultOptions.CheckForConflicts();
 
             // Update existing vehicles
-            new EnumerableActionThread(VehicleOptions.UpdateCapacityUnits);
-            new EnumerableActionThread(VehicleOptions.UpdateBackEngines);
+            SimulationManager.instance.AddAction(VehicleOptions.UpdateCapacityUnits);
+            SimulationManager.instance.AddAction(VehicleOptions.UpdateBackEngines);
 
             DebugUtils.Log("Configuration initialized");
             LogVehicleListSteamID();
@@ -417,8 +417,8 @@ namespace AdvancedVehicleOptionsUID
             DefaultOptions.CheckForConflicts();
 
             // Update existing vehicles
-            new EnumerableActionThread(VehicleOptions.UpdateCapacityUnits);
-            new EnumerableActionThread(VehicleOptions.UpdateBackEngines);
+            SimulationManager.instance.AddAction(VehicleOptions.UpdateCapacityUnits);
+            SimulationManager.instance.AddAction(VehicleOptions.UpdateBackEngines);
 
             DebugUtils.Log("Configuration imported");
             LogVehicleListSteamID();
@@ -430,8 +430,8 @@ namespace AdvancedVehicleOptionsUID
             DefaultOptions.CheckForConflicts();
 
             // Update existing vehicles
-            new EnumerableActionThread(VehicleOptions.UpdateCapacityUnits);
-            new EnumerableActionThread(VehicleOptions.UpdateBackEngines);
+            SimulationManager.instance.AddAction(VehicleOptions.UpdateCapacityUnits);
+            SimulationManager.instance.AddAction(VehicleOptions.UpdateBackEngines);
 
             DebugUtils.Log("Configuration reset");
         }
@@ -489,27 +489,27 @@ namespace AdvancedVehicleOptionsUID
             {
                 if(options == null)
                 {
-                    new EnumerableActionThread(ActionRemoveParkedAll);
+                    SimulationManager.instance.AddAction(ActionRemoveParkedAll);
                     return;
                 }
                 
                 m_removeParkedInfo = options.prefab;
-                new EnumerableActionThread(ActionRemoveParked);
+                SimulationManager.instance.AddAction(ActionRemoveParked);
             }
             else
             {
                 if (options == null)
                 {
-                    new EnumerableActionThread(ActionRemoveExistingAll);
+                    SimulationManager.instance.AddAction(ActionRemoveExistingAll);
                     return;
                 }
 
                 m_removeInfo = options.prefab;
-                new EnumerableActionThread(ActionRemoveExisting);
+                SimulationManager.instance.AddAction(ActionRemoveExisting);
             }
         }
 
-        public static IEnumerator ActionRemoveExisting(ThreadBase t)
+        public static void ActionRemoveExisting()
         {
             VehicleInfo info = m_removeInfo;
             Array16<Vehicle> vehicles = VehicleManager.instance.m_vehicles;
@@ -521,12 +521,10 @@ namespace AdvancedVehicleOptionsUID
                     if (info == vehicles.m_buffer[i].Info)
                         VehicleManager.instance.ReleaseVehicle(i);
                 }
-
-                if (i % 256 == 255) yield return i;
             }
         }
 
-        public static IEnumerator ActionRemoveParked(ThreadBase t)
+        public static void ActionRemoveParked()
         {
             VehicleInfo info = m_removeParkedInfo;
             Array16<VehicleParked> parkedVehicles = VehicleManager.instance.m_parkedVehicles;
@@ -538,26 +536,22 @@ namespace AdvancedVehicleOptionsUID
                     if (info == parkedVehicles.m_buffer[i].Info)
                         VehicleManager.instance.ReleaseParkedVehicle(i);
                 }
-
-                if (i % 256 == 255) yield return i;
             }
         }
 
-        public static IEnumerator ActionRemoveExistingAll(ThreadBase t)
+        public static void ActionRemoveExistingAll()
         {
             for (ushort i = 0; i < VehicleManager.instance.m_vehicles.m_buffer.Length; i++)
             {
                 VehicleManager.instance.ReleaseVehicle(i);
-                if (i % 256 == 255) yield return i;
             }
         }
 
-        public static IEnumerator ActionRemoveParkedAll(ThreadBase t)
+        public static void ActionRemoveParkedAll()
         {
             for (ushort i = 0; i < VehicleManager.instance.m_parkedVehicles.m_buffer.Length; i++)
             {
                 VehicleManager.instance.ReleaseParkedVehicle(i);
-                if (i % 256 == 255) yield return i;
             }
         }
 

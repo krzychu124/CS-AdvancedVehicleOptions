@@ -1047,7 +1047,7 @@ namespace AdvancedVehicleOptionsUID
             return count;
         }
 
-        public static IEnumerator UpdateCapacityUnits(ThreadBase t)
+        public static void UpdateCapacityUnits()
         {
             int count = 0;
             Array16<Vehicle> vehicles = VehicleManager.instance.m_vehicles;
@@ -1097,7 +1097,6 @@ namespace AdvancedVehicleOptionsUID
                         }
                     }
                 }
-                if (i % 256 == 255) yield return null;
             }
             prefabUpdateUnits = null;
 
@@ -1107,7 +1106,7 @@ namespace AdvancedVehicleOptionsUID
             }
         }
 
-        public static IEnumerator UpdateBackEngines(ThreadBase t)
+        public static void UpdateBackEngines()
         {
             Array16<Vehicle> vehicles = VehicleManager.instance.m_vehicles;
             for (uint i = 0; i < vehicles.m_buffer.Length; i++)
@@ -1141,7 +1140,6 @@ namespace AdvancedVehicleOptionsUID
                     DebugUtils.Log("Couldn't update back engine :");
                     Debug.LogError(e);
                 }
-                if (i % 256 == 255) yield return null;
             }
 
             prefabUpdateEngine = null;

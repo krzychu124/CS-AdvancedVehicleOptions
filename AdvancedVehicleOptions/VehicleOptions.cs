@@ -1147,16 +1147,18 @@ namespace AdvancedVehicleOptionsUID
 
         public static void UpdateTransfertVehicles()
         {
-            try
-            {
-                typeof(VehicleManager).GetField("m_vehiclesRefreshed", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(VehicleManager.instance, false);
-                VehicleManager.instance.RefreshTransferVehicles();
-            }
-            catch(Exception e)
-            {
-                DebugUtils.Log("Couldn't update transfer vehicles :");
-                Debug.LogError(e);
-            }
+            SimulationManager.instance.AddAction(() => {
+                try
+                {
+                    typeof(VehicleManager).GetField("m_vehiclesRefreshed", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(VehicleManager.instance, false);
+                    VehicleManager.instance.RefreshTransferVehicles();
+                }
+                catch(Exception e)
+                {
+                    DebugUtils.Log("Couldn't update transfer vehicles :");
+                    Debug.LogError(e);
+                }
+            });
         }
 
         public void SetPrefab(VehicleInfo prefab)
